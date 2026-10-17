@@ -36,6 +36,18 @@ streamlit run app.py
 - `docs`: documentação complementar
 - `tests`: testes automatizados
 
+## Colaboração no GitHub
+
+O projeto usa Issues para User Stories, critérios de aceitação, tasks e impedimentos. A documentação de produto está em `docs/visao-produto.md`, a Definition of Done em `docs/definition-of-done.md` e o planejamento do primeiro ciclo em `docs/sprints/sprint-01.md`.
+
+Templates de Issues estão em `.github/ISSUE_TEMPLATE/`. Para configurar labels, Issues e o Project em uma conta com permissão de escrita, execute:
+
+```bash
+./scripts/setup_github_collaboration.sh
+```
+
+O guia completo de permissões, branches, commits, revisão e status do Project está em `docs/github-colaborativo.md`.
+
 ## Regras de responsabilidade
 
 O agente futuro deverá consultar apenas ferramentas permitidas, produzir JSON validado, mostrar evidências e solicitar aprovação humana. O dashboard deve continuar funcionando com fallback determinístico por regras quando o LLM falhar.
