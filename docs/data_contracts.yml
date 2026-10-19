@@ -1,0 +1,40 @@
+version: "1.0.0"
+owner: "Pessoa 1 — Dados"
+reviewer: "Pessoa 2 — ML e Valor"
+seed: 20261014
+entities:
+  customers_raw:
+    path: data/raw/customers.csv
+    primary_key: customer_id
+    columns:
+      customer_id: {type: string, nullable: false, constraints: "regex ^C[0-9]{6}$"}
+      signup_date: {type: date, nullable: false, constraints: "<= 2026-09-30"}
+      loyalty_tier: {type: string, nullable: false, constraints: "one of [Azul Fidelidade, Topázio, Safira, Diamante, Diamante Unique]"}
+      home_airport: {type: string, nullable: false, constraints: "IATA-like 3 uppercase letters"}
+      preferred_channel: {type: string, nullable: false, constraints: "one of [app, web, agency]"}
+  transactions_raw:
+    path: data/raw/transactions.csv
+    primary_key: transaction_id
+    foreign_keys: [customer_id]
+    columns:
+      transaction_id: {type: string, nullable: false, constraints: "unique"}
+      customer_id: {type: string, nullable: false, constraints: "must exist in customers_raw"}
+      flight_date: {type: date, nullable: false, constraints: "2025-10-01..2026-09-30"}
+      origin: {type: string, nullable: false, constraints: "IATA-like 3 uppercase letters"}
+      destination: {type: string, nullable: false, constraints: "IATA-like 3 uppercase letters; different from origin"}
+      amount_brl: {type: decimal, nullable: false, constraints: "> 0"}
+      qualifying_points: {type: integer, nullable: false, constraints: ">= 0"}
+      cancelled: {type: boolean, nullable: false}
+  customer_features:
+    path: data/analytics/customer_features.csv
+    primary_key: customer_id
+    columns:
+      customer_id: {type: string, nullable: false}
+      trips_12m: {type: integer, nullable: false, constraints: ">= 0"}
+      spend_12m_brl: {type: decimal, nullable: false, constraints: ">= 0"}
+      avg_ticket_brl: {type: decimal, nullable: false, constraints: ">= 0"}
+      recency_days: {type: integer, nullable: false, constraints: ">= 0 and <= 365"}
+      preferred_route: {type: string, nullable: false}
+      value_score: {type: decimal, nullable: false, constraints: "0..100"}
+      segment: {type: string, nullable: false, constraints: "one of [Estratégico, Frequente, Oportunidade, Em risco]"}
+      recommended_action: {type: string, nullable: false}
