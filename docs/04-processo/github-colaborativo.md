@@ -56,14 +56,14 @@ Os integrantes não devem compartilhar senhas, tokens ou credenciais. O avaliado
 | Critérios de aceitação | Corpo da Issue da User Story |
 | Tasks técnicas | Issues vinculadas à User Story, usando o template `Task técnica` |
 | Impedimentos | Issue usando o template `Impedimento` e comentário no cartão afetado |
-| Visão do produto | `docs/visao-produto.md` e Issue de decisão quando houver mudança |
-| Product Goal | `docs/visao-produto.md` e Issue fixada ou marcada como decisão |
-| Definition of Done | `docs/definition-of-done.md` |
-| Sprint 01 | `docs/sprints/sprint-01.md` |
+| Visão do produto | `docs/00-contexto/visao-produto.md` e Issue de decisão quando houver mudança |
+| Product Goal | `docs/00-contexto/visao-produto.md` e Issue fixada ou marcada como decisão |
+| Definition of Done | `docs/04-processo/definition-of-done.md` |
+| Sprint 01 | `docs/04-processo/sprints/sprint-01.md` |
 | Discussão de implementação | Pull Request |
 | Decisões importantes | Issue ou Pull Request com seção “Decisão” |
-| Feedback da Sprint Review | `docs/sprints/sprint-01.md` |
-| Retrospective | `docs/sprints/sprint-01.md` |
+| Feedback da Sprint Review | `docs/04-processo/sprints/sprint-01.md` |
+| Retrospective | `docs/04-processo/sprints/sprint-01.md` |
 
 ## Passo 4 — Criar o Project
 

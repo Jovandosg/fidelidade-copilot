@@ -38,7 +38,7 @@ streamlit run app.py
 
 ## Colaboração no GitHub
 
-O projeto usa Issues para User Stories, critérios de aceitação, tasks e impedimentos. A documentação de produto está em `docs/visao-produto.md`, a Definition of Done em `docs/definition-of-done.md` e o planejamento do primeiro ciclo em `docs/sprints/sprint-01.md`.
+O projeto usa Issues para User Stories, critérios de aceitação, tasks e impedimentos. A documentação de produto está em `docs/00-contexto/visao-produto.md`, a Definition of Done em `docs/04-processo/definition-of-done.md` e o planejamento do primeiro ciclo em `docs/04-processo/sprints/sprint-01.md`.
 
 Templates de Issues estão em `.github/ISSUE_TEMPLATE/`. Para configurar labels, Issues e o Project em uma conta com permissão de escrita, execute:
 
@@ -46,7 +46,7 @@ Templates de Issues estão em `.github/ISSUE_TEMPLATE/`. Para configurar labels,
 ./scripts/setup_github_collaboration.sh
 ```
 
-O guia completo de permissões, branches, commits, revisão e status do Project está em `docs/github-colaborativo.md`.
+O guia completo de permissões, branches, commits, revisão e status do Project está em `docs/04-processo/github-colaborativo.md`.
 
 ## Regras de responsabilidade
 
