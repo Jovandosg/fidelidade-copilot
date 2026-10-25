@@ -26,7 +26,7 @@ A ordem final pertence à Product Owner. As histórias podem ser reduzidas para 
 - O usuário consegue localizar um caso de cliente corporativo em risco.
 - O perfil apresenta evidências compreensíveis e informa as limitações dos dados.
 - O dashboard executa sem depender de dados reais ou credenciais.
-- A entrega atende à Definition of Done em `docs/definition-of-done.md`.
+- A entrega atende à Definition of Done em `docs/04-processo/definition-of-done.md`.
 
 ## Plano de colaboração
 

@@ -27,7 +27,7 @@ O objetivo é entregar um **MVP de CRM de Alto Valor** centrado em IA e dados qu
 
 ## 2. Dados, Modelagem e Arquitetura Existente
 
-### 2.1 Camadas de Dados e Contratos (`docs/data_contracts.yml`, `docs/data_dictionary.md`)
+### 2.1 Camadas de Dados e Contratos (`docs/02-dados/data_contracts.yml`, `docs/02-dados/data_dictionary.md`)
 - **Tamanho da base:** Exatamente 1.200 clientes sintéticos (`C000001` a `C001200`).
 - **Camada Raw:**
   - `customers.csv`: `customer_id`, `signup_date`, `loyalty_tier` (Azul Fidelidade, Topázio, Safira, Diamante, Diamante Unique), `home_airport` (VCP, CGH, SDU, CNF, BSB, REC, SSA, POA, GYN, CWB), `preferred_channel` (app, web, agency).
