@@ -1,6 +1,9 @@
 """Modelos de resposta da API. Linhas de tabela reutilizam src.schemas (espelho das colunas do Postgres)."""
 from __future__ import annotations
 
+from datetime import datetime
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 from ..schemas import CustomerFeature, RouteMetric
@@ -70,3 +73,93 @@ class NbaPage(Page):
     )
     summary: list[NbaSummary]
     items: list[NbaItem]
+
+
+class PipelineRunOut(BaseModel):
+    run_id: str
+    started_at: datetime
+    finished_at: datetime | None
+    duration_ms: int | None
+    status: str
+    code_version: str
+    seed: int
+    contract_version: str
+    rows_by_entity: dict[str, int]
+    error: str | None
+
+
+class QualityRuleOut(BaseModel):
+    entity: str
+    rule: str
+    passed: bool
+    failed_rows: int
+
+
+class QualityOut(BaseModel):
+    run_id: str | None
+    total_rules: int
+    failed_rules: int
+    results: list[QualityRuleOut]
+
+
+class ModelOut(BaseModel):
+    model_name: str
+    model_version: str
+    run_id: str | None
+    trained_at: datetime
+    data_hash: str
+    metrics: dict
+    params: dict
+    synthetic_notice: str
+
+
+class DriftOut(BaseModel):
+    feature: str
+    psi: float
+    threshold: float
+    alert: bool
+
+
+class DriftReport(BaseModel):
+    run_id: str | None
+    computed_at: datetime | None
+    alerts: int
+    items: list[DriftOut]
+
+
+class AuditEntry(BaseModel):
+    id: int
+    occurred_at: datetime
+    actor: str
+    actor_role: str
+    action: str
+    entity: str
+    entity_id: str
+    before: dict | None
+    after: dict | None
+    request_id: str | None
+
+
+class AuditPage(Page):
+    items: list[AuditEntry]
+
+
+class ApprovalRequest(BaseModel):
+    decision: Literal["approve", "reject"]
+    reason: str = Field(min_length=5, max_length=500, description="Justificativa; nao inclua dados pessoais")
+
+
+class ApprovalResult(BaseModel):
+    audit_id: int
+    occurred_at: datetime
+    customer_id: str
+    decision: Literal["approve", "reject"]
+    before: dict
+    after: dict
+
+
+class ApprovalStatus(BaseModel):
+    customer_id: str
+    decision: Literal["approve", "reject"]
+    actor: str
+    occurred_at: datetime

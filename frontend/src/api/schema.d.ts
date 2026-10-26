@@ -4,6 +4,23 @@
  */
 
 export interface paths {
+    "/audit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Trilha de auditoria (somente auditor) */
+        get: operations["audit_audit_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/clientes": {
         parameters: {
             query?: never;
@@ -72,6 +89,108 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/nba/aprovacoes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Decisoes de aprovacao vigentes (gestor e auditor) */
+        get: operations["approvals_nba_aprovacoes_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/nba/{customer_id}/aprovacao": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Aprova ou rejeita uma acao NBA (somente gestor); grava em ops.audit_log */
+        post: operations["decide_nba__customer_id__aprovacao_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/ops/drift": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** PSI por feature (ultima execucao com drift ou run_id) */
+        get: operations["drift_ops_drift_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/ops/models": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Registro de modelos (metricas sobre dados sinteticos) */
+        get: operations["models_ops_models_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/ops/quality": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Qualidade por regra (ultima execucao ou run_id) */
+        get: operations["quality_ops_quality_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/ops/runs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Execucoes do pipeline */
+        get: operations["runs_ops_runs_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/rotas": {
         parameters: {
             query?: never;
@@ -93,6 +212,102 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** ApprovalRequest */
+        ApprovalRequest: {
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approve" | "reject";
+            /**
+             * Reason
+             * @description Justificativa; nao inclua dados pessoais
+             */
+            reason: string;
+        };
+        /** ApprovalResult */
+        ApprovalResult: {
+            /** After */
+            after: {
+                [key: string]: unknown;
+            };
+            /** Audit Id */
+            audit_id: number;
+            /** Before */
+            before: {
+                [key: string]: unknown;
+            };
+            /** Customer Id */
+            customer_id: string;
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approve" | "reject";
+            /**
+             * Occurred At
+             * Format: date-time
+             */
+            occurred_at: string;
+        };
+        /** ApprovalStatus */
+        ApprovalStatus: {
+            /** Actor */
+            actor: string;
+            /** Customer Id */
+            customer_id: string;
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approve" | "reject";
+            /**
+             * Occurred At
+             * Format: date-time
+             */
+            occurred_at: string;
+        };
+        /** AuditEntry */
+        AuditEntry: {
+            /** Action */
+            action: string;
+            /** Actor */
+            actor: string;
+            /** Actor Role */
+            actor_role: string;
+            /** After */
+            after: {
+                [key: string]: unknown;
+            } | null;
+            /** Before */
+            before: {
+                [key: string]: unknown;
+            } | null;
+            /** Entity */
+            entity: string;
+            /** Entity Id */
+            entity_id: string;
+            /** Id */
+            id: number;
+            /**
+             * Occurred At
+             * Format: date-time
+             */
+            occurred_at: string;
+            /** Request Id */
+            request_id: string | null;
+        };
+        /** AuditPage */
+        AuditPage: {
+            /** Items */
+            items: components["schemas"]["AuditEntry"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Total */
+            total: number;
+        };
         /** CustomerFeature */
         CustomerFeature: {
             /** Avg Ticket Brl */
@@ -162,6 +377,28 @@ export interface components {
             /** Key */
             key: string;
         };
+        /** DriftOut */
+        DriftOut: {
+            /** Alert */
+            alert: boolean;
+            /** Feature */
+            feature: string;
+            /** Psi */
+            psi: number;
+            /** Threshold */
+            threshold: number;
+        };
+        /** DriftReport */
+        DriftReport: {
+            /** Alerts */
+            alerts: number;
+            /** Computed At */
+            computed_at: string | null;
+            /** Items */
+            items: components["schemas"]["DriftOut"][];
+            /** Run Id */
+            run_id: string | null;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -201,6 +438,32 @@ export interface components {
             synthetic_data: boolean;
             /** Total Customers */
             total_customers: number;
+        };
+        /** ModelOut */
+        ModelOut: {
+            /** Data Hash */
+            data_hash: string;
+            /** Metrics */
+            metrics: {
+                [key: string]: unknown;
+            };
+            /** Model Name */
+            model_name: string;
+            /** Model Version */
+            model_version: string;
+            /** Params */
+            params: {
+                [key: string]: unknown;
+            };
+            /** Run Id */
+            run_id: string | null;
+            /** Synthetic Notice */
+            synthetic_notice: string;
+            /**
+             * Trained At
+             * Format: date-time
+             */
+            trained_at: string;
         };
         /** NbaItem */
         NbaItem: {
@@ -249,6 +512,56 @@ export interface components {
             nba_action: string;
             /** Pending Approval */
             pending_approval: number;
+        };
+        /** PipelineRunOut */
+        PipelineRunOut: {
+            /** Code Version */
+            code_version: string;
+            /** Contract Version */
+            contract_version: string;
+            /** Duration Ms */
+            duration_ms: number | null;
+            /** Error */
+            error: string | null;
+            /** Finished At */
+            finished_at: string | null;
+            /** Rows By Entity */
+            rows_by_entity: {
+                [key: string]: number;
+            };
+            /** Run Id */
+            run_id: string;
+            /** Seed */
+            seed: number;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /** Status */
+            status: string;
+        };
+        /** QualityOut */
+        QualityOut: {
+            /** Failed Rules */
+            failed_rules: number;
+            /** Results */
+            results: components["schemas"]["QualityRuleOut"][];
+            /** Run Id */
+            run_id: string | null;
+            /** Total Rules */
+            total_rules: number;
+        };
+        /** QualityRuleOut */
+        QualityRuleOut: {
+            /** Entity */
+            entity: string;
+            /** Failed Rows */
+            failed_rows: number;
+            /** Passed */
+            passed: boolean;
+            /** Rule */
+            rule: string;
         };
         /** RouteMetric */
         RouteMetric: {
@@ -300,6 +613,39 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    audit_audit_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                entity_id?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AuditPage"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     clientes_clientes_get: {
         parameters: {
             query?: {
@@ -423,6 +769,174 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["NbaPage"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    approvals_nba_aprovacoes_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApprovalStatus"][];
+                };
+            };
+        };
+    };
+    decide_nba__customer_id__aprovacao_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                customer_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ApprovalRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApprovalResult"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    drift_ops_drift_get: {
+        parameters: {
+            query?: {
+                run_id?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DriftReport"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    models_ops_models_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModelOut"][];
+                };
+            };
+        };
+    };
+    quality_ops_quality_get: {
+        parameters: {
+            query?: {
+                run_id?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QualityOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    runs_ops_runs_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PipelineRunOut"][];
                 };
             };
             /** @description Validation Error */

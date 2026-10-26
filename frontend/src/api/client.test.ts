@@ -1,11 +1,23 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { api, get } from "./client";
+import { api, get, setToken } from "./client";
 
 const ok = (body: unknown) => Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve(body) } as Response);
 
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => { vi.unstubAllGlobals(); setToken(undefined); });
 
 describe("api client", () => {
+  it("envia Authorization Bearer so quando ha token, sem colocar o token na URL", async () => {
+    const f = vi.fn(() => ok({}));
+    vi.stubGlobal("fetch", f);
+    await get("/kpis");
+    expect((f.mock.calls[0] as unknown[])[1]).toMatchObject({ headers: {} });
+    setToken("abc.def.ghi");
+    await get("/kpis");
+    const [url, init] = f.mock.calls[1] as unknown as [URL, { headers: Record<string, string> }];
+    expect(init.headers.Authorization).toBe("Bearer abc.def.ghi");
+    expect(String(url)).not.toContain("abc.def.ghi");
+  });
+
   it("monta querystring ignorando valores vazios", async () => {
     const f = vi.fn(() => ok({}));
     vi.stubGlobal("fetch", f);

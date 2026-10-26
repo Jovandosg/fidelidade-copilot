@@ -39,7 +39,7 @@ O script: cria `.env` com senhas aleatórias se não existir → sobe o Postgres
 |---|---|
 | Dashboard | http://localhost:5173 |
 | API (docs interativas) | http://localhost:8000/docs |
-| KPIs (teste rápido) | http://localhost:8000/kpis |
+| KPIs (teste rápido) | http://localhost:8000/kpis (exige token JWT; veja "API (JWT + RBAC)") |
 
 A API não tem rota em `/`: o `404` em `GET /` é esperado. `Ctrl+C` encerra API e frontend; o Postgres continua no Docker (`docker compose down` para parar).
 `.\scripts\start.ps1 -SetupOnly` prepara banco e dados e sai, sem subir os servidores.
@@ -59,7 +59,7 @@ pip install -r requirements.txt
 ```powershell
 Copy-Item .env.example .env         # Linux/macOS: cp .env.example .env
 ```
-Edite o `.env`: troque as senhas. `POSTGRES_PORT`, `DATABASE_URL` e `DATABASE_URL_RO` devem usar a mesma porta e as mesmas senhas.
+Edite o `.env`: troque as senhas. `POSTGRES_PORT` e as URLs (`DATABASE_URL`, `DATABASE_URL_RO`, `DATABASE_URL_ETL`, `DATABASE_URL_AUDIT`) devem usar a mesma porta e as senhas correspondentes.
 
 **3. Banco**
 ```powershell
@@ -98,6 +98,8 @@ docker compose down -v; Remove-Item .env
 
 ## Testes
 
+> Operação, rotinas, papéis, rotação de segredos e resposta a incidentes: [docs/03-arquitetura/operacao.md](docs/03-arquitetura/operacao.md).
+
 ```powershell
 .\scripts\test.ps1     # pytest + tsc + vitest
 ```
@@ -105,9 +107,25 @@ docker compose down -v; Remove-Item .env
 - `pytest -q`: pipeline, contrato, modelos e paridade (contrato × pandera × DDL × Pydantic) rodam sempre. Testes de banco e de API (`tests/test_db.py`, `tests/test_api.py`) usam um banco temporário descartável e são **pulados** sem `DATABASE_URL`/`DATABASE_URL_RO`.
 - `cd frontend && npm test`: vitest (cliente da API, formatação e fluxos das telas, com ApexCharts simulado). `npm run build` roda `tsc` e o build do Vite.
 
-## API somente leitura
+## API (JWT + RBAC)
 
-Somente GET, paginada, sem PII, conectando com o papel `fidelidade_ro` (apenas SELECT) via `DATABASE_URL_RO`: `/kpis`, `/clientes` (filtros `profile`, `segment`, `min_risk`, `max_risk`, `sort`, `desc`), `/clientes/{id}`, `/rotas`, `/nba`. CORS restrito a `CORS_ORIGINS` (padrão `http://localhost:5173`).
+Toda rota exceto `/health` exige `Authorization: Bearer <jwt>`. Gere um token local (usa `JWT_SECRET` do `.env`, ≥ 32 caracteres; sem ele a API responde 503 e nada é liberado):
+
+```powershell
+python -m src.api.tokens --sub seu.apelido --role gestor   # analista | gestor | auditor; --hours até 24
+```
+
+| Perfil | Pode |
+|---|---|
+| `analista` | ler `/kpis`, `/clientes`, `/rotas`, `/nba`, `/ops/*` |
+| `gestor` | tudo do analista + `POST /nba/{id}/aprovacao` e `GET /nba/aprovacoes` |
+| `auditor` | leitura + `GET /audit` (trilha) e `GET /nba/aprovacoes`; não aprova |
+
+Dados em `analytics`/`ops` via `fidelidade_ro` (somente SELECT, `DATABASE_URL_RO`); a aprovação e a leitura da trilha usam `fidelidade_api_audit` (`DATABASE_URL_AUDIT`, INSERT/SELECT só em `ops.audit_log`). Cada aprovação grava quem, quando, o quê e antes/depois (decisão única por cliente; a trilha é imutável). Sem PII: `sub` é um apelido e a justificativa não deve conter dados pessoais.
+
+Endpoints: `/kpis`, `/clientes` (filtros `profile`, `segment`, `min_risk`, `max_risk`, `sort`, `desc`), `/clientes/{id}`, `/rotas`, `/nba`, `/ops/runs`, `/ops/quality`, `/ops/models`, `/ops/drift`, `/audit`. Proteções: rate limit por IP (`RATE_LIMIT_PER_MINUTE`=120 leitura, `RATE_LIMIT_WRITE_PER_MINUTE`=20 escrita; em memória, por processo → 429 com `Retry-After`), logs JSON por requisição (`request_id`, status, duração, `sub`/`role`; sem query string nem token), headers de segurança (CSP, nosniff, X-Frame-Options, HSTS, no-store) e CORS restrito a `CORS_ORIGINS`.
+
+> **Frontend:** ao abrir `http://localhost:5173` informe o token (colado na tela de entrada; fica só no `sessionStorage` da aba e vai apenas no cabeçalho `Authorization`). As abas são Executivo, Proteger (Radar), Crescer (NBA + aprovação, só o perfil gestor decide), Rotas (IVR) e Saúde da plataforma (execuções, qualidade, drift, modelos e, só para o auditor, a trilha de auditoria). Token inválido/expirado (401) devolve à tela de entrada.
 
 Tipos TypeScript: `scripts/gen_types.ps1` gera `frontend/openapi.json` e `frontend/src/api/schema.d.ts` a partir da API (um teste falha se o `openapi.json` ficar desatualizado).
 
@@ -129,6 +147,21 @@ Visão Executiva, Mapa Valor × Risco, Fila de Risco, Perfil do Cliente (explica
 - O gerador sintético não tem dinâmica de churn: o ROC-AUC do radar de risco no hold-out é baixo (≈0,58) e poucos clientes caem no quadrante valor alto + risco alto. Os números ilustram o fluxo, não desempenho real.
 - A API abre uma conexão por requisição (sem pool).
 - O bundle do frontend tem ~850 kB (ApexCharts) e não usa code-splitting.
+
+## Camadas do banco e papéis
+
+| Schema | Conteúdo | Quem escreve | Quem lê |
+|---|---|---|---|
+| `raw` | snapshot sintético de origem (`customers`, `transactions`) | `fidelidade_etl` | só dono/etl |
+| `treated` | dados tratados | `fidelidade_etl` | só dono/etl |
+| `analytics` | features, HVS, risco, NBA, rotas (contrato v1.1.0) | `fidelidade_etl` | `fidelidade_ro` (API) |
+| `ops` | `pipeline_runs`, `data_quality_results`, `model_registry`, `drift_metrics`, `audit_log` | etl (menos `audit_log`) | `fidelidade_ro` (menos `audit_log`) |
+
+`ops.audit_log` é append-only: trigger bloqueia UPDATE/DELETE/TRUNCATE (até para o dono) e `fidelidade_api_audit` só tem INSERT/SELECT nela. As migrações `003`-`006` são idempotentes. Os logins dos 3 papéis são criados por `db/init/01-api-role.sh` só na **primeira** subida do volume: se você já tinha um volume antigo, rode `docker compose down -v` e adicione `POSTGRES_ETL_PASSWORD` e `POSTGRES_AUDIT_PASSWORD` ao `.env` (veja `.env.example`).
+
+**Instrumentação:** cada `python -m src.pipeline` grava `data/analytics/run_report.json` (ignorado pelo git) com `run_id`, duração, linhas por entidade, resultado por regra (pandera + regras cruzadas), `code_version` (commit git, `-dirty` se há alterações; ou `CODE_VERSION`) e `seed`. `python -m src.db load` registra isso em `ops.pipeline_runs` e `ops.data_quality_results` (idempotente por `run_id`) e **não carrega dados** se a última execução falhou.
+
+**Modelos e drift:** cada execução também registra HVS, Radar de Risco e NBA em `ops.model_registry` (versão, data de treino, SHA-256 dos dados tratados, métricas, parâmetros e o aviso de dados sintéticos; único por modelo+versão+hash). O PSI por feature (decis, 11 numéricas + `profile` e `nba_action`) é calculado contra a baseline da execução anterior (`data/analytics/drift_baseline.json`, ignorado pelo git) e gravado em `ops.drift_metrics`; PSI ≥ 0,2 marca `alert` e imprime `ALERTA de drift`. Na primeira execução não há baseline, então não há linhas de drift.
 
 ## Estrutura
 
