@@ -175,7 +175,7 @@ set -a; source .env; set +a        # Linux/macOS
 ```powershell
 python -m src.pipeline              # gera/valida data/raw, data/treated, data/analytics
 python -m src.db all                # migrações versionadas + carga idempotente
-python -m src.knowledge ingest      # base do RAG (fontes públicas)
+python -m src.knowledge      # base do RAG (fontes públicas)
 ```
 
 **6. API e frontend** (dois terminais; a API precisa do `.env` carregado)
@@ -275,7 +275,7 @@ Riscos e próximos passos completos: [`riscos.md`](docs/03-arquitetura/agente/ri
 - `No module named src.db` ou `src.api`: você está fora da raiz do repositório ou numa versão antiga.
 - `JWT_SECRET precisa ter pelo menos 32 caracteres`: o terminal não tem as variáveis do `.env` (passo 4) ou o segredo é curto.
 - `python -m src.db all` trava ou `DATABASE_URL nao definido`: variáveis ausentes ou porta/senha diferentes do container. Confira `docker ps` e `echo $env:DATABASE_URL`, ou use `.\scripts\start.ps1`.
-- API responde 500 em `/kpis` ou `knowledge.rule_chunks does not exist`: banco vazio ou sem migrações; rode `python -m src.db all` e `python -m src.knowledge ingest`.
+- API responde 500 em `/kpis` ou `knowledge.rule_chunks does not exist`: banco vazio ou sem migrações; rode `python -m src.db all` e `python -m src.knowledge`.
 - Porta 5432 ocupada: defina `POSTGRES_PORT=55432` e use essa porta nas URLs do `.env`.
 - Senha do banco mudou depois da primeira subida: as senhas só valem na criação do volume; use `docker compose down -v` (apaga só dados sintéticos).
 </details>
