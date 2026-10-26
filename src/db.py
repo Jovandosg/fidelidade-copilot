@@ -12,8 +12,10 @@ from pathlib import Path
 import pandas as pd
 import psycopg
 from psycopg import sql
+from psycopg.types.json import Jsonb
 
 from .contracts import build_schema, load_contract
+from .runs import read_run_report
 
 ROOT = Path(__file__).parents[1]
 MIGRATIONS_DIR = ROOT / "db" / "migrations"
@@ -97,6 +99,24 @@ def load_layers(conn: psycopg.Connection, data_dir: Path = ROOT / "data") -> dic
     return counts
 
 
+def record_run(conn: psycopg.Connection, report: dict) -> int:
+    """Persiste a execucao e o resultado por regra em ops.* (idempotente por run_id); devolve o numero de regras."""
+    with conn.transaction():
+        conn.execute(
+            """INSERT INTO ops.pipeline_runs (run_id, started_at, finished_at, duration_ms, status, code_version, seed, contract_version, rows_by_entity, error)
+               VALUES (%(run_id)s, %(started_at)s, %(finished_at)s, %(duration_ms)s, %(status)s, %(code_version)s, %(seed)s, %(contract_version)s, %(rows)s, %(error)s)
+               ON CONFLICT (run_id) DO UPDATE SET finished_at = EXCLUDED.finished_at, duration_ms = EXCLUDED.duration_ms,
+                   status = EXCLUDED.status, rows_by_entity = EXCLUDED.rows_by_entity, error = EXCLUDED.error""",
+            {**report, "rows": Jsonb(report["rows_by_entity"]), "error": report.get("error")})
+        with conn.cursor() as cur:
+            cur.executemany(
+                """INSERT INTO ops.data_quality_results (run_id, entity, rule, passed, failed_rows)
+                   VALUES (%s, %s, %s, %s, %s)
+                   ON CONFLICT (run_id, entity, rule) DO UPDATE SET passed = EXCLUDED.passed, failed_rows = EXCLUDED.failed_rows""",
+                [(report["run_id"], r["entity"], r["rule"], r["passed"], r["failed_rows"]) for r in report.get("rules", [])])
+    return len(report.get("rules", []))
+
+
 def main(argv: list[str] | None = None) -> None:
     cmd = (argv or sys.argv[1:] or ["all"])[0]
     if cmd in ("migrate", "all"):
@@ -105,6 +125,13 @@ def main(argv: list[str] | None = None) -> None:
     if cmd in ("load", "all"):
         dsn = os.environ.get("DATABASE_URL_ETL") or get_dsn()  # carga com o papel etl quando configurado
         with psycopg.connect(dsn) as conn:
+            run = read_run_report()
+            if run:
+                print("execucao do pipeline registrada em ops:", run["run_id"], run["status"], f"({record_run(conn, run)} regras)")
+                if run["status"] != "passed":
+                    raise SystemExit("ultima execucao do pipeline falhou; dados nao carregados (veja ops.pipeline_runs.error)")
+            else:
+                print("aviso: data/analytics/run_report.json ausente; execucao nao registrada em ops (rode python -m src.pipeline)")
             print("linhas carregadas:", load_layers(conn))
 
 

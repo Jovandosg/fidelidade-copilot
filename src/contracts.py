@@ -116,6 +116,47 @@ def build_schema(entity: str, contract: dict | None = None) -> pa.DataFrameSchem
     return pa.DataFrameSchema(columns, checks=frame_checks, strict=True)
 
 
+def _check_rule(frame: pd.DataFrame, schema: pa.DataFrameSchema) -> int:
+    """Valida o frame contra um schema de uma unica regra; devolve o numero de casos de falha (0 = passou)."""
+    try:
+        schema.validate(frame, lazy=True)
+        return 0
+    except pa.errors.SchemaErrors as exc:
+        index = exc.failure_cases["index"].dropna()
+        return max(int(index.nunique()), 1)
+
+
+def rule_results(entity: str, frame: pd.DataFrame, contract: dict | None = None) -> list[dict]:
+    """Resultado do pandera por regra do contrato: [{entity, rule, passed, failed_rows}].
+
+    Cada regra (colunas, tipo/nulabilidade, unicidade, cada constraint, regras entre colunas) e avaliada isoladamente
+    pelos mesmos checks gerados por build_schema, entao um unico dado ruim aponta a regra exata.
+    """
+    contract = contract or load_contract()
+    spec = build_schema(entity, contract)
+    results = []
+
+    def add(rule: str, failed: int) -> None:
+        results.append({"entity": entity, "rule": rule, "passed": failed == 0, "failed_rows": failed})
+
+    expected = list(spec.columns)
+    add("columns_match_contract", 0 if list(frame.columns) == expected else max(len(set(frame.columns) ^ set(expected)), 1))
+    present = [c for c in expected if c in frame.columns]
+    for name in present:
+        col = spec.columns[name]
+        add(f"{name}:type_nullable", _check_rule(frame, pa.DataFrameSchema({name: pa.Column(col.dtype, nullable=col.nullable)})))
+        if col.unique:
+            add(f"{name}:unique", _check_rule(frame, pa.DataFrameSchema({name: pa.Column(None, nullable=True, unique=True)})))
+        seen: dict[str, int] = {}
+        for check in col.checks:
+            seen[check.name] = seen.get(check.name, 0) + 1
+            suffix = f"#{seen[check.name]}" if seen[check.name] > 1 else ""
+            add(f"{name}:{check.name}{suffix}", _check_rule(frame, pa.DataFrameSchema({name: pa.Column(None, checks=[check], nullable=True)})))
+    for check in spec.checks:
+        add(f"table:{check.name}", _check_rule(frame, pa.DataFrameSchema(checks=[check], strict=False)))
+    return results
+
+
 def check_foreign_keys(frames: dict[str, pd.DataFrame], contract: dict | None = None) -> None:
     """Verifica 'must exist in <entidade>' entre as entidades fornecidas."""
     contract = contract or load_contract()

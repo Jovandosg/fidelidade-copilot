@@ -207,3 +207,27 @@ def test_ops_constraints_reject_bad_values(conn):
     with pytest.raises(psycopg.errors.CheckViolation):
         conn.execute(AUDIT_ROW.replace("'gestor'", "'root'"))
     conn.rollback()
+
+
+def test_record_run_is_idempotent_and_runs_as_etl(conn):
+    from src.runs import read_run_report
+
+    main()
+    rep = read_run_report()
+    conn.execute("SET ROLE fidelidade_etl")
+    try:
+        n = db.record_run(conn, rep)
+        db.record_run(conn, rep)
+        conn.commit()
+    finally:
+        conn.rollback()
+        conn.execute("RESET ROLE")
+        conn.commit()
+    assert n == len(rep["rules"]) > 10
+    row = conn.execute("SELECT status, seed, rows_by_entity->>'customers_raw' FROM ops.pipeline_runs WHERE run_id = %s", (rep["run_id"],)).fetchone()
+    assert row == ("passed", rep["seed"], "1200")
+    assert conn.execute("SELECT count(*) FROM ops.data_quality_results WHERE run_id = %s", (rep["run_id"],)).fetchone()[0] == n
+    failed = {**rep, "run_id": str(uuid.uuid4()), "status": "failed", "error": "boom", "rules": [{"entity": "route_metrics", "rule": "ivr:x", "passed": False, "failed_rows": 3}]}
+    db.record_run(conn, failed)
+    conn.commit()
+    assert conn.execute("SELECT status, error FROM ops.pipeline_runs WHERE run_id = %s", (failed["run_id"],)).fetchone() == ("failed", "boom")

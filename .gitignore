@@ -2,6 +2,7 @@
 __pycache__/
 .pytest_cache/
 .env
+data/analytics/run_report.json
 *.log
 data/raw/*.parquet
 
