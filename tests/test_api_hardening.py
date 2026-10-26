@@ -31,8 +31,10 @@ def test_every_documented_operation_requires_a_token():
     ops = list(openapi_operations())
     assert len(ops) >= 12
     c = TestClient(app)
-    open_ops = [(m, p) for m, p in ops if c.request(m, p, json={} if m == "POST" else None).status_code != 401]
+    open_ops = [(m, p) for m, p in ops if not p.startswith("/auth/demo") and c.request(m, p, json={} if m == "POST" else None).status_code != 401]
     assert open_ops == []
+    # login de demo: publico por desenho, mas 404 enquanto DEMO_LOGIN != 1
+    assert c.get("/auth/demo").json() == {"enabled": False} and c.post("/auth/demo/gestor").status_code in (404, 503)
 
 
 def test_health_is_the_only_undocumented_public_route():

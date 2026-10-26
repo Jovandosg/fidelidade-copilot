@@ -424,6 +424,47 @@
         "title": "CustomerPage",
         "type": "object"
       },
+      "DemoStatus": {
+        "properties": {
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "enabled"
+        ],
+        "title": "DemoStatus",
+        "type": "object"
+      },
+      "DemoToken": {
+        "properties": {
+          "expires_in": {
+            "title": "Expires In",
+            "type": "integer"
+          },
+          "role": {
+            "enum": [
+              "analista",
+              "gestor",
+              "auditor"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "token": {
+            "title": "Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "role",
+          "expires_in"
+        ],
+        "title": "DemoToken",
+        "type": "object"
+      },
       "DistributionItem": {
         "properties": {
           "customers": {
@@ -1208,7 +1249,7 @@
     }
   },
   "info": {
-    "description": "Dados SINTETICOS. Autenticacao por JWT (perfis analista, gestor, auditor); leitura do PostgreSQL e um unico POST de aprovacao que grava em ops.audit_log. Sem PII.",
+    "description": "Dados SINTETICOS. Autenticacao por JWT (perfis analista, gestor, auditor); leitura do PostgreSQL, agente de IA com SSE (somente propoe) e POSTs de aprovacao/decisao que gravam em ops.audit_log. Sem PII.",
     "title": "Ancora Azul - API de analytics",
     "version": "1.1.0"
   },
@@ -1326,6 +1367,74 @@
           }
         ],
         "summary": "Trilha de auditoria (somente auditor)"
+      }
+    },
+    "/auth/demo": {
+      "get": {
+        "operationId": "demo_status_auth_demo_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemoStatus"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Informa se o login de demonstracao esta habilitado",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/demo/{role}": {
+      "post": {
+        "operationId": "demo_token_auth_demo__role__post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role",
+            "required": true,
+            "schema": {
+              "enum": [
+                "analista",
+                "gestor",
+                "auditor"
+              ],
+              "title": "Role",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemoToken"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Token de demonstracao (1 h) para o perfil; 404 se DEMO_LOGIN!=1",
+        "tags": [
+          "auth"
+        ]
       }
     },
     "/clientes": {

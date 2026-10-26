@@ -35,7 +35,7 @@ def _auth(role: str = "analista") -> dict[str, str]:
 # ---------- estaticos (sem banco) ----------
 def test_only_approval_and_agent_endpoints_write():
     ops = {(m.upper(), p) for p, v in app.openapi()["paths"].items() for m in v}
-    assert {(m, p) for m, p in ops if m != "GET"} == {("POST", "/nba/{customer_id}/aprovacao"), ("POST", "/agente/perguntar"),
+    assert {(m, p) for m, p in ops if m != "GET"} == {("POST", "/nba/{customer_id}/aprovacao"), ("POST", "/agente/perguntar"), ("POST", "/auth/demo/{role}"),
                                                       ("POST", "/nba/{customer_id}/proposta"), ("POST", "/propostas/{proposal_id}/decisao")}
 
 

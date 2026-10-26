@@ -20,6 +20,10 @@ from .schemas import AgentAnswer
 MAX_QUESTION_CHARS = 500
 BENEFIT_CAP_BRL = max(cost for _, cost, _, _ in ACTIONS)  # teto = maior custo de acao do catalogo de premissas
 ALLOWED_SOURCE_HOST = "voeazul.com.br"
+
+
+def _trusted_host(host: str) -> bool:
+    return host == ALLOWED_SOURCE_HOST or host.endswith("." + ALLOWED_SOURCE_HOST)
 ANSWER_SCHEMA = AgentAnswer.model_json_schema()
 
 PII_PATTERNS = {
@@ -101,7 +105,7 @@ def check_output(answer: AgentAnswer, ctx: AgentContext) -> list[str]:
         out.append("citation_unknown")
     if (answer.citations and not used) or (not answer.citations and NO_SOURCE not in plain):
         out.append("missing_citation")
-    if any(urlparse(c.url).scheme != "https" or not (urlparse(c.url).hostname or "").endswith(ALLOWED_SOURCE_HOST) for c in answer.citations):
+    if any(urlparse(c.url).scheme != "https" or not _trusted_host(urlparse(c.url).hostname or "") for c in answer.citations):
         out.append("citation_untrusted_source")
 
     if detect_pii(text):

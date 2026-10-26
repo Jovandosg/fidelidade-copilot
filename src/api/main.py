@@ -12,6 +12,7 @@ from psycopg import sql
 from ..schemas import CustomerFeature, RouteMetric
 from .agent import router as agent_router
 from .deps import Conn
+from .demo import router as demo_router
 from .models import CustomerPage, DistributionItem, Kpis, NbaPage, NbaSummary, RoutePage
 from .ops import router as ops_router
 from .security import RateLimitMiddleware, RequestLogMiddleware, SecurityHeadersMiddleware, configure_logging, make_limiter, require
@@ -47,7 +48,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="Ancora Azul - API de analytics",
         version="1.1.0",
-        description="Dados SINTETICOS. Autenticacao por JWT (perfis analista, gestor, auditor); leitura do PostgreSQL e um unico POST de aprovacao que grava em ops.audit_log. Sem PII.",
+        description="Dados SINTETICOS. Autenticacao por JWT (perfis analista, gestor, auditor); leitura do PostgreSQL, agente de IA com SSE (somente propoe) e POSTs de aprovacao/decisao que gravam em ops.audit_log. Sem PII.",
     )
     configure_logging()
     origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", DEFAULT_ORIGINS).split(",") if o.strip()]
@@ -60,6 +61,7 @@ def create_app() -> FastAPI:
                        expose_headers=["X-Request-ID", "Retry-After"], allow_credentials=False)
     app.include_router(ops_router)
     app.include_router(agent_router)
+    app.include_router(demo_router)
 
     @app.get("/health", include_in_schema=False)
     def health() -> dict[str, str]:

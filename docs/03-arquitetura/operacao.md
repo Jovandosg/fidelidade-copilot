@@ -114,6 +114,7 @@ python -m src.api.tokens --sub seu.apelido --role gestor --hours 8   # analista 
 | `POST /propostas/{proposal_id}/decisao` | — | ✔ | — |
 | `GET /nba/aprovacoes` | — | ✔ | ✔ |
 | `POST /nba/{customer_id}/aprovacao` | — | ✔ | — |
+| `GET /auth/demo`, `POST /auth/demo/{role}` (públicos; só com `DEMO_LOGIN=1`, senão 404) | — | — | — |
 | `GET /audit` | — | — | ✔ |
 
 Códigos: 401 sem token válido, 403 perfil insuficiente, 404 cliente inexistente, 409 ação sem aprovação exigida ou decisão já registrada, 422 entrada inválida, 429 limite excedido (`Retry-After`), 503 banco ou segredo indisponível.

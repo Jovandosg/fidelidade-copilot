@@ -108,6 +108,8 @@ export const api = {
   approvals: () => get<ApprovalStatus[]>("/nba/aprovacoes"),
   decide: (customerId: string, decision: Decision, reason: string) =>
     request<ApprovalResult>("POST", `/nba/${encodeURIComponent(customerId)}/aprovacao`, { body: { decision, reason } }),
+  demoEnabled: () => get<{ enabled: boolean }>("/auth/demo"),
+  demoToken: (role: string) => request<{ token: string; role: string; expires_in: number }>("POST", `/auth/demo/${encodeURIComponent(role)}`),
   decideProposal: (id: string, decision: Decision, reason: string) =>
     request<Proposal>("POST", `/propostas/${encodeURIComponent(id)}/decisao`, { body: { decision, reason } }),
   // A API limita a pagina a 200 itens; percorre as paginas para o mapa valor x risco.

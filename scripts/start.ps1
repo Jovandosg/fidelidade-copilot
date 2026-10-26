@@ -74,6 +74,7 @@ Step "Dependencias do frontend"
 if (-not (Test-Path frontend\node_modules)) { Push-Location frontend; Run "npm install" { npm install --no-audit --no-fund }; Pop-Location }
 
 Step "Subindo API e frontend"
+$env:DEMO_LOGIN = "1"   # botoes de perfil na tela de login (so neste processo local; nao e gravado no .env)
 $procs = @()
 try {
     $procs += Start-Process python -ArgumentList "-m", "uvicorn", "src.api.main:app", "--port", "8000" -PassThru -NoNewWindow

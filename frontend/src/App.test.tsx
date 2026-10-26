@@ -36,6 +36,7 @@ function mockApi(opts: { status?: number; detail?: string } = {}) {
   calls = [];
   vi.stubGlobal("fetch", vi.fn((url: URL, init?: RequestInit) => {
     const p = url.pathname;
+    if (p === "/auth/demo") return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({ enabled: false }) } as Response);
     const headers = (init?.headers ?? {}) as Record<string, string>;
     calls.push({ method: init?.method ?? "GET", path: p, auth: headers.Authorization, body: init?.body as string | undefined });
     if (opts.status) return Promise.resolve({ ok: false, status: opts.status, json: () => Promise.resolve({ detail: opts.detail ?? "erro" }) } as Response);
