@@ -38,7 +38,8 @@ def frames():
 
 
 def test_migrations_are_idempotent_and_checksummed(conn):
-    assert db.migrate(conn) == ["001_analytics_schema.sql", "002_readonly_role.sql"]
+    all_files = sorted(p.name for p in db.MIGRATIONS_DIR.glob("*.sql"))
+    assert db.migrate(conn) == all_files
     assert db.migrate(conn) == []
     conn.execute("UPDATE public.schema_migrations SET checksum = 'x' WHERE version LIKE '001%'")
     conn.commit()
@@ -47,24 +48,41 @@ def test_migrations_are_idempotent_and_checksummed(conn):
     conn.rollback()
     conn.execute("DELETE FROM public.schema_migrations WHERE version LIKE '001%'")  # restaura estado para os proximos testes
     conn.commit()
-    conn.execute("DROP SCHEMA analytics CASCADE")
+    conn.execute("DROP SCHEMA analytics, raw, treated, ops CASCADE")
     conn.commit()
     conn.execute("DELETE FROM public.schema_migrations")
     conn.commit()
-    assert len(db.migrate(conn)) == 2
+    assert db.migrate(conn) == all_files
+
+
+def test_ddl_migrations_can_be_reapplied_without_error(conn):
+    """003-006 usam IF NOT EXISTS/GRANT idempotentes: reexecutar o SQL nao pode falhar nem duplicar objetos."""
+    for name in ("003_layers_and_roles.sql", "004_raw_treated_tables.sql", "005_ops_tables.sql", "006_grants.sql"):
+        conn.execute((db.MIGRATIONS_DIR / name).read_text(encoding="utf-8"))
+    conn.commit()
 
 
 def test_live_tables_match_contract_and_pydantic(conn):
     contract = load_contract()
-    for entity in db.ENTITIES:
+    for (schema, table), entity in db.LAYER_TABLES.items():
         rows = conn.execute("""SELECT column_name, data_type, is_nullable FROM information_schema.columns
-                               WHERE table_schema = 'analytics' AND table_name = %s ORDER BY ordinal_position""", (entity,)).fetchall()
+                               WHERE table_schema = %s AND table_name = %s ORDER BY ordinal_position""", (schema, table)).fetchall()
         spec = contract["entities"][entity]["columns"]
-        assert [r[0] for r in rows] == list(spec)
+        assert [r[0] for r in rows] == list(spec), f"{schema}.{table}"
         for name, data_type, nullable in rows:
             assert data_type == {"text": "text", "integer": "integer", "numeric": "numeric", "boolean": "boolean", "date": "date"}[db.PG_TYPES[spec[name]["type"]]]
             assert (nullable == "YES") == spec[name]["nullable"]
-        assert list(MODELS[entity].model_fields) == list(spec)
+        if schema == "analytics":
+            assert list(MODELS[entity].model_fields) == list(spec)
+
+
+def test_load_layers_fills_raw_treated_and_analytics_idempotently(conn, frames):
+    first = db.load_layers(conn)
+    assert first == db.load_layers(conn)
+    assert set(first) == {f"{s}.{t}" for s, t in db.LAYER_TABLES}
+    assert first["raw.transactions"] == first["treated.transactions"] > 0
+    assert conn.execute("SELECT count(*) FROM raw.transactions t LEFT JOIN raw.customers c USING (customer_id) WHERE c.customer_id IS NULL").fetchone()[0] == 0
+    conn.commit()
 
 
 def test_upsert_is_idempotent_updates_and_removes_stale(conn, frames):
@@ -119,3 +137,73 @@ def test_readonly_role_can_select_but_not_write(conn):
         conn.rollback()
         conn.execute("RESET ROLE")
         conn.commit()
+
+
+OPS_TABLES = ("pipeline_runs", "data_quality_results", "model_registry", "drift_metrics", "audit_log")
+AUDIT_ROW = ("INSERT INTO ops.audit_log (actor, actor_role, action, entity, entity_id, before, after) "
+              "VALUES ('u1', 'gestor', 'approve_nba', 'nba', 'C000001', '{}', '{\"ok\": true}')")
+
+
+def _as(conn, role, stmt, params=None):
+    conn.execute(f"SET ROLE {role}")
+    try:
+        return conn.execute(stmt, params).fetchall() if stmt.lstrip().upper().startswith("SELECT") else conn.execute(stmt, params)
+    finally:
+        conn.rollback()
+        conn.execute("RESET ROLE")
+        conn.commit()
+
+
+def test_ops_tables_exist(conn):
+    found = {r[0] for r in conn.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'ops'").fetchall()}
+    assert set(OPS_TABLES) <= found
+
+
+def test_audit_log_is_append_only_even_for_owner(conn):
+    conn.execute(AUDIT_ROW)
+    conn.commit()
+    for stmt in ("UPDATE ops.audit_log SET actor = 'x'", "DELETE FROM ops.audit_log", "TRUNCATE ops.audit_log"):
+        with pytest.raises(psycopg.errors.InsufficientPrivilege):
+            conn.execute(stmt)
+        conn.rollback()
+    assert conn.execute("SELECT count(*) FROM ops.audit_log").fetchone()[0] >= 1
+
+
+def test_audit_role_can_only_insert_and_select_audit_log(conn):
+    assert _as(conn, "fidelidade_api_audit", "SELECT count(*) FROM ops.audit_log")[0][0] >= 1
+    conn.execute("SET ROLE fidelidade_api_audit")
+    conn.execute(AUDIT_ROW)
+    conn.rollback()
+    conn.execute("RESET ROLE")
+    for stmt in ("UPDATE ops.audit_log SET actor = 'x'", "DELETE FROM ops.audit_log", "INSERT INTO analytics.route_metrics SELECT * FROM analytics.route_metrics",
+                 "SELECT 1 FROM ops.model_registry", "SELECT 1 FROM raw.customers"):
+        with pytest.raises(psycopg.errors.InsufficientPrivilege):
+            _as(conn, "fidelidade_api_audit", stmt)
+
+
+def test_readonly_role_reads_ops_but_not_audit_log_nor_raw(conn):
+    for ok in ("SELECT count(*) FROM ops.pipeline_runs", "SELECT count(*) FROM ops.drift_metrics"):
+        _as(conn, "fidelidade_ro", ok)
+    for stmt in ("SELECT 1 FROM ops.audit_log", "SELECT 1 FROM raw.customers", "SELECT 1 FROM treated.transactions",
+                 "INSERT INTO ops.pipeline_runs (run_id, started_at, status, code_version, seed, contract_version) "
+                 "VALUES (gen_random_uuid(), now(), 'running', 'x', 1, '1.1.0')"):
+        with pytest.raises(psycopg.errors.InsufficientPrivilege):
+            _as(conn, "fidelidade_ro", stmt)
+
+
+def test_etl_role_writes_layers_but_not_audit_log(conn):
+    _as(conn, "fidelidade_etl", "UPDATE analytics.route_metrics SET ivr = ivr")
+    _as(conn, "fidelidade_etl", "SELECT count(*) FROM raw.customers")
+    for stmt in (AUDIT_ROW, "SELECT 1 FROM ops.audit_log", "UPDATE ops.audit_log SET actor = 'x'"):
+        with pytest.raises(psycopg.errors.InsufficientPrivilege):
+            _as(conn, "fidelidade_etl", stmt)
+
+
+def test_ops_constraints_reject_bad_values(conn):
+    with pytest.raises(psycopg.errors.CheckViolation):
+        conn.execute("INSERT INTO ops.pipeline_runs (run_id, started_at, status, code_version, seed, contract_version) "
+                     "VALUES (gen_random_uuid(), now(), 'bogus', 'x', 1, '1.1.0')")
+    conn.rollback()
+    with pytest.raises(psycopg.errors.CheckViolation):
+        conn.execute(AUDIT_ROW.replace("'gestor'", "'root'"))
+    conn.rollback()

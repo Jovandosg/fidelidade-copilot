@@ -18,14 +18,20 @@ from .contracts import build_schema, load_contract
 ROOT = Path(__file__).parents[1]
 MIGRATIONS_DIR = ROOT / "db" / "migrations"
 SCHEMA = "analytics"
-ENTITIES = ("customer_features", "route_metrics")  # entidades do contrato persistidas no Postgres
+ENTITIES = ("customer_features", "route_metrics")  # entidades do contrato persistidas em analytics
+# (schema, tabela) -> entidade do contrato que a define; customers antes de transactions
+LAYER_TABLES = {
+    ("raw", "customers"): "customers_raw", ("raw", "transactions"): "transactions_raw",
+    ("treated", "customers"): "customers_raw", ("treated", "transactions"): "transactions_raw",
+    ("analytics", "customer_features"): "customer_features", ("analytics", "route_metrics"): "route_metrics",
+}
 PG_TYPES = {"string": "text", "integer": "integer", "decimal": "numeric", "boolean": "boolean", "date": "date"}
 
 
-def get_dsn() -> str:
-    dsn = os.environ.get("DATABASE_URL")
+def get_dsn(var: str = "DATABASE_URL") -> str:
+    dsn = os.environ.get(var)
     if not dsn:
-        raise RuntimeError("DATABASE_URL nao definido (veja .env.example)")
+        raise RuntimeError(f"{var} nao definido (veja .env.example)")
     return dsn
 
 
@@ -54,14 +60,15 @@ def _rows(df: pd.DataFrame, columns: list[str]) -> list[list]:
     return df[columns].astype(object).where(df[columns].notna(), None).values.tolist()
 
 
-def load_table(conn: psycopg.Connection, entity: str, df: pd.DataFrame, contract: dict | None = None) -> int:
+def load_table(conn: psycopg.Connection, entity: str, df: pd.DataFrame, contract: dict | None = None,
+               schema: str = SCHEMA, table_name: str | None = None) -> int:
     """Upsert por chave primaria e remocao de linhas ausentes (a tabela espelha o snapshot do pipeline)."""
     contract = contract or load_contract()
     ent = contract["entities"][entity]
     columns = list(ent["columns"])
     pk = ent["primary_key"]
     build_schema(entity, contract).validate(df[columns], lazy=True)
-    table = sql.Identifier(SCHEMA, entity)
+    table = sql.Identifier(schema, table_name or entity)
     updates = [sql.SQL("{c} = EXCLUDED.{c}").format(c=sql.Identifier(c)) for c in columns if c != pk]
     upsert = sql.SQL("INSERT INTO {t} ({cols}) VALUES ({ph}) ON CONFLICT ({pk}) DO UPDATE SET {upd}").format(
         t=table, cols=sql.SQL(", ").join(map(sql.Identifier, columns)), ph=sql.SQL(", ").join(sql.Placeholder() * len(columns)),
@@ -79,15 +86,26 @@ def load_analytics(conn: psycopg.Connection, features: pd.DataFrame, routes: pd.
             "route_metrics": load_table(conn, "route_metrics", routes, contract)}
 
 
+def load_layers(conn: psycopg.Connection, data_dir: Path = ROOT / "data") -> dict[str, int]:
+    """Carrega raw, treated e analytics a partir dos CSVs do pipeline (customers antes de transactions)."""
+    contract = load_contract()
+    counts = {}
+    for (schema, table), entity in LAYER_TABLES.items():
+        layer_dir = data_dir / schema
+        df = pd.read_csv(layer_dir / f"{table}.csv") if schema != "analytics" else pd.read_csv(layer_dir / f"{entity}.csv")
+        counts[f"{schema}.{table}"] = load_table(conn, entity, df, contract, schema, table)
+    return counts
+
+
 def main(argv: list[str] | None = None) -> None:
     cmd = (argv or sys.argv[1:] or ["all"])[0]
-    with psycopg.connect(get_dsn()) as conn:
-        if cmd in ("migrate", "all"):
+    if cmd in ("migrate", "all"):
+        with psycopg.connect(get_dsn()) as conn:  # DDL exige o dono do schema
             print("migracoes aplicadas:", migrate(conn) or "nenhuma pendente")
-        if cmd in ("load", "all"):
-            analytics = ROOT / "data" / "analytics"
-            counts = load_analytics(conn, pd.read_csv(analytics / "customer_features.csv"), pd.read_csv(analytics / "route_metrics.csv"))
-            print("linhas carregadas:", counts)
+    if cmd in ("load", "all"):
+        dsn = os.environ.get("DATABASE_URL_ETL") or get_dsn()  # carga com o papel etl quando configurado
+        with psycopg.connect(dsn) as conn:
+            print("linhas carregadas:", load_layers(conn))
 
 
 if __name__ == "__main__":

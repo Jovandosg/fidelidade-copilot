@@ -28,12 +28,17 @@ if (-not (Test-Path .env)) {
     $rand = { -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 24 | ForEach-Object { [char]$_ }) }
     $owner = & $rand
     $api = & $rand
+    $etl = & $rand
+    $audit = & $rand
     $db, $user, $port = "fidelidade", "fidelidade_owner", 5432
     @(
         "POSTGRES_DB=$db", "POSTGRES_USER=$user", "POSTGRES_PORT=$port",
         "POSTGRES_PASSWORD=$owner", "POSTGRES_API_PASSWORD=$api",
+        "POSTGRES_ETL_PASSWORD=$etl", "POSTGRES_AUDIT_PASSWORD=$audit",
         "DATABASE_URL=postgresql://${user}:${owner}@127.0.0.1:${port}/${db}",
         "DATABASE_URL_RO=postgresql://fidelidade_ro:${api}@127.0.0.1:${port}/${db}",
+        "DATABASE_URL_ETL=postgresql://fidelidade_etl:${etl}@127.0.0.1:${port}/${db}",
+        "DATABASE_URL_AUDIT=postgresql://fidelidade_api_audit:${audit}@127.0.0.1:${port}/${db}",
         "CORS_ORIGINS=http://localhost:5173"
     ) | Set-Content .env -Encoding ascii
     Write-Host ".env criado com senhas aleatorias (nao versionado)."

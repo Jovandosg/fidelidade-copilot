@@ -59,7 +59,7 @@ pip install -r requirements.txt
 ```powershell
 Copy-Item .env.example .env         # Linux/macOS: cp .env.example .env
 ```
-Edite o `.env`: troque as senhas. `POSTGRES_PORT`, `DATABASE_URL` e `DATABASE_URL_RO` devem usar a mesma porta e as mesmas senhas.
+Edite o `.env`: troque as senhas. `POSTGRES_PORT` e as URLs (`DATABASE_URL`, `DATABASE_URL_RO`, `DATABASE_URL_ETL`, `DATABASE_URL_AUDIT`) devem usar a mesma porta e as senhas correspondentes.
 
 **3. Banco**
 ```powershell
@@ -129,6 +129,17 @@ Visão Executiva, Mapa Valor × Risco, Fila de Risco, Perfil do Cliente (explica
 - O gerador sintético não tem dinâmica de churn: o ROC-AUC do radar de risco no hold-out é baixo (≈0,58) e poucos clientes caem no quadrante valor alto + risco alto. Os números ilustram o fluxo, não desempenho real.
 - A API abre uma conexão por requisição (sem pool).
 - O bundle do frontend tem ~850 kB (ApexCharts) e não usa code-splitting.
+
+## Camadas do banco e papéis
+
+| Schema | Conteúdo | Quem escreve | Quem lê |
+|---|---|---|---|
+| `raw` | snapshot sintético de origem (`customers`, `transactions`) | `fidelidade_etl` | só dono/etl |
+| `treated` | dados tratados | `fidelidade_etl` | só dono/etl |
+| `analytics` | features, HVS, risco, NBA, rotas (contrato v1.1.0) | `fidelidade_etl` | `fidelidade_ro` (API) |
+| `ops` | `pipeline_runs`, `data_quality_results`, `model_registry`, `drift_metrics`, `audit_log` | etl (menos `audit_log`) | `fidelidade_ro` (menos `audit_log`) |
+
+`ops.audit_log` é append-only: trigger bloqueia UPDATE/DELETE/TRUNCATE (até para o dono) e `fidelidade_api_audit` só tem INSERT/SELECT nela. As migrações `003`-`006` são idempotentes. Os logins dos 3 papéis são criados por `db/init/01-api-role.sh` só na **primeira** subida do volume: se você já tinha um volume antigo, rode `docker compose down -v` e adicione `POSTGRES_ETL_PASSWORD` e `POSTGRES_AUDIT_PASSWORD` ao `.env` (veja `.env.example`).
 
 ## Estrutura
 
