@@ -5,6 +5,8 @@ import json
 import pandas as pd
 from .generator import SEED, generate_raw
 from .models import enrich_with_models
+from .drift import compute_drift, read_baseline, write_baseline
+from .registry import build_registry, data_hash
 from .runs import PipelineRun, write_run_report
 from .contracts import load_contract
 from .transform import build_treated, build_analytics, build_route_metrics
@@ -42,7 +44,13 @@ def _run(run: PipelineRun) -> dict:
                           "customer_features": len(features), "route_metrics": len(routes)}
     run.rules = evaluate_rules(customers_t, transactions_t, features, routes)
     report = validate_all(customers_t, transactions_t, features, routes, analytics / "quality_report.json", rules=run.rules)
+    run.models = build_registry(model_metrics, run.started_at.isoformat(), data_hash(customers_t, transactions_t))
+    run.drift = compute_drift(features, read_baseline())
+    write_baseline(features)
     print(f"Pipeline concluído: {report['customers']} clientes, {report['transactions']} transações; validação={report['status']}")
+    for d in run.drift:
+        if d["alert"]:
+            print(f"ALERTA de drift: {d['feature']} PSI={d['psi']} >= {d['threshold']}")
 
     return report
 

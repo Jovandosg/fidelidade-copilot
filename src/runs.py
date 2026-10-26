@@ -40,6 +40,8 @@ class PipelineRun:
         self._t0 = time.perf_counter()
         self.rows_by_entity: dict[str, int] = {}
         self.rules: list[dict] = []
+        self.models: list[dict] = []
+        self.drift: list[dict] = []
 
     def finish(self, status: str, error: str | None = None) -> dict:
         finished = datetime.now(timezone.utc)
@@ -48,7 +50,8 @@ class PipelineRun:
             "duration_ms": int((time.perf_counter() - self._t0) * 1000), "status": status,
             "code_version": code_version(), "seed": self.seed, "contract_version": self.contract_version,
             "rows_by_entity": self.rows_by_entity, "error": error, "rules": self.rules,
-        }
+                        "models": self.models, "drift": self.drift,
+                    }
 
 
 def write_run_report(report: dict, path: Path = RUN_REPORT) -> None:

@@ -231,3 +231,30 @@ def test_record_run_is_idempotent_and_runs_as_etl(conn):
     db.record_run(conn, failed)
     conn.commit()
     assert conn.execute("SELECT status, error FROM ops.pipeline_runs WHERE run_id = %s", (failed["run_id"],)).fetchone() == ("failed", "boom")
+
+
+def test_record_run_persists_models_and_drift_idempotently(conn):
+    from src.drift import compute_drift, snapshot
+    from src.runs import read_run_report
+
+    main()
+    rep = read_run_report()
+    feats = pd.read_csv(ROOT / "data" / "analytics" / "customer_features.csv")
+    rep["drift"] = compute_drift(feats.assign(recency_days=feats["recency_days"] + 400), snapshot(feats))
+    db.record_run(conn, rep)
+    conn.commit()
+    conn.execute("SET ROLE fidelidade_etl")
+    try:
+        db.record_run(conn, rep)
+        conn.commit()
+    finally:
+        conn.rollback()
+        conn.execute("RESET ROLE")
+        conn.commit()
+    names = {r[0] for r in conn.execute("SELECT model_name FROM ops.model_registry WHERE data_hash = %s", (rep["models"][0]["data_hash"],)).fetchall()}
+    assert names == {"hvs", "risk", "nba"}
+    assert conn.execute("SELECT count(*) FROM ops.model_registry WHERE data_hash = %s", (rep["models"][0]["data_hash"],)).fetchone()[0] == 3
+    assert "Metricas calculadas sobre dados sinteticos" in conn.execute("SELECT synthetic_notice FROM ops.model_registry LIMIT 1").fetchone()[0]
+    alerts = {r[0] for r in conn.execute("SELECT feature FROM ops.drift_metrics WHERE run_id = %s AND alert", (rep["run_id"],)).fetchall()}
+    assert "recency_days" in alerts
+    assert conn.execute("SELECT count(*) FROM ops.drift_metrics WHERE run_id = %s", (rep["run_id"],)).fetchone()[0] == len(rep["drift"])

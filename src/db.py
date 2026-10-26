@@ -114,6 +114,17 @@ def record_run(conn: psycopg.Connection, report: dict) -> int:
                    VALUES (%s, %s, %s, %s, %s)
                    ON CONFLICT (run_id, entity, rule) DO UPDATE SET passed = EXCLUDED.passed, failed_rows = EXCLUDED.failed_rows""",
                 [(report["run_id"], r["entity"], r["rule"], r["passed"], r["failed_rows"]) for r in report.get("rules", [])])
+            cur.executemany(
+                """INSERT INTO ops.model_registry (model_name, model_version, run_id, trained_at, data_hash, metrics, params, synthetic_notice)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                   ON CONFLICT (model_name, model_version, data_hash) DO NOTHING""",
+                [(m["model_name"], m["model_version"], report["run_id"], m["trained_at"], m["data_hash"], Jsonb(m["metrics"]), Jsonb(m["params"]),
+                  m["metrics"]["synthetic_notice"]) for m in report.get("models", [])])
+            cur.executemany(
+                """INSERT INTO ops.drift_metrics (run_id, feature, psi, threshold, alert)
+                   VALUES (%s, %s, %s, %s, %s)
+                   ON CONFLICT (run_id, feature) DO UPDATE SET psi = EXCLUDED.psi, threshold = EXCLUDED.threshold, alert = EXCLUDED.alert""",
+                [(report["run_id"], d["feature"], d["psi"], d["threshold"], d["alert"]) for d in report.get("drift", [])])
     return len(report.get("rules", []))
 
 

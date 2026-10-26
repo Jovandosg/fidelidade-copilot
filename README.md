@@ -142,6 +142,8 @@ Visão Executiva, Mapa Valor × Risco, Fila de Risco, Perfil do Cliente (explica
 `ops.audit_log` é append-only: trigger bloqueia UPDATE/DELETE/TRUNCATE (até para o dono) e `fidelidade_api_audit` só tem INSERT/SELECT nela. As migrações `003`-`006` são idempotentes. Os logins dos 3 papéis são criados por `db/init/01-api-role.sh` só na **primeira** subida do volume: se você já tinha um volume antigo, rode `docker compose down -v` e adicione `POSTGRES_ETL_PASSWORD` e `POSTGRES_AUDIT_PASSWORD` ao `.env` (veja `.env.example`).
 
 **Instrumentação:** cada `python -m src.pipeline` grava `data/analytics/run_report.json` (ignorado pelo git) com `run_id`, duração, linhas por entidade, resultado por regra (pandera + regras cruzadas), `code_version` (commit git, `-dirty` se há alterações; ou `CODE_VERSION`) e `seed`. `python -m src.db load` registra isso em `ops.pipeline_runs` e `ops.data_quality_results` (idempotente por `run_id`) e **não carrega dados** se a última execução falhou.
+
+**Modelos e drift:** cada execução também registra HVS, Radar de Risco e NBA em `ops.model_registry` (versão, data de treino, SHA-256 dos dados tratados, métricas, parâmetros e o aviso de dados sintéticos; único por modelo+versão+hash). O PSI por feature (decis, 11 numéricas + `profile` e `nba_action`) é calculado contra a baseline da execução anterior (`data/analytics/drift_baseline.json`, ignorado pelo git) e gravado em `ops.drift_metrics`; PSI ≥ 0,2 marca `alert` e imprime `ALERTA de drift`. Na primeira execução não há baseline, então não há linhas de drift.
 
 ## Estrutura
 

@@ -3,6 +3,7 @@ __pycache__/
 .pytest_cache/
 .env
 data/analytics/run_report.json
+data/analytics/drift_baseline.json
 *.log
 data/raw/*.parquet
 
