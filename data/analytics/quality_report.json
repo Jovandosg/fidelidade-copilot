@@ -1,8 +1,9 @@
 {
   "status": "passed",
   "customers": 1200,
-  "transactions": 6770,
+  "transactions": 6739,
   "features": 1200,
+  "routes": 90,
   "null_cells": 0,
   "duplicate_customer_ids": 0,
   "duplicate_transaction_ids": 0,

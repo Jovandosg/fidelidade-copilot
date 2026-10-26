@@ -15,13 +15,22 @@ def build_analytics(customers: pd.DataFrame, transactions: pd.DataFrame) -> pd.D
         trips_12m=("transaction_id", "count"),
         spend_12m_brl=("amount_brl", "sum"),
         avg_ticket_brl=("amount_brl", "mean"),
+        margin_12m_brl=("margin_brl", "sum"),
         last_flight=("flight_date", "max"),
+    )
+    experience = transactions.groupby("customer_id").agg(
+        disruptions_12m=("disrupted", "sum"),
+        complaints_12m=("complaint_flag", "sum"),
     )
     route = tx.groupby(["customer_id", "route"]).size().rename("n").reset_index()
     route = route.sort_values(["customer_id", "n", "route"], ascending=[True, False, True]).drop_duplicates("customer_id").set_index("customer_id")
-    result = customers.set_index("customer_id").join(agg).join(route[["route"]].rename(columns={"route": "preferred_route"}))
-    result[["trips_12m", "spend_12m_brl", "avg_ticket_brl"]] = result[["trips_12m", "spend_12m_brl", "avg_ticket_brl"]].fillna(0)
-    result["trips_12m"] = result["trips_12m"].astype(int)
+    result = customers.set_index("customer_id").join(agg).join(experience).join(route[["route"]].rename(columns={"route": "preferred_route"}))
+    result[["trips_12m", "spend_12m_brl", "avg_ticket_brl", "margin_12m_brl", "disruptions_12m", "complaints_12m"]] = result[["trips_12m", "spend_12m_brl", "avg_ticket_brl", "margin_12m_brl", "disruptions_12m", "complaints_12m"]].fillna(0)
+    for col in ("trips_12m", "disruptions_12m", "complaints_12m"):
+        result[col] = result[col].astype(int)
+    result["spend_12m_brl"] = result["spend_12m_brl"].round(2)
+    result["avg_ticket_brl"] = result["avg_ticket_brl"].round(2)
+    result["margin_12m_brl"] = result["margin_12m_brl"].round(2)
     result["last_flight"] = pd.to_datetime(result["last_flight"])
     result["recency_days"] = (AS_OF_DATE - result["last_flight"]).dt.days.fillna(365).astype(int).clip(0, 365)
     result["preferred_route"] = result["preferred_route"].fillna("N/A-N/A")
@@ -42,8 +51,28 @@ def build_analytics(customers: pd.DataFrame, transactions: pd.DataFrame) -> pd.D
         "Oportunidade": "Oferta personalizada de próxima viagem",
         "Em risco": "Campanha de reativação com benefício relevante",
     })
-    cols = ["trips_12m", "spend_12m_brl", "avg_ticket_brl", "recency_days", "preferred_route", "value_score", "segment", "recommended_action"]
+    cols = ["trips_12m", "spend_12m_brl", "avg_ticket_brl", "recency_days", "preferred_route", "value_score", "segment", "recommended_action",
+            "points_balance", "margin_12m_brl", "disruptions_12m", "complaints_12m"]
     return result[cols].reset_index()
+
+
+def build_route_metrics(transactions: pd.DataFrame) -> pd.DataFrame:
+    """Metricas por rota; IVR = % de voos irregulares (atraso >= 60 min ou cancelamento)."""
+    tx = transactions.copy()
+    tx["route"] = tx["origin"] + "-" + tx["destination"]
+    g = tx.groupby("route")
+    out = pd.DataFrame({
+        "flights": g.size(),
+        "disrupted_flights": g["disrupted"].sum(),
+        "avg_delay_minutes": g["delay_minutes"].mean(),
+        "complaints": g["complaint_flag"].sum(),
+        "revenue_brl": tx.loc[~tx["cancelled"]].groupby("route")["amount_brl"].sum(),
+    }).fillna(0)
+    out[["flights", "disrupted_flights", "complaints"]] = out[["flights", "disrupted_flights", "complaints"]].astype(int)
+    out["ivr"] = (100 * out["disrupted_flights"] / out["flights"]).round(2)
+    out["avg_delay_minutes"] = out["avg_delay_minutes"].round(2)
+    out["revenue_brl"] = out["revenue_brl"].round(2)
+    return out.reset_index()
 
 
 def build_treated(customers: pd.DataFrame, transactions: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:

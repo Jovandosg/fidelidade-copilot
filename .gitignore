@@ -4,3 +4,8 @@ __pycache__/
 .env
 *.log
 data/raw/*.parquet
+
+# frontend
+frontend/node_modules/
+frontend/dist/
+*.tsbuildinfo

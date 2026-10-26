@@ -7,7 +7,7 @@ Esta proposta considera o MVP **Azul CRM de Alto Valor** e o projeto `fidelidade
 A base disponível indica:
 
 - uso de dados sintéticos e fontes públicas apropriadas ao contexto do desafio;
-- Python, pandas, NumPy, scikit-learn, Parquet, Streamlit, Plotly e pytest;
+- Python, pandas, NumPy, scikit-learn, Parquet, PostgreSQL, FastAPI, Plotly (legado), pytest; React 19, Vite, Tailwind, ApexCharts e vitest no front;
 - score de valor, risco de evasão, segmentação, explicações e recomendação de próxima melhor ação;
 - necessidade de aprovação humana;
 - fallback baseado em regras quando a geração inteligente falhar;
