@@ -123,7 +123,7 @@ Dados em `analytics`/`ops` via `fidelidade_ro` (somente SELECT, `DATABASE_URL_RO
 
 Endpoints: `/kpis`, `/clientes` (filtros `profile`, `segment`, `min_risk`, `max_risk`, `sort`, `desc`), `/clientes/{id}`, `/rotas`, `/nba`, `/ops/runs`, `/ops/quality`, `/ops/models`, `/ops/drift`, `/audit`. Proteções: rate limit por IP (`RATE_LIMIT_PER_MINUTE`=120 leitura, `RATE_LIMIT_WRITE_PER_MINUTE`=20 escrita; em memória, por processo → 429 com `Retry-After`), logs JSON por requisição (`request_id`, status, duração, `sub`/`role`; sem query string nem token), headers de segurança (CSP, nosniff, X-Frame-Options, HSTS, no-store) e CORS restrito a `CORS_ORIGINS`.
 
-> O frontend atual ainda não envia token: a integração (login e as novas abas) é a Task6 do Prompt B.
+> **Frontend:** ao abrir `http://localhost:5173` informe o token (colado na tela de entrada; fica só no `sessionStorage` da aba e vai apenas no cabeçalho `Authorization`). As abas são Executivo, Proteger (Radar), Crescer (NBA + aprovação, só o perfil gestor decide), Rotas (IVR) e Saúde da plataforma (execuções, qualidade, drift, modelos e, só para o auditor, a trilha de auditoria). Token inválido/expirado (401) devolve à tela de entrada.
 
 Tipos TypeScript: `scripts/gen_types.ps1` gera `frontend/openapi.json` e `frontend/src/api/schema.d.ts` a partir da API (um teste falha se o `openapi.json` ficar desatualizado).
 
