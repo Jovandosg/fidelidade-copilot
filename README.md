@@ -6,15 +6,28 @@ MVP do **Azul CRM de Alto Valor** ("Âncora Azul") para o Hack a Business Azul.
 
 ## Objetivo
 
-Identificar clientes de alto valor atual ou futuro, estimar risco de evasão, explicar a prioridade e recomendar uma próxima melhor ação de CRM com aprovação humana.
+Ajudar o CRM da Azul a **proteger e fazer crescer os clientes de maior valor**: identificar quem é (ou será) de alto valor, estimar o risco de evasão, explicar o porquê da prioridade e recomendar a próxima melhor ação de CRM, sempre com **aprovação humana** e trilha de auditoria.
+
+### Como a aplicação faz isso
+
+1. **Dados e modelos** (`src/pipeline`): gera dados sintéticos, valida pelo contrato e calcula o **HVS** (valor atual e futuro), o **Radar de Risco** (evasão) e a **Próxima Melhor Ação (NBA)** com margem esperada.
+2. **Persistência** (`src/db`, PostgreSQL): migrações versionadas e carga idempotente; qualidade, modelos e drift ficam registrados em `ops`.
+3. **API** (FastAPI, JWT + RBAC): serve KPIs, clientes, rotas e NBA com papéis de menor privilégio no banco.
+4. **Dashboard** (React): Visão Executiva, Mapa Valor × Risco, Fila de Risco, perfil do cliente com explicação e aprovação da NBA.
+5. **Agente com RAG** (`src/agent`, simulado): responde com **fonte pública citada** e propõe ações para clientes elegíveis. Passa por **guardrails** de entrada e saída, cai em **fallback por regras** se o LLM falhar e nunca ativa nada sozinho.
+6. **Aprovação humana e auditoria**: a proposta entra na fila (tempo real via SSE); só o `gestor` aprova ou rejeita, e tudo vai para o `audit_log` imutável.
 
 ## Arquitetura
 
 ```
 src/pipeline (gerador sintético + modelos HVS/risco/NBA, validado por docs/02-dados/data_contracts.yml)
-      └─► data/analytics/*.csv ──► src/db (migrações + upsert) ──► PostgreSQL (schema analytics)
-                                                                       └─► API FastAPI somente leitura (papel SELECT)
-                                                                              └─► Frontend React 19 + Vite + Tailwind + ApexCharts
+      └─► data/analytics/*.csv ──► src/db (migrações + upsert) ──► PostgreSQL + pgvector
+                                                                       ├─ analytics / ops (somente leitura para a API)
+                                                                       ├─ knowledge (fontes públicas, chunks, embeddings)
+                                                                       └─ ops.agent_proposals + ops.audit_log (decisões)
+                                                                              └─► API FastAPI (JWT + RBAC, SSE)
+                                                                                     └─► Frontend React 19 + Vite + Tailwind + ApexCharts
+                                                          Agente: ferramentas tipadas → provider (regras | LLM) → guardrails → proposta → aprovação humana
 ```
 
 O contrato de dados (`docs/02-dados/data_contracts.yml`, v1.1.0) é a fonte da verdade: pandera, DDL do Postgres e schemas Pydantic são verificados contra ele em `tests/test_parity.py`.
@@ -43,6 +56,8 @@ O script: cria `.env` com senhas aleatórias se não existir → sobe o Postgres
 
 A API não tem rota em `/`: o `404` em `GET /` é esperado. `Ctrl+C` encerra API e frontend; o Postgres continua no Docker (`docker compose down` para parar).
 `.\scripts\start.ps1 -SetupOnly` prepara banco e dados e sai, sem subir os servidores.
+
+**Login de teste por perfil:** o `start.ps1` liga `DEMO_LOGIN=1` só para a API que ele sobe. A tela de entrada mostra então 3 botões, **Entrar como Analista / Gestor / Auditor**, para ver o que cada perfil enxerga e pode fazer, sem gerar token. Sem `DEMO_LOGIN=1` (padrão do `.env.example` e de qualquer ambiente real) os botões não aparecem e `/auth/demo` responde 404. Use só localmente: o token de demo tem privilégios reais do perfil e dura 1 hora.
 
 ## Passo a passo manual (qualquer SO)
 
@@ -105,8 +120,10 @@ docker compose down -v; Remove-Item .env
 .\scripts\test.ps1     # pytest + tsc + vitest
 ```
 
-- `pytest -q`: pipeline, contrato, modelos e paridade (contrato × pandera × DDL × Pydantic) rodam sempre. Testes de banco e de API (`tests/test_db.py`, `tests/test_api.py`) usam um banco temporário descartável e são **pulados** sem `DATABASE_URL`/`DATABASE_URL_RO`.
-- `cd frontend && npm test`: vitest (cliente da API, formatação e fluxos das telas, com ApexCharts simulado). `npm run build` roda `tsc` e o build do Vite.
+- `pytest -q`: pipeline, contrato, modelos e paridade rodam sempre. Testes de banco, API, agente e red team usam um banco temporário descartável e são **pulados** sem `DATABASE_URL`, `DATABASE_URL_ETL`, `DATABASE_URL_RO` e `DATABASE_URL_AUDIT` (o `scripts/test.ps1` e o passo 4 carregam o `.env`; o banco precisa ser `pgvector`).
+- `python -m src.agent.evals`: harness do agente (27 casos: feliz, sem fonte e adversarial), mede groundedness, violações de guardrail e taxa de fallback; também roda no pytest (`tests/test_agent_evals.py`).
+- `tests/test_redteam.py`: ataques de segurança (injeção, saída maliciosa, abuso de ferramentas, JWT forjado, adulteração no banco, vazamento de chave). Veja `docs/03-arquitetura/agente/redteam.md`.
+- `cd frontend && npm test`: vitest (cliente da API, SSE, telas, login de teste e painel do agente, com ApexCharts simulado). `npm run build` roda `tsc` e o build do Vite.
 
 ## API (JWT + RBAC)
 
@@ -118,13 +135,13 @@ python -m src.api.tokens --sub seu.apelido --role gestor   # analista | gestor |
 
 | Perfil | Pode |
 |---|---|
-| `analista` | ler `/kpis`, `/clientes`, `/rotas`, `/nba`, `/ops/*` |
-| `gestor` | tudo do analista + `POST /nba/{id}/aprovacao` e `GET /nba/aprovacoes` |
-| `auditor` | leitura + `GET /audit` (trilha) e `GET /nba/aprovacoes`; não aprova |
+| `analista` | ler `/kpis`, `/clientes`, `/rotas`, `/nba`, `/ops/*`; usar o agente (`POST /agente/perguntar`, `POST /nba/{id}/proposta`); ver a fila (`GET /propostas/fila/stream`) |
+| `gestor` | tudo do analista + decidir propostas (`POST /propostas/{id}/decisao`) e `POST /nba/{id}/aprovacao` |
+| `auditor` | leitura + `GET /audit` (trilha) e `GET /nba/aprovacoes`; não usa o agente nem decide |
 
 Dados em `analytics`/`ops` via `fidelidade_ro` (somente SELECT, `DATABASE_URL_RO`); a aprovação e a leitura da trilha usam `fidelidade_api_audit` (`DATABASE_URL_AUDIT`, INSERT/SELECT só em `ops.audit_log`). Cada aprovação grava quem, quando, o quê e antes/depois (decisão única por cliente; a trilha é imutável). Sem PII: `sub` é um apelido e a justificativa não deve conter dados pessoais.
 
-Endpoints: `/kpis`, `/clientes` (filtros `profile`, `segment`, `min_risk`, `max_risk`, `sort`, `desc`), `/clientes/{id}`, `/rotas`, `/nba`, `/ops/runs`, `/ops/quality`, `/ops/models`, `/ops/drift`, `/audit`. Proteções: rate limit por IP (`RATE_LIMIT_PER_MINUTE`=120 leitura, `RATE_LIMIT_WRITE_PER_MINUTE`=20 escrita; em memória, por processo → 429 com `Retry-After`), logs JSON por requisição (`request_id`, status, duração, `sub`/`role`; sem query string nem token), headers de segurança (CSP, nosniff, X-Frame-Options, HSTS, no-store) e CORS restrito a `CORS_ORIGINS`.
+Endpoints: `/kpis`, `/clientes` (filtros `profile`, `segment`, `min_risk`, `max_risk`, `sort`, `desc`), `/clientes/{id}`, `/rotas`, `/nba`, `/ops/runs`, `/ops/quality`, `/ops/models`, `/ops/drift`, `/audit`, `/agente/perguntar` e `/nba/{id}/proposta` (SSE), `/propostas/{id}/decisao`, `/propostas/fila/stream` (SSE) e, só com `DEMO_LOGIN=1`, `/auth/demo`. Proteções: rate limit por IP (`RATE_LIMIT_PER_MINUTE`=120 leitura, `RATE_LIMIT_WRITE_PER_MINUTE`=20 escrita; em memória, por processo → 429 com `Retry-After`), logs JSON por requisição (`request_id`, status, duração, `sub`/`role`; sem query string nem token), headers de segurança (CSP, nosniff, X-Frame-Options, HSTS, no-store) e CORS restrito a `CORS_ORIGINS`.
 
 > **Frontend:** ao abrir `http://localhost:5173` informe o token (colado na tela de entrada; fica só no `sessionStorage` da aba e vai apenas no cabeçalho `Authorization`). As abas são Executivo, Proteger (Radar), Crescer (NBA + aprovação, só o perfil gestor decide), Rotas (IVR) e Saúde da plataforma (execuções, qualidade, drift, modelos e, só para o auditor, a trilha de auditoria). Token inválido/expirado (401) devolve à tela de entrada.
 
@@ -132,7 +149,17 @@ Tipos TypeScript: `scripts/gen_types.ps1` gera `frontend/openapi.json` e `fronte
 
 ## Telas
 
-Visão Executiva, Mapa Valor × Risco, Fila de Risco, Perfil do Cliente (explicação do HVS e do risco) e Próxima Melhor Ação (com aviso de aprovação humana). O front só consome a API.
+Visão Executiva, Mapa Valor × Risco (acima da Fila de Risco), Perfil do Cliente (explicação do HVS e do risco), Próxima Melhor Ação (com aprovação humana), Rotas (IVR), Saúde da plataforma e **Agente (simulado)**: painel com resposta, fontes citadas e status dos guardrails, mais a fila de aprovação em tempo real; toda saída do agente leva o selo "simulado". O front só consome a API.
+
+## Agente de IA (RAG + guardrails)
+
+- **Ferramentas** (somente leitura, schema Pydantic): consultar cliente, calcular elegibilidade, buscar regra. Sem acesso direto ao banco nem SQL livre.
+- **Base de conhecimento**: fontes públicas do Azul Fidelidade com URL e data de consulta, versionadas, em chunks com embeddings no pgvector (`knowledge/sources/*.md`). As regras numéricas oficiais ainda precisam ser coladas pelo time; sem fonte, o agente diz que não encontrou.
+- **Guardrails**: entrada (sanitização, PII, prompt injection) e saída (JSON Schema, citação obrigatória, sem PII, teto de benefício, elegibilidade, sem "ativei").
+- **Fallback**: sem LLM, credencial ou com saída inválida, responde por regras determinísticas. Para usar um LLM real, defina `AGENT_LLM_PROVIDER=llm`, `AGENT_LLM_API_KEY`, `AGENT_LLM_BASE_URL` e `AGENT_LLM_MODEL` **no ambiente** (nunca no repositório) e só depois de validar o fallback.
+- **Aprovação**: o agente só cria proposta `pending`; quem ativa é um humano (`gestor`), com auditoria.
+
+Detalhes: [docs/03-arquitetura/agente](docs/03-arquitetura/agente/README.md), [riscos](docs/03-arquitetura/agente/riscos.md) e [red team](docs/03-arquitetura/agente/redteam.md).
 
 ## Solução de problemas
 
@@ -146,8 +173,10 @@ Visão Executiva, Mapa Valor × Risco, Fila de Risco, Perfil do Cliente (explica
 ## Limitações conhecidas
 
 - O gerador sintético não tem dinâmica de churn: o ROC-AUC do radar de risco no hold-out é baixo (≈0,58) e poucos clientes caem no quadrante valor alto + risco alto. Os números ilustram o fluxo, não desempenho real.
-- A API abre uma conexão por requisição (sem pool).
-- O bundle do frontend tem ~850 kB (ApexCharts) e não usa code-splitting.
+- A API abre uma conexão por requisição (sem pool); cada stream da fila usa uma conexão de polling (máx. 10).
+- O bundle do frontend tem ~870 kB (ApexCharts) e não usa code-splitting.
+- O agente é simulado: o LLM real só foi exercitado com provider falso; a detecção de injeção é heurística (regex) e a busca é lexical. Riscos abertos em `docs/03-arquitetura/agente/riscos.md`.
+- O rate limit é em memória, por processo.
 
 ## Camadas do banco e papéis
 
@@ -169,12 +198,13 @@ Visão Executiva, Mapa Valor × Risco, Fila de Risco, Perfil do Cliente (explica
 - `data/raw`: snapshot sintético de origem
 - `data/treated`: reservado para dados tratados
 - `data/analytics`: features, scores, segmentos e recomendações
-- `src/`: pipeline oficial (gerador, transformação, validação pelo contrato), `models/`, `db.py`, `api/`
+- `src/`: pipeline oficial (gerador, transformação, validação pelo contrato), `models/`, `db.py`, `api/` (inclui `agent.py` SSE e `demo.py`), `agent/` (ferramentas, providers, guardrails, evals), `knowledge/` (RAG)
+- `knowledge/sources`: fontes públicas versionadas do RAG
 - `db/`: migrações SQL versionadas e init do container
 - `frontend/`: dashboard React
 - `scripts/`: `start.ps1`, `test.ps1`, `export_openapi.py`, `gen_types.ps1`
 - `legacy/`: MVP antigo (Streamlit) preservado por histórico; não executar
-- `docs`: documentação complementar
+- `docs`: documentação complementar (`03-arquitetura/agente`: agente, riscos e red team)
 - `tests`: testes automatizados
 
 ## Colaboração no GitHub
@@ -191,4 +221,4 @@ O guia completo de permissões, branches, commits, revisão e status do Project 
 
 ## Regras de responsabilidade
 
-O agente futuro deverá consultar apenas ferramentas permitidas, produzir JSON validado, mostrar evidências e solicitar aprovação humana. O dashboard deve continuar funcionando com fallback determinístico por regras quando o LLM falhar.
+O agente consulta apenas ferramentas permitidas, produz JSON validado, mostra evidências e solicita aprovação humana; nunca ativa nada sozinho e não acessa o banco diretamente. O dashboard continua funcionando com fallback determinístico por regras quando o LLM falha ou não há credencial.

@@ -86,6 +86,8 @@ Versionadas em `db/migrations/`, aplicadas em ordem por `python -m src.db migrat
 
 ### 4.4 Agente (`src/agent`)
 
+Documentação completa, riscos e red team: [agente/](agente/README.md), [riscos](agente/riscos.md), [redteam](agente/redteam.md).
+
 - Ferramentas tipadas e fechadas (`consultar_cliente`, `calcular_elegibilidade`, `buscar_regra`), sobre conexão somente leitura; sem SQL livre.
 - Plano fixo de ferramentas; a ação proposta vem sempre da elegibilidade determinística (`requires_approval`), o LLM só redige o texto.
 - Provider padrão: `rules` (sem credencial). `AGENT_LLM_PROVIDER=llm` exige `AGENT_LLM_API_KEY`, `AGENT_LLM_BASE_URL` (https) e `AGENT_LLM_MODEL` por ambiente; sem eles, ou em erro/saída inválida, cai em `rules` e registra `fallback_reason`.
