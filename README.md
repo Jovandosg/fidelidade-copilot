@@ -12,7 +12,7 @@ Identificar clientes de alto valor atual ou futuro, estimar risco de evasão, ex
 
 - Python 3.11+
 - pandas, NumPy, scikit-learn e Parquet
-- Dashboard: legado em Streamlit (`legacy/`); novo front React + API previsto (ver `docs/03-arquitetura/`)
+- Dashboard: React 19 + Vite + Tailwind + ApexCharts em `frontend/` (consome só a API); MVP Streamlit antigo em `legacy/`
 - Plotly para visualização
 - Evolução prevista: DuckDB, FastAPI, LangGraph, Pydantic, SHAP e testes pytest
 
@@ -45,6 +45,18 @@ uvicorn src.api.main:app --port 8000     # usa DATABASE_URL_RO (papel fidelidade
 
 Endpoints (somente GET, paginados, sem PII): `/kpis`, `/clientes` (filtros `profile`, `segment`, `min_risk`, `max_risk`, `sort`, `desc`), `/clientes/{id}`, `/rotas`, `/nba`. CORS restrito a `CORS_ORIGINS` (padrao `http://localhost:5173`).
 Tipos TypeScript: `scripts/gen_types.ps1` gera `frontend/openapi.json` e `frontend/src/api/schema.d.ts` (um teste falha se o `openapi.json` ficar desatualizado). `scripts/gen_types.ps1` exige Node 20+.
+
+### Frontend (React 19 + Vite + Tailwind + ApexCharts)
+
+```bash
+cd frontend
+npm install
+npm run dev        # http://localhost:5173 (API em VITE_API_URL, padrao http://localhost:8000)
+npm test           # vitest
+npm run build      # tsc + vite build
+```
+
+Telas: Visao Executiva, Mapa Valor x Risco, Fila de Risco, Perfil do Cliente (explicacao do HVS e do risco) e Proxima Melhor Acao (com aviso de aprovacao humana). O front so consome a API, usando tipos gerados do OpenAPI.
 
 Observacao: `db/init/*.sh` precisa de finais de linha LF (garantido por `.gitattributes`), senao o container nao cria o login da API. Se o volume ja foi criado com a versao quebrada, rode `docker compose down -v` e suba de novo.
 
