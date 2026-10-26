@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from psycopg import sql
 
 from ..schemas import CustomerFeature, RouteMetric
+from .agent import router as agent_router
 from .deps import Conn
 from .models import CustomerPage, DistributionItem, Kpis, NbaPage, NbaSummary, RoutePage
 from .ops import router as ops_router
@@ -58,6 +59,7 @@ def create_app() -> FastAPI:
     app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET", "POST"], allow_headers=["Content-Type", "Authorization", "X-Request-ID"],
                        expose_headers=["X-Request-ID", "Retry-After"], allow_credentials=False)
     app.include_router(ops_router)
+    app.include_router(agent_router)
 
     @app.get("/health", include_in_schema=False)
     def health() -> dict[str, str]:

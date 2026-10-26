@@ -104,6 +104,22 @@
         "title": "ApprovalStatus",
         "type": "object"
       },
+      "AskRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "question": {
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AskRequest",
+        "type": "object"
+      },
       "AuditEntry": {
         "properties": {
           "action": {
@@ -1198,6 +1214,45 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/agente/perguntar": {
+      "post": {
+        "operationId": "ask_agente_perguntar_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {}
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Pergunta ao agente (SSE; simulado, nunca ativa nada)"
+      }
+    },
     "/audit": {
       "get": {
         "operationId": "audit_audit_get",
@@ -1706,6 +1761,47 @@
         "summary": "Aprova ou rejeita uma acao NBA (somente gestor); grava em ops.audit_log"
       }
     },
+    "/nba/{customer_id}/proposta": {
+      "post": {
+        "operationId": "propose_nba__customer_id__proposta_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customer_id",
+            "required": true,
+            "schema": {
+              "pattern": "^C\\d{6}$",
+              "title": "Customer Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {}
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Gera e persiste uma proposta do agente para o cliente (SSE; pendente de aprovacao humana)"
+      }
+    },
     "/ops/drift": {
       "get": {
         "operationId": "drift_ops_drift_get",
@@ -1977,6 +2073,25 @@
         "summary": "Propostas do agente persistidas (simuladas; exigem aprovacao humana)"
       }
     },
+    "/propostas/fila/stream": {
+      "get": {
+        "operationId": "queue_stream_propostas_fila_stream_get",
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {}
+            },
+            "description": "Successful Response"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Fila de propostas pendentes em tempo real (SSE; reconecte ao receber 'end')"
+      }
+    },
     "/propostas/{proposal_id}": {
       "get": {
         "operationId": "proposal_propostas__proposal_id__get",
@@ -2020,6 +2135,61 @@
           }
         ],
         "summary": "Detalhe de uma proposta do agente"
+      }
+    },
+    "/propostas/{proposal_id}/decisao": {
+      "post": {
+        "operationId": "decide_propostas__proposal_id__decisao_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "proposal_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Proposal Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposalOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Aprova ou rejeita uma proposta do agente (somente gestor); grava before/after em ops.audit_log"
       }
     },
     "/rotas": {

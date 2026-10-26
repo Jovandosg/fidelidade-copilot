@@ -108,6 +108,10 @@ python -m src.api.tokens --sub seu.apelido --role gestor --hours 8   # analista 
 | `GET /kpis`, `/clientes`, `/clientes/{customer_id}`, `/rotas`, `/nba` | ✔ | ✔ | ✔ |
 | `GET /ops/runs`, `/ops/quality`, `/ops/models`, `/ops/drift` | ✔ | ✔ | ✔ |
 | `GET /propostas`, `/propostas/{proposal_id}` | ✔ | ✔ | ✔ |
+| `GET /propostas/fila/stream` (SSE) | ✔ | ✔ | ✔ |
+| `POST /agente/perguntar` (SSE) | ✔ | ✔ | — |
+| `POST /nba/{customer_id}/proposta` (SSE) | ✔ | ✔ | — |
+| `POST /propostas/{proposal_id}/decisao` | — | ✔ | — |
 | `GET /nba/aprovacoes` | — | ✔ | ✔ |
 | `POST /nba/{customer_id}/aprovacao` | — | ✔ | — |
 | `GET /audit` | — | — | ✔ |
@@ -115,6 +119,8 @@ python -m src.api.tokens --sub seu.apelido --role gestor --hours 8   # analista 
 Códigos: 401 sem token válido, 403 perfil insuficiente, 404 cliente inexistente, 409 ação sem aprovação exigida ou decisão já registrada, 422 entrada inválida, 429 limite excedido (`Retry-After`), 503 banco ou segredo indisponível.
 
 **Aprovação:** corpo `{decision: approve|reject, reason: 5–500 caracteres}` sem dados pessoais. Grava em `ops.audit_log` quem (`actor`, `actor_role`), quando, o quê (`action`, `entity_id`), `before`/`after` e `request_id`, com lock por cliente. Uma decisão por cliente.
+
+**Streaming SSE (agente e fila):** eventos `meta`, `guardrails`, `sources`, `proposed_action`, `delta`, `proposal`, `done` (e `queue`, `end`, `error` na fila). A resposta só é transmitida depois de validada pelos guardrails; `perguntar` nunca grava, `proposta` grava `pending` + `proposal.create` no audit_log, e `decisao` grava `before`/`after` (só gestor). `EventSource` não envia `Authorization`: o cliente deve usar `fetch` com leitura do stream. A fila faz polling a cada 2 s, reabre a cada 60 s (`end {reconnect:true}`) e aceita no máximo 10 conexões simultâneas.
 
 **Proteções:** JWT com `iss`, `sub`, `role`, `iat`, `exp` obrigatórios e validade máxima de 24 h; rate limit por IP em memória (por processo; `X-Forwarded-For` não é confiado); logs JSON no logger `ancora.api` (`request_id`, rota, status, duração, `sub`, `role`; sem query string, corpo ou token); headers CSP, nosniff, X-Frame-Options, HSTS, no-store, Referrer-Policy.
 
