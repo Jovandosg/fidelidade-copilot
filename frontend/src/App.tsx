@@ -56,8 +56,8 @@ export default function App() {
         {tab === "executivo" && <ExecutivePage />}
         {tab === "proteger" && (
           <div className="space-y-6">
-            <RiskQueuePage onSelect={openCustomer} />
             <ValueRiskPage onSelect={openCustomer} />
+            <RiskQueuePage onSelect={openCustomer} />
           </div>
         )}
         {tab === "crescer" && <NbaPage onSelect={openCustomer} />}
