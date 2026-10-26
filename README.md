@@ -25,6 +25,16 @@ pip install -r requirements.txt
 python -m src.pipeline
 ```
 
+### PostgreSQL (schema `analytics`)
+
+```bash
+cp .env.example .env        # defina senhas locais; .env nao e versionado
+docker compose up -d        # postgres:16, somente em 127.0.0.1
+python -m src.db all        # migracoes versionadas + carga idempotente (upsert)
+```
+
+A API usara o papel `fidelidade_ro` (somente SELECT) via `DATABASE_URL_RO`. Os testes de banco (`tests/test_db.py`) usam um banco temporario e sao pulados sem `DATABASE_URL`.
+
 O dashboard Streamlit antigo foi movido para `legacy/` e nao deve ser executado.
 
 ## Estrutura
