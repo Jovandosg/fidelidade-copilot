@@ -1,0 +1,966 @@
+{
+  "components": {
+    "schemas": {
+      "CustomerFeature": {
+        "additionalProperties": false,
+        "properties": {
+          "avg_ticket_brl": {
+            "minimum": 0.0,
+            "title": "Avg Ticket Brl",
+            "type": "number"
+          },
+          "complaints_12m": {
+            "minimum": 0.0,
+            "title": "Complaints 12M",
+            "type": "integer"
+          },
+          "customer_id": {
+            "title": "Customer Id",
+            "type": "string"
+          },
+          "disruptions_12m": {
+            "minimum": 0.0,
+            "title": "Disruptions 12M",
+            "type": "integer"
+          },
+          "hvs": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Hvs",
+            "type": "number"
+          },
+          "hvs_clv": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Hvs Clv",
+            "type": "number"
+          },
+          "hvs_cost_to_serve": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Hvs Cost To Serve",
+            "type": "number"
+          },
+          "hvs_margin": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Hvs Margin",
+            "type": "number"
+          },
+          "hvs_stability": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Hvs Stability",
+            "type": "number"
+          },
+          "margin_12m_brl": {
+            "minimum": 0.0,
+            "title": "Margin 12M Brl",
+            "type": "number"
+          },
+          "nba_action": {
+            "title": "Nba Action",
+            "type": "string"
+          },
+          "nba_expected_margin_brl": {
+            "minimum": 0.0,
+            "title": "Nba Expected Margin Brl",
+            "type": "number"
+          },
+          "nba_requires_approval": {
+            "title": "Nba Requires Approval",
+            "type": "boolean"
+          },
+          "points_balance": {
+            "minimum": 0.0,
+            "title": "Points Balance",
+            "type": "integer"
+          },
+          "preferred_route": {
+            "title": "Preferred Route",
+            "type": "string"
+          },
+          "profile": {
+            "pattern": "^[A-E]$",
+            "title": "Profile",
+            "type": "string"
+          },
+          "recency_days": {
+            "maximum": 365.0,
+            "minimum": 0.0,
+            "title": "Recency Days",
+            "type": "integer"
+          },
+          "recommended_action": {
+            "title": "Recommended Action",
+            "type": "string"
+          },
+          "risk_drivers": {
+            "title": "Risk Drivers",
+            "type": "string"
+          },
+          "risk_score": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Risk Score",
+            "type": "number"
+          },
+          "segment": {
+            "title": "Segment",
+            "type": "string"
+          },
+          "spend_12m_brl": {
+            "minimum": 0.0,
+            "title": "Spend 12M Brl",
+            "type": "number"
+          },
+          "trips_12m": {
+            "minimum": 0.0,
+            "title": "Trips 12M",
+            "type": "integer"
+          },
+          "value_score": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Value Score",
+            "type": "number"
+          }
+        },
+        "required": [
+          "customer_id",
+          "trips_12m",
+          "spend_12m_brl",
+          "avg_ticket_brl",
+          "recency_days",
+          "preferred_route",
+          "value_score",
+          "segment",
+          "recommended_action",
+          "points_balance",
+          "margin_12m_brl",
+          "disruptions_12m",
+          "complaints_12m",
+          "hvs_clv",
+          "hvs_margin",
+          "hvs_stability",
+          "hvs_cost_to_serve",
+          "hvs",
+          "profile",
+          "risk_score",
+          "risk_drivers",
+          "nba_action",
+          "nba_expected_margin_brl",
+          "nba_requires_approval"
+        ],
+        "title": "CustomerFeature",
+        "type": "object"
+      },
+      "CustomerPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerFeature"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "minimum": 1.0,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "minimum": 0.0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total",
+          "limit",
+          "offset",
+          "items"
+        ],
+        "title": "CustomerPage",
+        "type": "object"
+      },
+      "DistributionItem": {
+        "properties": {
+          "customers": {
+            "minimum": 0.0,
+            "title": "Customers",
+            "type": "integer"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "customers"
+        ],
+        "title": "DistributionItem",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Kpis": {
+        "properties": {
+          "avg_hvs": {
+            "title": "Avg Hvs",
+            "type": "number"
+          },
+          "avg_risk_score": {
+            "title": "Avg Risk Score",
+            "type": "number"
+          },
+          "avg_route_ivr": {
+            "title": "Avg Route Ivr",
+            "type": "number"
+          },
+          "high_risk_customers": {
+            "title": "High Risk Customers",
+            "type": "integer"
+          },
+          "nba_expected_margin_brl": {
+            "title": "Nba Expected Margin Brl",
+            "type": "number"
+          },
+          "nba_pending_approval": {
+            "title": "Nba Pending Approval",
+            "type": "integer"
+          },
+          "notice": {
+            "default": "Dados sinteticos gerados para o desafio; nao representam clientes reais. Scores de risco sao estimativas de um modelo simples, sem previsao validada.",
+            "title": "Notice",
+            "type": "string"
+          },
+          "profiles": {
+            "items": {
+              "$ref": "#/components/schemas/DistributionItem"
+            },
+            "title": "Profiles",
+            "type": "array"
+          },
+          "risk_threshold": {
+            "title": "Risk Threshold",
+            "type": "number"
+          },
+          "segments": {
+            "items": {
+              "$ref": "#/components/schemas/DistributionItem"
+            },
+            "title": "Segments",
+            "type": "array"
+          },
+          "spend_12m_at_risk_brl": {
+            "title": "Spend 12M At Risk Brl",
+            "type": "number"
+          },
+          "synthetic_data": {
+            "default": true,
+            "title": "Synthetic Data",
+            "type": "boolean"
+          },
+          "total_customers": {
+            "title": "Total Customers",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total_customers",
+          "avg_hvs",
+          "avg_risk_score",
+          "risk_threshold",
+          "high_risk_customers",
+          "spend_12m_at_risk_brl",
+          "nba_expected_margin_brl",
+          "nba_pending_approval",
+          "avg_route_ivr",
+          "profiles",
+          "segments"
+        ],
+        "title": "Kpis",
+        "type": "object"
+      },
+      "NbaItem": {
+        "properties": {
+          "customer_id": {
+            "title": "Customer Id",
+            "type": "string"
+          },
+          "hvs": {
+            "title": "Hvs",
+            "type": "number"
+          },
+          "nba_action": {
+            "title": "Nba Action",
+            "type": "string"
+          },
+          "nba_expected_margin_brl": {
+            "title": "Nba Expected Margin Brl",
+            "type": "number"
+          },
+          "nba_requires_approval": {
+            "title": "Nba Requires Approval",
+            "type": "boolean"
+          },
+          "profile": {
+            "title": "Profile",
+            "type": "string"
+          },
+          "risk_score": {
+            "title": "Risk Score",
+            "type": "number"
+          },
+          "segment": {
+            "title": "Segment",
+            "type": "string"
+          }
+        },
+        "required": [
+          "customer_id",
+          "profile",
+          "segment",
+          "hvs",
+          "risk_score",
+          "nba_action",
+          "nba_expected_margin_brl",
+          "nba_requires_approval"
+        ],
+        "title": "NbaItem",
+        "type": "object"
+      },
+      "NbaPage": {
+        "properties": {
+          "human_approval_notice": {
+            "default": "Acoes com custo acima do limite exigem aprovacao humana antes de qualquer contato com o cliente.",
+            "title": "Human Approval Notice",
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NbaItem"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "minimum": 1.0,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "minimum": 0.0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "summary": {
+            "items": {
+              "$ref": "#/components/schemas/NbaSummary"
+            },
+            "title": "Summary",
+            "type": "array"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total",
+          "limit",
+          "offset",
+          "summary",
+          "items"
+        ],
+        "title": "NbaPage",
+        "type": "object"
+      },
+      "NbaSummary": {
+        "properties": {
+          "customers": {
+            "title": "Customers",
+            "type": "integer"
+          },
+          "expected_margin_brl": {
+            "title": "Expected Margin Brl",
+            "type": "number"
+          },
+          "nba_action": {
+            "title": "Nba Action",
+            "type": "string"
+          },
+          "pending_approval": {
+            "title": "Pending Approval",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "nba_action",
+          "customers",
+          "expected_margin_brl",
+          "pending_approval"
+        ],
+        "title": "NbaSummary",
+        "type": "object"
+      },
+      "RouteMetric": {
+        "additionalProperties": false,
+        "properties": {
+          "avg_delay_minutes": {
+            "minimum": 0.0,
+            "title": "Avg Delay Minutes",
+            "type": "number"
+          },
+          "complaints": {
+            "minimum": 0.0,
+            "title": "Complaints",
+            "type": "integer"
+          },
+          "disrupted_flights": {
+            "minimum": 0.0,
+            "title": "Disrupted Flights",
+            "type": "integer"
+          },
+          "flights": {
+            "minimum": 1.0,
+            "title": "Flights",
+            "type": "integer"
+          },
+          "ivr": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Ivr",
+            "type": "number"
+          },
+          "revenue_brl": {
+            "minimum": 0.0,
+            "title": "Revenue Brl",
+            "type": "number"
+          },
+          "route": {
+            "pattern": "^[A-Z]{3}-[A-Z]{3}$",
+            "title": "Route",
+            "type": "string"
+          }
+        },
+        "required": [
+          "route",
+          "flights",
+          "disrupted_flights",
+          "avg_delay_minutes",
+          "complaints",
+          "revenue_brl",
+          "ivr"
+        ],
+        "title": "RouteMetric",
+        "type": "object"
+      },
+      "RoutePage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RouteMetric"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "minimum": 1.0,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "minimum": 0.0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total",
+          "limit",
+          "offset",
+          "items"
+        ],
+        "title": "RoutePage",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Dados SINTETICOS. Somente GET; le exclusivamente do PostgreSQL. Sem PII.",
+    "title": "Ancora Azul - API de analytics (somente leitura)",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/clientes": {
+      "get": {
+        "operationId": "clientes_clientes_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "profile",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "pattern": "^[A-E]$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Profile"
+            }
+          },
+          {
+            "in": "query",
+            "name": "segment",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Segment"
+            }
+          },
+          {
+            "in": "query",
+            "name": "min_risk",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 100,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Min Risk"
+            }
+          },
+          {
+            "in": "query",
+            "name": "max_risk",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 100,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Max Risk"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "hvs",
+              "title": "Sort",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "desc",
+            "required": false,
+            "schema": {
+              "default": true,
+              "title": "Desc",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Lista de clientes (paginada)"
+      }
+    },
+    "/clientes/{customer_id}": {
+      "get": {
+        "operationId": "cliente_clientes__customer_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customer_id",
+            "required": true,
+            "schema": {
+              "pattern": "^C\\d{6}$",
+              "title": "Customer Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerFeature"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Perfil e explicacao de um cliente"
+      }
+    },
+    "/kpis": {
+      "get": {
+        "operationId": "kpis_kpis_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "risk_threshold",
+            "required": false,
+            "schema": {
+              "default": 40.0,
+              "maximum": 100,
+              "minimum": 0,
+              "title": "Risk Threshold",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Kpis"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Indicadores executivos"
+      }
+    },
+    "/nba": {
+      "get": {
+        "operationId": "nba_nba_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "requires_approval",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Requires Approval"
+            }
+          },
+          {
+            "in": "query",
+            "name": "action",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 120,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Action"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "nba_expected_margin_brl",
+              "title": "Sort",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "desc",
+            "required": false,
+            "schema": {
+              "default": true,
+              "title": "Desc",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NbaPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Next Best Action (sugestoes; exigem aprovacao humana quando indicado)"
+      }
+    },
+    "/rotas": {
+      "get": {
+        "operationId": "rotas_rotas_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "ivr",
+              "title": "Sort",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "desc",
+            "required": false,
+            "schema": {
+              "default": true,
+              "title": "Desc",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoutePage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Metricas por rota (IVR)"
+      }
+    }
+  }
+}

@@ -60,6 +60,12 @@ def test_entities_have_primary_key_in_ddl():
         assert re.search(rf"\b{pk}\s+\w+\s+PRIMARY KEY", (MIGRATIONS_DIR / "001_analytics_schema.sql").read_text(encoding="utf-8"))
 
 
+def test_container_init_script_uses_lf():
+    # CRLF no .sh faz o container falhar com "bad interpreter" e o login da API nao e criado
+    script = MIGRATIONS_DIR.parents[1] / "db" / "init" / "01-api-role.sh"
+    assert b"\r" not in script.read_bytes()
+
+
 def test_no_pii_columns_in_any_layer():
     banned = {"name", "email", "cpf", "phone", "birth_date"}
     for entity, ent in load_contract()["entities"].items():

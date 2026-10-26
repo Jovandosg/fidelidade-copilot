@@ -37,6 +37,17 @@ A API usara o papel `fidelidade_ro` (somente SELECT) via `DATABASE_URL_RO`. Os t
 
 O dashboard Streamlit antigo foi movido para `legacy/` e nao deve ser executado.
 
+### API somente leitura (FastAPI)
+
+```bash
+uvicorn src.api.main:app --port 8000     # usa DATABASE_URL_RO (papel fidelidade_ro, so SELECT); docs em /docs
+```
+
+Endpoints (somente GET, paginados, sem PII): `/kpis`, `/clientes` (filtros `profile`, `segment`, `min_risk`, `max_risk`, `sort`, `desc`), `/clientes/{id}`, `/rotas`, `/nba`. CORS restrito a `CORS_ORIGINS` (padrao `http://localhost:5173`).
+Tipos TypeScript: `scripts/gen_types.ps1` gera `frontend/openapi.json` e `frontend/src/api/schema.d.ts` (um teste falha se o `openapi.json` ficar desatualizado). `scripts/gen_types.ps1` exige Node 20+.
+
+Observacao: `db/init/*.sh` precisa de finais de linha LF (garantido por `.gitattributes`), senao o container nao cria o login da API. Se o volume ja foi criado com a versao quebrada, rode `docker compose down -v` e suba de novo.
+
 ## Estrutura
 
 - `data/raw`: snapshot sintético de origem
