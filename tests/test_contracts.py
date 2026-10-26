@@ -23,7 +23,10 @@ def _tx(**over):
 def _features(**over):
     row = {"customer_id": "C000001", "trips_12m": 1, "spend_12m_brl": 10.0, "avg_ticket_brl": 10.0, "recency_days": 10,
            "preferred_route": "VCP-CGH", "value_score": 10.0, "segment": "Frequente", "recommended_action": "x",
-           "points_balance": 1000, "margin_12m_brl": 1.0, "disruptions_12m": 0, "complaints_12m": 0}
+           "points_balance": 1000, "margin_12m_brl": 1.0, "disruptions_12m": 0, "complaints_12m": 0,
+           "hvs_clv": 50.0, "hvs_margin": 50.0, "hvs_stability": 50.0, "hvs_cost_to_serve": 0.0, "hvs": 45.0, "profile": "C",
+           "risk_score": 30.0, "risk_drivers": "sem fator dominante", "nba_action": "Monitorar (sem acao)",
+           "nba_expected_margin_brl": 0.0, "nba_requires_approval": False}
     row.update(over)
     return pd.DataFrame([row])
 
@@ -60,7 +63,8 @@ def test_invalid_transaction_is_rejected(bad):
         build_schema("transactions_raw").validate(_tx(**bad))
 
 
-@pytest.mark.parametrize("bad", [{"recency_days": 366}, {"disruptions_12m": -1}, {"margin_12m_brl": -1.0}])
+@pytest.mark.parametrize("bad", [{"recency_days": 366}, {"disruptions_12m": -1}, {"margin_12m_brl": -1.0},
+                                 {"hvs": 100.5}, {"risk_score": -1.0}, {"profile": "F"}, {"nba_expected_margin_brl": -1.0}])
 def test_invalid_features_are_rejected(bad):
     with pytest.raises(pa.errors.SchemaError):
         build_schema("customer_features").validate(_features(**bad))

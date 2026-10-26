@@ -36,8 +36,21 @@
 | `margin_12m_brl` | analytics/customer_features | decimal | sim | *(v1.1.0)* Soma de `margin_brl` dos voos não cancelados. |
 | `disruptions_12m` | analytics/customer_features | integer | sim | *(v1.1.0)* Voos irregulares do cliente (cancelados ou atraso ≥ 60 min). |
 | `complaints_12m` | analytics/customer_features | integer | sim | *(v1.1.0)* Reclamações do cliente no período. |
+| `hvs_clv` | analytics/customer_features | decimal | sim | *(v1.1.0)* Componente de valor (0–100): 70% percentil de gasto + 30% percentil de viagens. |
+| `hvs_margin` | analytics/customer_features | decimal | sim | *(v1.1.0)* Componente de margem (0–100): percentil de `margin_12m_brl`. |
+| `hvs_stability` | analytics/customer_features | decimal | sim | *(v1.1.0)* Componente de estabilidade (0–100): 60% recência + 40% regularidade (viagens/8, teto 1). |
+| `hvs_cost_to_serve` | analytics/customer_features | decimal | sim | *(v1.1.0)* Proxy de custo de servir (0–100): 60% disrupções (teto 4) + 40% reclamações (teto 2). |
+| `hvs` | analytics/customer_features | decimal | sim | *(v1.1.0)* High-Value Score = clip(0,4·clv + 0,3·margem + 0,3·estabilidade − 0,2·custo, 0, 100). Pesos em `src/models/hvs.py`. |
+| `profile` | analytics/customer_features | string | sim | *(v1.1.0)* Perfil A–E por faixa de HVS (A ≥ 75, B ≥ 60, C ≥ 45, D ≥ 30, E abaixo). |
+| `risk_score` | analytics/customer_features | decimal | sim | *(v1.1.0)* Probabilidade estimada (×100) de não voar nos próximos 90 dias; GradientBoosting, avaliado em hold-out temporal. |
+| `risk_drivers` | analytics/customer_features | string | sim | *(v1.1.0)* Até 3 fatores que mais elevam o risco do cliente (efeito de trocar cada variável pela mediana). |
+| `nba_action` | analytics/customer_features | string | sim | *(v1.1.0)* Ação com maior margem esperada líquida; `Monitorar (sem acao)` se nenhuma compensar. |
+| `nba_expected_margin_brl` | analytics/customer_features | decimal | sim | *(v1.1.0)* P(churn) × uplift assumido × margem 12m − custo da ação (0 se monitorar). Premissas sintéticas. |
+| `nba_requires_approval` | analytics/customer_features | boolean | sim | *(v1.1.0)* `true` quando a ação custa mais de R$ 10: exige aprovação humana antes de qualquer disparo. |
 
-> Todos os dados são **sintéticos** (`synthetic: true` no contrato): sem PII e sem relação com clientes reais da Azul. Colunas do modelo (HVS, risco, NBA) entram na Task3.
+> Métricas dos modelos em `data/analytics/model_metrics.json`. Com dados sintéticos elas descrevem o gerador, não uma previsão validada.
+
+> Todos os dados são **sintéticos** (`synthetic: true` no contrato): sem PII e sem relação com clientes reais da Azul.
 
 ## Regras de qualidade
 

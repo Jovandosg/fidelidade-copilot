@@ -1,0 +1,104 @@
+{
+  "risk_radar": {
+    "split": {
+      "train_cutoff": "2026-03-31",
+      "holdout_cutoff": "2026-06-30",
+      "label": "sem voo nao cancelado em 90 dias",
+      "lookback_days": 180
+    },
+    "n_train": 1103,
+    "n_holdout": 1109,
+    "churn_rate_train": 0.282,
+    "churn_rate_holdout": 0.284,
+    "holdout": {
+      "roc_auc": 0.5764,
+      "pr_auc": 0.3337,
+      "brier": 0.2014,
+      "brier_baseline_constant": 0.2034
+    },
+    "baselines_holdout_roc_auc": {
+      "recency_days": 0.5175,
+      "trips_180d_inverse": 0.5213
+    },
+    "feature_importance": {
+      "points_balance": 0.2234,
+      "tier_idx": 0.1932,
+      "margin_180d": 0.1551,
+      "avg_delay_180d": 0.1375,
+      "spend_180d": 0.1122,
+      "recency_days": 0.0832,
+      "disruptions_90d": 0.0351,
+      "trips_180d": 0.0173,
+      "trips_90d": 0.012,
+      "is_corporate": 0.0106,
+      "complaints_180d": 0.0098,
+      "disruptions_180d": 0.0059,
+      "cabin_idx": 0.0048
+    },
+    "disclaimer": "Dados sinteticos: metricas descrevem o gerador e nao constituem previsao validada."
+  },
+  "hvs": {
+    "weights": {
+      "clv": 0.4,
+      "margin": 0.3,
+      "stability": 0.3,
+      "cost_to_serve": 0.2
+    },
+    "profile_thresholds": {
+      "A": 75,
+      "B": 60,
+      "C": 45,
+      "D": 30
+    },
+    "profile_counts": {
+      "A": 268,
+      "B": 258,
+      "C": 223,
+      "D": 212,
+      "E": 239
+    }
+  },
+  "nba": {
+    "approval_cost_threshold_brl": 10.0,
+    "assumptions": [
+      {
+        "action": "Recuperacao de experiencia (compensacao em pontos + contato proativo)",
+        "cost_brl": 25.0,
+        "assumed_uplift": 0.25
+      },
+      {
+        "action": "Reativacao com bonus de pontos na rota preferida",
+        "cost_brl": 15.0,
+        "assumed_uplift": 0.15
+      },
+      {
+        "action": "Cortesia de upgrade e reconhecimento de status",
+        "cost_brl": 60.0,
+        "assumed_uplift": 0.2
+      },
+      {
+        "action": "Oferta de resgate de pontos",
+        "cost_brl": 8.0,
+        "assumed_uplift": 0.08
+      },
+      {
+        "action": "Atendimento premium e reconhecimento",
+        "cost_brl": 12.0,
+        "assumed_uplift": 0.05
+      },
+      {
+        "action": "Oferta personalizada de proxima viagem",
+        "cost_brl": 5.0,
+        "assumed_uplift": 0.05
+      }
+    ],
+    "action_counts": {
+      "Monitorar (sem acao)": 676,
+      "Recuperacao de experiencia (compensacao em pontos + contato proativo)": 227,
+      "Oferta personalizada de proxima viagem": 203,
+      "Reativacao com bonus de pontos na rota preferida": 55,
+      "Oferta de resgate de pontos": 39
+    },
+    "note": "Custos e uplifts sao premissas sinteticas; toda acao acima do limite requer aprovacao humana."
+  }
+}
