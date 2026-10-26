@@ -3,52 +3,41 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import pandas as pd
-import pandera.pandas as pa
-from pandera.typing import DataFrame, Series
 
-class CustomersSchema(pa.DataFrameModel):
-    customer_id: Series[str] = pa.Field(str_matches=r"^C\d{6}$", unique=True, nullable=False)
-    signup_date: Series[object] = pa.Field(nullable=False)
-    loyalty_tier: Series[str] = pa.Field(isin=["Azul Fidelidade", "Topázio", "Safira", "Diamante", "Diamante Unique"], nullable=False)
-    home_airport: Series[str] = pa.Field(str_matches=r"^[A-Z]{3}$", nullable=False)
-    preferred_channel: Series[str] = pa.Field(isin=["app", "web", "agency"], nullable=False)
-
-class TransactionsSchema(pa.DataFrameModel):
-    transaction_id: Series[str] = pa.Field(str_matches=r"^T\d{8}$", unique=True, nullable=False)
-    customer_id: Series[str] = pa.Field(str_matches=r"^C\d{6}$", nullable=False)
-    flight_date: Series[object] = pa.Field(nullable=False)
-    origin: Series[str] = pa.Field(str_matches=r"^[A-Z]{3}$", nullable=False)
-    destination: Series[str] = pa.Field(str_matches=r"^[A-Z]{3}$", nullable=False)
-    amount_brl: Series[float] = pa.Field(gt=0, nullable=False)
-    qualifying_points: Series[int] = pa.Field(ge=0, nullable=False)
-    cancelled: Series[bool] = pa.Field(nullable=False)
-
-class FeaturesSchema(pa.DataFrameModel):
-    customer_id: Series[str] = pa.Field(str_matches=r"^C\d{6}$", unique=True, nullable=False)
-    trips_12m: Series[int] = pa.Field(ge=0, nullable=False)
-    spend_12m_brl: Series[float] = pa.Field(ge=0, nullable=False)
-    avg_ticket_brl: Series[float] = pa.Field(ge=0, nullable=False)
-    recency_days: Series[int] = pa.Field(ge=0, le=365, nullable=False)
-    preferred_route: Series[str] = pa.Field(nullable=False)
-    value_score: Series[float] = pa.Field(ge=0, le=100, nullable=False)
-    segment: Series[str] = pa.Field(isin=["Estratégico", "Frequente", "Oportunidade", "Em risco"], nullable=False)
-    recommended_action: Series[str] = pa.Field(nullable=False)
+from .contracts import build_schema, check_foreign_keys, load_contract, rule_results
 
 
-def validate_all(customers: pd.DataFrame, transactions: pd.DataFrame, features: pd.DataFrame, report_path: str | Path) -> dict:
-    CustomersSchema.validate(customers, lazy=True)
-    TransactionsSchema.validate(transactions, lazy=True)
-    FeaturesSchema.validate(features, lazy=True)
-    unknown_customer_ids = set(transactions.customer_id) - set(customers.customer_id)
-    if unknown_customer_ids:
-        raise ValueError(f"customer_id sem correspondência: {sorted(unknown_customer_ids)[:5]}")
-    if (transactions.origin == transactions.destination).any():
-        raise ValueError("Há transações com origem igual ao destino")
-    if len(customers) != 1200 or len(features) != 1200:
-        raise ValueError("O contrato exige exatamente 1.200 clientes")
+def evaluate_rules(customers: pd.DataFrame, transactions: pd.DataFrame, features: pd.DataFrame, route_metrics: pd.DataFrame) -> list[dict]:
+    """Todas as regras de qualidade (contrato via pandera + regras entre entidades). Nunca levanta por dado ruim."""
+    contract = load_contract()
+    frames = {"customers_raw": customers, "transactions_raw": transactions, "customer_features": features, "route_metrics": route_metrics}
+    results = [r for entity, frame in frames.items() for r in rule_results(entity, frame, contract)]
+
+    def add(entity: str, rule: str, failed: int) -> None:
+        results.append({"entity": entity, "rule": rule, "passed": bool(failed == 0), "failed_rows": int(failed)})
+
+    try:
+        check_foreign_keys(frames, contract)
+        add("transactions_raw", "fk:customer_id->customers_raw", 0)
+    except ValueError:
+        add("transactions_raw", "fk:customer_id->customers_raw", len(set(transactions.customer_id) - set(customers.customer_id)))
+    add("customer_features", "one_row_per_customer", len(set(features.customer_id) ^ set(customers.customer_id)))
+    add("transactions_raw", "disrupted_consistent_with_cancel_or_delay", (transactions.disrupted != (transactions.cancelled | (transactions.delay_minutes >= 60))).sum())
+    add("transactions_raw", "margin_not_above_amount", (transactions.margin_brl > transactions.amount_brl).sum())
+    add("route_metrics", "flights_sum_equals_transactions", abs(int(route_metrics.flights.sum()) - len(transactions)))
+    return results
+
+
+def validate_all(customers: pd.DataFrame, transactions: pd.DataFrame, features: pd.DataFrame, route_metrics: pd.DataFrame, report_path: str | Path,
+                 rules: list[dict] | None = None) -> dict:
+    rules = rules if rules is not None else evaluate_rules(customers, transactions, features, route_metrics)
+    failed = [r for r in rules if not r["passed"]]
+    if failed:
+        raise ValueError("regras de qualidade falharam: " + ", ".join(f"{r['entity']}.{r['rule']}({r['failed_rows']})" for r in failed))
     report = {
         "status": "passed", "customers": int(len(customers)), "transactions": int(len(transactions)),
-        "features": int(len(features)), "null_cells": int(sum(frame.isna().sum().sum() for frame in (customers, transactions, features))),
+        "features": int(len(features)), "routes": int(len(route_metrics)),
+        "null_cells": int(sum(frame.isna().sum().sum() for frame in (customers, transactions, features, route_metrics))),
         "duplicate_customer_ids": int(customers.customer_id.duplicated().sum()),
         "duplicate_transaction_ids": int(transactions.transaction_id.duplicated().sum()),
         "impossible_amounts": int((transactions.amount_brl <= 0).sum()),

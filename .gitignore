@@ -2,5 +2,16 @@
 __pycache__/
 .pytest_cache/
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+data/analytics/run_report.json
+data/analytics/drift_baseline.json
 *.log
 data/raw/*.parquet
+
+# frontend
+frontend/node_modules/
+frontend/dist/
+*.tsbuildinfo

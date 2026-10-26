@@ -1,0 +1,88 @@
+version: "1.1.0"
+owner: "Pessoa 1 — Dados"
+reviewer: "Pessoa 2 — ML e Valor"
+seed: 20261014
+synthetic: true  # todos os dados sao sinteticos; sem PII; nao sao dados reais da Azul
+changelog:
+  - version: "1.1.0"
+    date: "2026-10-25"
+    summary: >-
+      Ancora Azul: sinais de experiencia e valor. Task2 adiciona points_balance, is_corporate,
+      primary_cabin (customers_raw); margin_brl, delay_minutes, disrupted, complaint_flag
+      (transactions_raw); entidade route_metrics (IVR por rota); points_balance, margin_12m_brl,
+      disruptions_12m, complaints_12m (customer_features). Task3 completa a versao com as colunas de modelo
+      em customer_features: hvs_clv, hvs_margin, hvs_stability, hvs_cost_to_serve, hvs, profile (A-E),
+      risk_score, risk_drivers, nba_action, nba_expected_margin_brl, nba_requires_approval.
+      Colunas da 1.0.0 mantidas (compativel).
+  - version: "1.0.0"
+    date: "2026-10-14"
+    summary: "Contrato inicial do MVP (customers_raw, transactions_raw, customer_features)."
+entities:
+  customers_raw:
+    path: data/raw/customers.csv
+    primary_key: customer_id
+    columns:
+      customer_id: {type: string, nullable: false, constraints: "regex ^C[0-9]{6}$"}
+      signup_date: {type: date, nullable: false, constraints: "<= 2026-09-30"}
+      loyalty_tier: {type: string, nullable: false, constraints: "one of [Azul Fidelidade, Topázio, Safira, Diamante, Diamante Unique]"}
+      home_airport: {type: string, nullable: false, constraints: "IATA-like 3 uppercase letters"}
+      preferred_channel: {type: string, nullable: false, constraints: "one of [app, web, agency]"}
+      points_balance: {type: integer, nullable: false, constraints: ">= 0"}
+      is_corporate: {type: boolean, nullable: false}
+      primary_cabin: {type: string, nullable: false, constraints: "one of [economy, premium, business]"}
+  transactions_raw:
+    path: data/raw/transactions.csv
+    primary_key: transaction_id
+    foreign_keys: [customer_id]
+    columns:
+      transaction_id: {type: string, nullable: false, constraints: "unique"}
+      customer_id: {type: string, nullable: false, constraints: "must exist in customers_raw"}
+      flight_date: {type: date, nullable: false, constraints: "2025-10-01..2026-09-30"}
+      origin: {type: string, nullable: false, constraints: "IATA-like 3 uppercase letters"}
+      destination: {type: string, nullable: false, constraints: "IATA-like 3 uppercase letters; different from origin"}
+      amount_brl: {type: decimal, nullable: false, constraints: "> 0"}
+      qualifying_points: {type: integer, nullable: false, constraints: ">= 0"}
+      cancelled: {type: boolean, nullable: false}
+      margin_brl: {type: decimal, nullable: false, constraints: ">= 0"}
+      delay_minutes: {type: integer, nullable: false, constraints: "0..600"}
+      disrupted: {type: boolean, nullable: false}
+      complaint_flag: {type: boolean, nullable: false}
+  route_metrics:
+    path: data/analytics/route_metrics.csv
+    primary_key: route
+    columns:
+      route: {type: string, nullable: false, constraints: "regex ^[A-Z]{3}-[A-Z]{3}$"}
+      flights: {type: integer, nullable: false, constraints: ">= 1"}
+      disrupted_flights: {type: integer, nullable: false, constraints: ">= 0"}
+      avg_delay_minutes: {type: decimal, nullable: false, constraints: ">= 0"}
+      complaints: {type: integer, nullable: false, constraints: ">= 0"}
+      revenue_brl: {type: decimal, nullable: false, constraints: ">= 0"}
+      ivr: {type: decimal, nullable: false, constraints: "0..100"}
+  customer_features:
+    path: data/analytics/customer_features.csv
+    primary_key: customer_id
+    columns:
+      customer_id: {type: string, nullable: false}
+      trips_12m: {type: integer, nullable: false, constraints: ">= 0"}
+      spend_12m_brl: {type: decimal, nullable: false, constraints: ">= 0"}
+      avg_ticket_brl: {type: decimal, nullable: false, constraints: ">= 0"}
+      recency_days: {type: integer, nullable: false, constraints: ">= 0 and <= 365"}
+      preferred_route: {type: string, nullable: false}
+      value_score: {type: decimal, nullable: false, constraints: "0..100"}
+      segment: {type: string, nullable: false, constraints: "one of [Estratégico, Frequente, Oportunidade, Em risco]"}
+      recommended_action: {type: string, nullable: false}
+      points_balance: {type: integer, nullable: false, constraints: ">= 0"}
+      margin_12m_brl: {type: decimal, nullable: false, constraints: ">= 0"}
+      disruptions_12m: {type: integer, nullable: false, constraints: ">= 0"}
+      complaints_12m: {type: integer, nullable: false, constraints: ">= 0"}
+      hvs_clv: {type: decimal, nullable: false, constraints: "0..100"}
+      hvs_margin: {type: decimal, nullable: false, constraints: "0..100"}
+      hvs_stability: {type: decimal, nullable: false, constraints: "0..100"}
+      hvs_cost_to_serve: {type: decimal, nullable: false, constraints: "0..100"}
+      hvs: {type: decimal, nullable: false, constraints: "0..100"}
+      profile: {type: string, nullable: false, constraints: "one of [A, B, C, D, E]"}
+      risk_score: {type: decimal, nullable: false, constraints: "0..100"}
+      risk_drivers: {type: string, nullable: false}
+      nba_action: {type: string, nullable: false}
+      nba_expected_margin_brl: {type: decimal, nullable: false, constraints: ">= 0"}
+      nba_requires_approval: {type: boolean, nullable: false}

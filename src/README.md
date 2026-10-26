@@ -11,4 +11,4 @@ Estrutura sugerida para os próximos incrementos:
 - `policies/`: elegibilidade, aprovação humana e limites;
 - `evaluation/`: métricas e avaliações.
 
-A implementação inicial do MVP permanece em `pipeline.py` e `app.py` para reduzir a complexidade do primeiro Sprint. A migração para módulos em `src/` deve acontecer somente quando gerar valor e for revisada pelo time.
+O pipeline oficial vive em `src/` (executar com `python -m src.pipeline`); o MVP antigo (`pipeline.py`/`app.py` Streamlit) esta em `../legacy/` apenas por historico. A migracao para modulos em `src/` deve ser revisada pelo time.
