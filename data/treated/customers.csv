@@ -1,1201 +1,1201 @@
-customer_id,signup_date,loyalty_tier,home_airport,preferred_channel
-C000001,2026-04-22,Safira,VCP,app
-C000002,2024-03-02,Azul Fidelidade,SSA,app
-C000003,2021-12-31,Azul Fidelidade,GYN,web
-C000004,2021-04-30,Diamante,VCP,app
-C000005,2023-11-18,Topázio,SSA,app
-C000006,2022-03-03,Azul Fidelidade,CWB,app
-C000007,2021-08-09,Topázio,SSA,web
-C000008,2020-03-25,Safira,REC,agency
-C000009,2022-05-31,Topázio,SDU,web
-C000010,2024-03-10,Azul Fidelidade,SSA,web
-C000011,2022-03-05,Topázio,POA,web
-C000012,2022-12-06,Diamante Unique,REC,app
-C000013,2021-06-19,Azul Fidelidade,REC,web
-C000014,2024-03-06,Safira,REC,app
-C000015,2023-07-21,Azul Fidelidade,CWB,app
-C000016,2022-12-26,Safira,POA,web
-C000017,2021-06-22,Topázio,VCP,app
-C000018,2023-04-29,Azul Fidelidade,POA,agency
-C000019,2025-09-28,Diamante,SSA,web
-C000020,2023-11-14,Safira,CGH,app
-C000021,2023-08-11,Diamante,CNF,app
-C000022,2025-03-17,Safira,VCP,web
-C000023,2024-05-30,Safira,CWB,app
-C000024,2025-03-03,Azul Fidelidade,BSB,app
-C000025,2023-11-24,Diamante,REC,app
-C000026,2026-06-18,Topázio,REC,web
-C000027,2022-07-30,Topázio,SDU,app
-C000028,2021-03-02,Azul Fidelidade,SDU,app
-C000029,2021-06-10,Safira,SSA,web
-C000030,2023-09-12,Safira,SDU,app
-C000031,2023-11-28,Safira,SDU,app
-C000032,2022-01-10,Topázio,VCP,web
-C000033,2023-01-16,Diamante,VCP,app
-C000034,2023-08-13,Diamante Unique,VCP,agency
-C000035,2026-02-22,Safira,POA,web
-C000036,2020-12-25,Topázio,POA,app
-C000037,2021-12-17,Topázio,CNF,web
-C000038,2020-07-18,Azul Fidelidade,BSB,app
-C000039,2021-01-01,Azul Fidelidade,CGH,app
-C000040,2025-07-07,Safira,CWB,agency
-C000041,2020-08-16,Azul Fidelidade,SSA,web
-C000042,2023-09-30,Safira,BSB,app
-C000043,2023-07-10,Safira,CNF,app
-C000044,2020-08-07,Azul Fidelidade,BSB,app
-C000045,2022-09-16,Azul Fidelidade,BSB,app
-C000046,2020-02-07,Azul Fidelidade,CGH,app
-C000047,2026-09-29,Azul Fidelidade,SSA,app
-C000048,2025-09-20,Azul Fidelidade,POA,app
-C000049,2026-02-18,Azul Fidelidade,VCP,web
-C000050,2021-05-29,Azul Fidelidade,BSB,web
-C000051,2025-07-23,Safira,SDU,app
-C000052,2023-08-16,Diamante,CGH,app
-C000053,2025-02-20,Topázio,CNF,agency
-C000054,2022-04-15,Safira,CNF,app
-C000055,2020-01-05,Azul Fidelidade,VCP,app
-C000056,2020-11-23,Azul Fidelidade,CGH,app
-C000057,2020-07-18,Azul Fidelidade,CGH,agency
-C000058,2024-11-27,Azul Fidelidade,SDU,app
-C000059,2020-05-02,Azul Fidelidade,REC,app
-C000060,2021-02-22,Topázio,SDU,app
-C000061,2020-12-02,Topázio,CWB,app
-C000062,2023-08-10,Azul Fidelidade,GYN,app
-C000063,2026-08-19,Topázio,BSB,web
-C000064,2021-08-25,Azul Fidelidade,CWB,agency
-C000065,2026-06-19,Azul Fidelidade,POA,web
-C000066,2022-07-08,Azul Fidelidade,VCP,agency
-C000067,2026-03-01,Diamante,CGH,web
-C000068,2026-07-16,Azul Fidelidade,SDU,app
-C000069,2026-07-15,Azul Fidelidade,POA,app
-C000070,2024-03-28,Topázio,SDU,web
-C000071,2021-10-10,Topázio,SSA,app
-C000072,2026-07-12,Azul Fidelidade,SSA,app
-C000073,2024-08-01,Diamante,GYN,app
-C000074,2025-01-25,Topázio,CGH,app
-C000075,2021-05-15,Topázio,REC,app
-C000076,2026-09-12,Azul Fidelidade,REC,agency
-C000077,2026-04-10,Azul Fidelidade,REC,app
-C000078,2024-02-29,Topázio,REC,web
-C000079,2024-04-13,Azul Fidelidade,POA,web
-C000080,2026-01-11,Azul Fidelidade,CWB,app
-C000081,2021-10-22,Topázio,REC,web
-C000082,2024-11-20,Azul Fidelidade,CNF,web
-C000083,2025-07-24,Diamante,SDU,agency
-C000084,2025-04-27,Diamante,BSB,app
-C000085,2024-06-12,Azul Fidelidade,CGH,agency
-C000086,2020-01-27,Azul Fidelidade,CWB,web
-C000087,2024-11-07,Safira,BSB,agency
-C000088,2023-02-01,Azul Fidelidade,SDU,web
-C000089,2024-11-25,Topázio,SDU,web
-C000090,2023-10-02,Azul Fidelidade,REC,app
-C000091,2021-08-19,Topázio,BSB,agency
-C000092,2022-10-17,Diamante,CNF,app
-C000093,2024-11-21,Safira,SDU,web
-C000094,2021-11-11,Diamante,POA,app
-C000095,2023-05-04,Azul Fidelidade,CWB,app
-C000096,2026-03-10,Azul Fidelidade,CWB,app
-C000097,2024-11-06,Azul Fidelidade,BSB,agency
-C000098,2023-02-19,Azul Fidelidade,CWB,web
-C000099,2026-04-16,Safira,CNF,app
-C000100,2024-07-23,Topázio,SDU,app
-C000101,2021-11-14,Topázio,CNF,app
-C000102,2024-12-15,Azul Fidelidade,REC,web
-C000103,2021-03-06,Azul Fidelidade,CNF,web
-C000104,2023-01-12,Topázio,SSA,app
-C000105,2021-11-28,Safira,CNF,app
-C000106,2021-07-03,Safira,POA,web
-C000107,2021-02-15,Azul Fidelidade,SSA,app
-C000108,2020-08-02,Azul Fidelidade,BSB,web
-C000109,2023-06-04,Topázio,CNF,app
-C000110,2024-03-25,Azul Fidelidade,CNF,app
-C000111,2025-12-27,Azul Fidelidade,POA,agency
-C000112,2021-05-04,Azul Fidelidade,CGH,web
-C000113,2024-09-21,Azul Fidelidade,GYN,agency
-C000114,2024-09-02,Azul Fidelidade,CGH,web
-C000115,2024-04-12,Azul Fidelidade,BSB,app
-C000116,2024-04-07,Azul Fidelidade,VCP,web
-C000117,2021-12-26,Topázio,VCP,web
-C000118,2021-05-06,Topázio,GYN,app
-C000119,2022-10-28,Azul Fidelidade,CGH,app
-C000120,2024-03-31,Topázio,CNF,app
-C000121,2020-08-27,Azul Fidelidade,BSB,app
-C000122,2022-01-28,Azul Fidelidade,VCP,agency
-C000123,2024-05-15,Azul Fidelidade,VCP,app
-C000124,2026-03-20,Diamante,SDU,app
-C000125,2026-06-12,Azul Fidelidade,CGH,app
-C000126,2024-12-12,Safira,BSB,web
-C000127,2020-03-03,Diamante,SSA,app
-C000128,2026-07-07,Azul Fidelidade,CGH,app
-C000129,2024-02-09,Topázio,BSB,web
-C000130,2021-05-04,Azul Fidelidade,REC,app
-C000131,2025-09-17,Azul Fidelidade,CGH,app
-C000132,2022-06-06,Azul Fidelidade,SSA,app
-C000133,2021-01-18,Topázio,POA,web
-C000134,2024-06-11,Azul Fidelidade,REC,web
-C000135,2021-07-31,Diamante,CGH,app
-C000136,2020-03-12,Azul Fidelidade,POA,web
-C000137,2025-07-08,Azul Fidelidade,CGH,web
-C000138,2023-05-29,Azul Fidelidade,CWB,web
-C000139,2021-03-22,Azul Fidelidade,SDU,web
-C000140,2025-08-26,Azul Fidelidade,SSA,app
-C000141,2022-11-07,Safira,GYN,web
-C000142,2020-06-03,Azul Fidelidade,REC,web
-C000143,2025-03-29,Azul Fidelidade,CWB,web
-C000144,2022-12-06,Topázio,CNF,app
-C000145,2023-11-28,Azul Fidelidade,GYN,app
-C000146,2025-04-02,Azul Fidelidade,SSA,app
-C000147,2021-07-27,Azul Fidelidade,VCP,app
-C000148,2021-03-27,Safira,VCP,app
-C000149,2025-06-09,Topázio,GYN,app
-C000150,2022-09-21,Diamante Unique,REC,app
-C000151,2022-10-08,Azul Fidelidade,REC,agency
-C000152,2023-01-14,Topázio,BSB,web
-C000153,2020-08-02,Azul Fidelidade,VCP,app
-C000154,2023-06-28,Safira,POA,app
-C000155,2024-12-02,Azul Fidelidade,CNF,app
-C000156,2022-11-30,Safira,CNF,app
-C000157,2024-06-23,Azul Fidelidade,CGH,agency
-C000158,2023-07-06,Safira,CWB,app
-C000159,2024-05-24,Topázio,GYN,web
-C000160,2025-05-24,Topázio,REC,web
-C000161,2025-11-25,Azul Fidelidade,CWB,app
-C000162,2025-11-25,Safira,CGH,app
-C000163,2025-07-10,Azul Fidelidade,SSA,app
-C000164,2022-01-12,Safira,GYN,app
-C000165,2024-09-19,Diamante Unique,VCP,web
-C000166,2020-05-31,Diamante,CGH,app
-C000167,2023-10-21,Azul Fidelidade,GYN,web
-C000168,2021-08-23,Azul Fidelidade,CNF,app
-C000169,2021-06-10,Topázio,BSB,app
-C000170,2025-11-27,Azul Fidelidade,CNF,web
-C000171,2026-02-06,Azul Fidelidade,CWB,agency
-C000172,2025-05-31,Topázio,GYN,agency
-C000173,2020-08-30,Azul Fidelidade,REC,web
-C000174,2023-11-14,Azul Fidelidade,SSA,app
-C000175,2023-04-01,Topázio,SDU,app
-C000176,2020-09-05,Azul Fidelidade,SDU,web
-C000177,2021-08-04,Azul Fidelidade,BSB,web
-C000178,2022-02-08,Safira,SSA,app
-C000179,2026-04-18,Azul Fidelidade,POA,web
-C000180,2024-08-12,Azul Fidelidade,BSB,app
-C000181,2026-08-06,Topázio,POA,app
-C000182,2023-05-20,Azul Fidelidade,REC,app
-C000183,2022-01-23,Azul Fidelidade,CGH,app
-C000184,2025-04-03,Safira,CGH,web
-C000185,2020-04-25,Safira,CNF,app
-C000186,2024-11-29,Topázio,BSB,app
-C000187,2026-06-18,Topázio,CGH,web
-C000188,2025-05-21,Azul Fidelidade,CNF,app
-C000189,2022-05-14,Safira,POA,web
-C000190,2021-07-14,Azul Fidelidade,GYN,app
-C000191,2021-03-17,Topázio,POA,web
-C000192,2023-10-02,Topázio,GYN,agency
-C000193,2025-02-19,Topázio,CNF,app
-C000194,2026-08-27,Safira,POA,web
-C000195,2021-12-09,Topázio,CWB,web
-C000196,2023-08-17,Azul Fidelidade,CNF,app
-C000197,2020-07-25,Azul Fidelidade,POA,app
-C000198,2024-11-11,Azul Fidelidade,SDU,web
-C000199,2020-01-09,Topázio,POA,app
-C000200,2020-12-25,Azul Fidelidade,SDU,web
-C000201,2024-01-24,Azul Fidelidade,REC,app
-C000202,2021-05-14,Safira,SSA,app
-C000203,2021-05-02,Safira,SDU,app
-C000204,2024-03-10,Safira,REC,app
-C000205,2025-02-17,Topázio,SDU,web
-C000206,2023-07-02,Azul Fidelidade,CNF,agency
-C000207,2021-10-11,Azul Fidelidade,SDU,app
-C000208,2024-10-15,Azul Fidelidade,REC,agency
-C000209,2021-05-11,Safira,BSB,app
-C000210,2025-12-25,Azul Fidelidade,SSA,app
-C000211,2026-08-18,Azul Fidelidade,SSA,web
-C000212,2023-08-02,Azul Fidelidade,GYN,app
-C000213,2024-02-14,Diamante,SDU,web
-C000214,2020-03-14,Topázio,VCP,agency
-C000215,2022-08-08,Azul Fidelidade,CWB,app
-C000216,2025-05-14,Azul Fidelidade,CNF,app
-C000217,2023-02-15,Safira,SDU,web
-C000218,2024-03-27,Azul Fidelidade,CNF,web
-C000219,2020-03-11,Azul Fidelidade,POA,app
-C000220,2020-03-25,Azul Fidelidade,REC,app
-C000221,2025-06-21,Diamante,SSA,app
-C000222,2022-04-01,Azul Fidelidade,POA,agency
-C000223,2020-03-13,Topázio,REC,web
-C000224,2021-09-01,Azul Fidelidade,CWB,web
-C000225,2025-06-11,Topázio,CGH,app
-C000226,2025-06-15,Safira,BSB,web
-C000227,2023-01-01,Azul Fidelidade,VCP,web
-C000228,2022-07-01,Topázio,POA,app
-C000229,2021-11-20,Azul Fidelidade,CGH,app
-C000230,2023-10-18,Topázio,GYN,app
-C000231,2022-07-19,Diamante,SDU,app
-C000232,2025-05-22,Safira,GYN,web
-C000233,2024-05-20,Topázio,SSA,app
-C000234,2020-02-29,Azul Fidelidade,CGH,app
-C000235,2022-02-24,Safira,SSA,agency
-C000236,2020-03-29,Safira,BSB,web
-C000237,2023-10-03,Azul Fidelidade,VCP,app
-C000238,2024-01-23,Diamante,REC,app
-C000239,2021-04-26,Azul Fidelidade,SDU,web
-C000240,2021-11-21,Azul Fidelidade,GYN,app
-C000241,2020-07-05,Safira,VCP,web
-C000242,2021-10-03,Azul Fidelidade,SDU,app
-C000243,2020-06-09,Azul Fidelidade,GYN,app
-C000244,2024-12-24,Azul Fidelidade,REC,app
-C000245,2020-06-02,Azul Fidelidade,GYN,web
-C000246,2025-08-27,Azul Fidelidade,CWB,web
-C000247,2021-05-17,Azul Fidelidade,CNF,app
-C000248,2020-12-03,Topázio,CWB,web
-C000249,2026-09-16,Diamante,SDU,web
-C000250,2024-06-09,Azul Fidelidade,CNF,app
-C000251,2020-08-05,Topázio,REC,app
-C000252,2023-09-07,Azul Fidelidade,BSB,web
-C000253,2022-10-20,Azul Fidelidade,CWB,app
-C000254,2022-01-14,Topázio,REC,web
-C000255,2020-07-31,Topázio,REC,app
-C000256,2024-08-29,Diamante,CNF,app
-C000257,2025-06-19,Topázio,POA,web
-C000258,2021-07-01,Azul Fidelidade,CGH,app
-C000259,2020-03-02,Azul Fidelidade,SDU,app
-C000260,2021-08-18,Diamante,POA,app
-C000261,2021-11-01,Safira,REC,app
-C000262,2022-05-16,Topázio,REC,web
-C000263,2026-08-21,Azul Fidelidade,CGH,agency
-C000264,2024-12-19,Topázio,GYN,app
-C000265,2020-09-27,Safira,GYN,app
-C000266,2024-11-10,Diamante,GYN,app
-C000267,2022-01-09,Azul Fidelidade,CGH,web
-C000268,2020-02-20,Azul Fidelidade,POA,agency
-C000269,2026-06-08,Topázio,SDU,app
-C000270,2021-04-24,Azul Fidelidade,CWB,app
-C000271,2022-03-11,Azul Fidelidade,SDU,web
-C000272,2020-03-24,Azul Fidelidade,VCP,app
-C000273,2021-08-06,Azul Fidelidade,VCP,agency
-C000274,2021-02-18,Diamante,SDU,app
-C000275,2025-10-31,Diamante Unique,REC,web
-C000276,2024-03-19,Safira,REC,app
-C000277,2024-05-26,Azul Fidelidade,GYN,web
-C000278,2022-12-25,Diamante Unique,CGH,web
-C000279,2020-05-08,Azul Fidelidade,CWB,web
-C000280,2020-11-23,Diamante,GYN,agency
-C000281,2026-09-04,Topázio,CNF,web
-C000282,2022-06-06,Diamante,CGH,agency
-C000283,2025-04-21,Azul Fidelidade,CNF,app
-C000284,2024-12-25,Topázio,CNF,app
-C000285,2023-05-04,Safira,VCP,app
-C000286,2026-02-15,Azul Fidelidade,SSA,web
-C000287,2021-07-14,Azul Fidelidade,SDU,web
-C000288,2021-10-05,Topázio,BSB,agency
-C000289,2023-06-22,Azul Fidelidade,CGH,app
-C000290,2023-02-12,Topázio,REC,app
-C000291,2020-08-10,Azul Fidelidade,SDU,app
-C000292,2024-08-09,Azul Fidelidade,GYN,app
-C000293,2025-10-14,Azul Fidelidade,POA,app
-C000294,2023-11-30,Azul Fidelidade,CNF,web
-C000295,2026-09-05,Topázio,CWB,app
-C000296,2023-08-31,Topázio,BSB,app
-C000297,2021-03-29,Topázio,SSA,web
-C000298,2025-10-30,Azul Fidelidade,CGH,app
-C000299,2024-06-05,Topázio,POA,agency
-C000300,2021-10-19,Azul Fidelidade,SSA,app
-C000301,2020-12-10,Azul Fidelidade,VCP,web
-C000302,2022-05-28,Topázio,POA,agency
-C000303,2025-09-22,Azul Fidelidade,SSA,app
-C000304,2024-04-09,Safira,POA,web
-C000305,2026-05-19,Azul Fidelidade,GYN,web
-C000306,2025-10-12,Safira,GYN,app
-C000307,2022-12-29,Azul Fidelidade,SDU,web
-C000308,2022-03-29,Azul Fidelidade,CNF,app
-C000309,2025-08-12,Topázio,CWB,app
-C000310,2022-01-09,Diamante,VCP,app
-C000311,2021-05-18,Topázio,BSB,app
-C000312,2023-10-29,Topázio,REC,app
-C000313,2023-12-01,Safira,CGH,app
-C000314,2026-04-25,Azul Fidelidade,VCP,agency
-C000315,2023-03-08,Topázio,REC,web
-C000316,2021-06-06,Safira,BSB,agency
-C000317,2026-01-24,Azul Fidelidade,BSB,app
-C000318,2024-09-26,Safira,CWB,web
-C000319,2021-07-05,Azul Fidelidade,CNF,agency
-C000320,2022-06-21,Topázio,SSA,app
-C000321,2022-04-25,Azul Fidelidade,SSA,app
-C000322,2026-06-08,Azul Fidelidade,REC,web
-C000323,2023-08-21,Azul Fidelidade,VCP,app
-C000324,2024-08-03,Safira,SDU,app
-C000325,2022-05-06,Safira,GYN,web
-C000326,2022-01-08,Safira,BSB,web
-C000327,2022-07-06,Safira,VCP,app
-C000328,2024-01-27,Topázio,CNF,web
-C000329,2022-01-19,Azul Fidelidade,CNF,app
-C000330,2022-03-07,Azul Fidelidade,BSB,web
-C000331,2022-10-13,Azul Fidelidade,SDU,web
-C000332,2021-11-22,Safira,REC,web
-C000333,2020-06-07,Topázio,GYN,app
-C000334,2026-02-10,Azul Fidelidade,CNF,app
-C000335,2026-06-26,Azul Fidelidade,SSA,app
-C000336,2021-07-31,Topázio,VCP,agency
-C000337,2024-09-09,Azul Fidelidade,POA,web
-C000338,2025-10-02,Topázio,BSB,app
-C000339,2022-01-10,Topázio,POA,app
-C000340,2025-09-03,Safira,SSA,app
-C000341,2024-03-04,Safira,REC,app
-C000342,2023-05-13,Azul Fidelidade,CGH,agency
-C000343,2023-11-11,Safira,GYN,app
-C000344,2020-07-27,Azul Fidelidade,CWB,web
-C000345,2026-06-25,Topázio,SDU,web
-C000346,2021-10-26,Topázio,CNF,app
-C000347,2021-02-13,Azul Fidelidade,CGH,app
-C000348,2024-04-28,Safira,CWB,app
-C000349,2026-05-25,Azul Fidelidade,CNF,web
-C000350,2021-01-14,Diamante Unique,VCP,app
-C000351,2022-05-09,Diamante,GYN,app
-C000352,2024-03-07,Diamante,GYN,app
-C000353,2026-02-04,Azul Fidelidade,POA,web
-C000354,2023-01-27,Safira,CGH,app
-C000355,2021-02-27,Azul Fidelidade,REC,app
-C000356,2022-03-28,Azul Fidelidade,REC,web
-C000357,2020-03-24,Azul Fidelidade,REC,web
-C000358,2024-10-07,Topázio,BSB,web
-C000359,2025-09-14,Diamante,SDU,app
-C000360,2025-03-17,Azul Fidelidade,CGH,agency
-C000361,2020-06-21,Azul Fidelidade,REC,web
-C000362,2023-04-02,Diamante,CNF,app
-C000363,2022-12-21,Safira,SDU,app
-C000364,2021-01-06,Topázio,POA,app
-C000365,2025-06-01,Azul Fidelidade,GYN,app
-C000366,2026-04-24,Azul Fidelidade,GYN,agency
-C000367,2021-11-14,Azul Fidelidade,SDU,app
-C000368,2023-08-25,Azul Fidelidade,SSA,web
-C000369,2022-09-26,Safira,CWB,app
-C000370,2026-04-08,Safira,GYN,app
-C000371,2020-06-26,Azul Fidelidade,REC,agency
-C000372,2020-09-08,Diamante Unique,CNF,agency
-C000373,2022-08-14,Diamante Unique,CGH,agency
-C000374,2022-02-28,Diamante Unique,CWB,web
-C000375,2023-04-25,Azul Fidelidade,VCP,web
-C000376,2020-12-19,Topázio,SSA,web
-C000377,2024-02-08,Azul Fidelidade,BSB,app
-C000378,2021-05-14,Topázio,CWB,agency
-C000379,2021-01-05,Azul Fidelidade,BSB,agency
-C000380,2024-07-29,Azul Fidelidade,SSA,app
-C000381,2024-10-07,Topázio,REC,app
-C000382,2026-01-12,Azul Fidelidade,POA,agency
-C000383,2020-06-30,Safira,GYN,app
-C000384,2020-05-25,Azul Fidelidade,GYN,web
-C000385,2024-01-07,Azul Fidelidade,CNF,web
-C000386,2024-05-23,Topázio,POA,app
-C000387,2025-09-22,Azul Fidelidade,CGH,web
-C000388,2024-06-16,Diamante,SSA,app
-C000389,2023-10-13,Diamante,SSA,web
-C000390,2026-05-22,Azul Fidelidade,SDU,web
-C000391,2020-02-27,Azul Fidelidade,REC,app
-C000392,2026-09-08,Azul Fidelidade,VCP,app
-C000393,2025-06-12,Azul Fidelidade,CNF,app
-C000394,2022-04-24,Topázio,CWB,app
-C000395,2020-07-01,Topázio,SSA,app
-C000396,2023-09-22,Azul Fidelidade,CWB,web
-C000397,2026-07-06,Topázio,VCP,web
-C000398,2021-06-28,Azul Fidelidade,SDU,web
-C000399,2026-07-11,Azul Fidelidade,GYN,web
-C000400,2024-06-06,Azul Fidelidade,VCP,web
-C000401,2022-10-17,Azul Fidelidade,REC,app
-C000402,2024-11-19,Azul Fidelidade,GYN,app
-C000403,2021-01-02,Azul Fidelidade,CGH,web
-C000404,2023-04-24,Azul Fidelidade,BSB,web
-C000405,2022-05-12,Topázio,REC,app
-C000406,2024-05-23,Azul Fidelidade,GYN,app
-C000407,2022-05-27,Topázio,VCP,app
-C000408,2022-03-20,Azul Fidelidade,POA,web
-C000409,2026-07-17,Azul Fidelidade,SSA,web
-C000410,2024-03-13,Azul Fidelidade,VCP,agency
-C000411,2024-09-06,Azul Fidelidade,REC,web
-C000412,2023-05-22,Safira,CGH,app
-C000413,2026-04-14,Topázio,REC,app
-C000414,2020-01-02,Topázio,VCP,agency
-C000415,2022-07-20,Topázio,REC,app
-C000416,2020-11-30,Safira,VCP,web
-C000417,2022-10-19,Topázio,CNF,app
-C000418,2024-11-04,Diamante,VCP,web
-C000419,2026-09-14,Azul Fidelidade,CNF,app
-C000420,2025-06-01,Azul Fidelidade,CGH,web
-C000421,2026-06-22,Topázio,POA,web
-C000422,2024-03-12,Safira,VCP,web
-C000423,2024-10-21,Azul Fidelidade,BSB,app
-C000424,2022-11-25,Diamante,SSA,web
-C000425,2020-09-14,Topázio,CWB,agency
-C000426,2020-10-31,Diamante,REC,app
-C000427,2021-12-14,Safira,BSB,app
-C000428,2025-09-10,Safira,BSB,app
-C000429,2024-02-17,Diamante Unique,VCP,web
-C000430,2026-04-26,Safira,CGH,agency
-C000431,2026-04-04,Azul Fidelidade,CWB,app
-C000432,2020-10-24,Azul Fidelidade,BSB,web
-C000433,2022-11-30,Topázio,REC,web
-C000434,2021-02-26,Azul Fidelidade,SSA,web
-C000435,2025-04-26,Azul Fidelidade,CNF,app
-C000436,2023-01-27,Topázio,CNF,app
-C000437,2020-02-08,Topázio,SSA,web
-C000438,2020-09-25,Azul Fidelidade,CWB,app
-C000439,2024-06-06,Safira,VCP,web
-C000440,2023-09-16,Azul Fidelidade,CNF,app
-C000441,2024-04-02,Azul Fidelidade,GYN,app
-C000442,2024-12-03,Azul Fidelidade,CNF,app
-C000443,2025-04-24,Topázio,POA,web
-C000444,2026-09-13,Diamante,CGH,web
-C000445,2024-07-31,Safira,CNF,app
-C000446,2023-09-11,Safira,CGH,app
-C000447,2023-09-09,Azul Fidelidade,GYN,web
-C000448,2021-10-30,Diamante Unique,REC,app
-C000449,2026-03-30,Azul Fidelidade,CNF,agency
-C000450,2023-07-16,Azul Fidelidade,SDU,app
-C000451,2023-05-04,Topázio,SDU,app
-C000452,2025-05-01,Azul Fidelidade,CNF,app
-C000453,2020-10-06,Topázio,CGH,web
-C000454,2026-06-06,Azul Fidelidade,SSA,web
-C000455,2025-07-20,Safira,CGH,app
-C000456,2023-08-14,Azul Fidelidade,SDU,app
-C000457,2024-05-25,Topázio,CGH,web
-C000458,2022-11-20,Azul Fidelidade,REC,app
-C000459,2021-04-17,Diamante,VCP,app
-C000460,2023-08-04,Azul Fidelidade,SSA,web
-C000461,2021-07-09,Topázio,VCP,app
-C000462,2022-06-02,Topázio,CWB,web
-C000463,2021-10-15,Safira,REC,app
-C000464,2024-03-30,Azul Fidelidade,POA,web
-C000465,2022-04-24,Diamante,CGH,app
-C000466,2026-04-10,Topázio,SDU,web
-C000467,2025-10-08,Azul Fidelidade,CWB,app
-C000468,2020-07-03,Diamante,BSB,app
-C000469,2023-03-08,Topázio,VCP,app
-C000470,2026-07-07,Azul Fidelidade,CGH,web
-C000471,2025-12-19,Safira,SSA,agency
-C000472,2021-05-21,Azul Fidelidade,VCP,app
-C000473,2023-03-09,Azul Fidelidade,POA,app
-C000474,2021-09-30,Topázio,SSA,web
-C000475,2022-03-31,Azul Fidelidade,REC,app
-C000476,2025-01-24,Azul Fidelidade,BSB,app
-C000477,2025-08-24,Azul Fidelidade,REC,app
-C000478,2026-07-11,Azul Fidelidade,CNF,app
-C000479,2024-02-02,Topázio,REC,web
-C000480,2025-02-10,Azul Fidelidade,CNF,app
-C000481,2022-02-28,Azul Fidelidade,SDU,agency
-C000482,2023-09-27,Azul Fidelidade,CNF,app
-C000483,2023-05-06,Azul Fidelidade,GYN,app
-C000484,2023-09-21,Azul Fidelidade,POA,agency
-C000485,2020-04-14,Safira,CWB,app
-C000486,2025-07-01,Azul Fidelidade,BSB,web
-C000487,2025-01-15,Topázio,GYN,app
-C000488,2024-11-09,Azul Fidelidade,VCP,web
-C000489,2022-06-03,Azul Fidelidade,CNF,web
-C000490,2020-06-12,Topázio,SSA,app
-C000491,2024-08-05,Safira,BSB,web
-C000492,2025-10-03,Azul Fidelidade,REC,web
-C000493,2026-03-26,Topázio,VCP,app
-C000494,2022-05-14,Azul Fidelidade,SSA,web
-C000495,2026-01-06,Topázio,SSA,app
-C000496,2024-10-11,Diamante,REC,app
-C000497,2021-01-23,Topázio,CGH,web
-C000498,2021-06-09,Diamante,BSB,web
-C000499,2026-03-16,Azul Fidelidade,POA,web
-C000500,2021-11-04,Azul Fidelidade,SDU,app
-C000501,2023-07-07,Topázio,CGH,app
-C000502,2020-06-28,Safira,CNF,app
-C000503,2022-12-25,Topázio,REC,app
-C000504,2022-12-05,Azul Fidelidade,CWB,app
-C000505,2025-01-22,Azul Fidelidade,REC,agency
-C000506,2023-07-29,Azul Fidelidade,CNF,app
-C000507,2024-02-14,Safira,SSA,web
-C000508,2026-03-05,Safira,SDU,app
-C000509,2023-03-14,Safira,VCP,app
-C000510,2023-12-20,Azul Fidelidade,SDU,app
-C000511,2024-03-16,Topázio,VCP,app
-C000512,2020-07-20,Diamante,CNF,app
-C000513,2021-04-22,Azul Fidelidade,VCP,app
-C000514,2023-08-31,Safira,SSA,app
-C000515,2023-05-10,Diamante,SDU,app
-C000516,2021-05-06,Azul Fidelidade,POA,web
-C000517,2024-01-22,Azul Fidelidade,CNF,web
-C000518,2025-11-18,Safira,CNF,web
-C000519,2024-08-12,Topázio,VCP,app
-C000520,2020-05-25,Topázio,SDU,app
-C000521,2024-03-28,Safira,REC,app
-C000522,2024-12-21,Azul Fidelidade,POA,app
-C000523,2020-05-26,Diamante,CGH,app
-C000524,2026-06-07,Topázio,VCP,agency
-C000525,2026-05-28,Azul Fidelidade,BSB,app
-C000526,2023-01-16,Diamante,POA,web
-C000527,2026-03-31,Azul Fidelidade,CNF,app
-C000528,2023-01-10,Azul Fidelidade,REC,web
-C000529,2022-03-03,Safira,SSA,web
-C000530,2022-12-23,Azul Fidelidade,CNF,web
-C000531,2020-11-11,Azul Fidelidade,BSB,app
-C000532,2026-06-09,Azul Fidelidade,CGH,app
-C000533,2025-08-23,Safira,POA,app
-C000534,2022-02-27,Azul Fidelidade,SSA,web
-C000535,2021-08-05,Azul Fidelidade,VCP,web
-C000536,2023-05-28,Topázio,BSB,app
-C000537,2026-03-17,Diamante,BSB,web
-C000538,2023-03-22,Topázio,BSB,web
-C000539,2024-07-10,Azul Fidelidade,BSB,app
-C000540,2024-07-13,Azul Fidelidade,SSA,agency
-C000541,2025-12-13,Safira,VCP,agency
-C000542,2026-03-16,Topázio,CGH,app
-C000543,2023-06-21,Safira,SDU,app
-C000544,2026-01-21,Azul Fidelidade,SDU,app
-C000545,2024-04-18,Safira,BSB,web
-C000546,2021-10-24,Azul Fidelidade,POA,web
-C000547,2022-05-30,Azul Fidelidade,SSA,app
-C000548,2020-08-01,Topázio,SDU,app
-C000549,2025-04-18,Azul Fidelidade,GYN,app
-C000550,2024-11-14,Azul Fidelidade,BSB,app
-C000551,2021-03-03,Topázio,CWB,app
-C000552,2026-09-28,Azul Fidelidade,SDU,web
-C000553,2026-09-23,Azul Fidelidade,CNF,web
-C000554,2026-06-07,Safira,CGH,app
-C000555,2021-04-13,Safira,CGH,web
-C000556,2022-05-24,Azul Fidelidade,VCP,web
-C000557,2021-01-09,Diamante,SSA,app
-C000558,2025-10-27,Topázio,BSB,agency
-C000559,2021-12-23,Diamante,CWB,web
-C000560,2025-08-22,Safira,SDU,app
-C000561,2025-02-05,Azul Fidelidade,GYN,app
-C000562,2020-10-10,Safira,SSA,app
-C000563,2025-01-21,Diamante Unique,CNF,app
-C000564,2021-06-19,Topázio,BSB,app
-C000565,2024-03-11,Azul Fidelidade,POA,web
-C000566,2024-01-29,Diamante,GYN,app
-C000567,2024-04-30,Azul Fidelidade,CGH,app
-C000568,2024-08-08,Safira,REC,web
-C000569,2020-11-14,Topázio,CGH,app
-C000570,2020-09-15,Topázio,BSB,app
-C000571,2022-07-16,Azul Fidelidade,SSA,app
-C000572,2023-10-27,Azul Fidelidade,CNF,app
-C000573,2025-04-15,Azul Fidelidade,CWB,web
-C000574,2024-01-01,Diamante Unique,CGH,web
-C000575,2026-03-31,Azul Fidelidade,SDU,app
-C000576,2025-12-20,Azul Fidelidade,REC,app
-C000577,2021-10-13,Safira,VCP,app
-C000578,2021-03-30,Safira,GYN,web
-C000579,2021-07-12,Azul Fidelidade,CGH,app
-C000580,2021-07-20,Safira,GYN,web
-C000581,2021-12-02,Azul Fidelidade,CGH,app
-C000582,2023-05-03,Azul Fidelidade,VCP,web
-C000583,2022-02-14,Safira,VCP,app
-C000584,2021-03-08,Azul Fidelidade,CWB,web
-C000585,2024-11-11,Azul Fidelidade,BSB,app
-C000586,2023-08-19,Azul Fidelidade,SSA,app
-C000587,2021-11-02,Topázio,CWB,app
-C000588,2023-05-27,Topázio,CNF,agency
-C000589,2022-07-28,Topázio,SSA,web
-C000590,2025-10-05,Azul Fidelidade,CGH,web
-C000591,2024-11-03,Safira,CWB,app
-C000592,2020-11-17,Azul Fidelidade,VCP,web
-C000593,2020-10-11,Azul Fidelidade,SSA,app
-C000594,2025-10-03,Azul Fidelidade,REC,web
-C000595,2025-06-23,Azul Fidelidade,CGH,app
-C000596,2022-11-07,Safira,GYN,app
-C000597,2023-08-15,Azul Fidelidade,BSB,app
-C000598,2021-09-06,Azul Fidelidade,CGH,app
-C000599,2024-08-29,Azul Fidelidade,CNF,app
-C000600,2021-08-28,Azul Fidelidade,POA,app
-C000601,2022-12-24,Topázio,SSA,app
-C000602,2020-08-13,Topázio,SSA,app
-C000603,2020-02-02,Diamante,CNF,web
-C000604,2020-01-06,Azul Fidelidade,REC,app
-C000605,2026-09-03,Azul Fidelidade,BSB,app
-C000606,2024-03-09,Topázio,CNF,app
-C000607,2024-12-20,Safira,CNF,app
-C000608,2022-03-30,Topázio,SDU,app
-C000609,2021-11-15,Azul Fidelidade,SSA,web
-C000610,2022-01-29,Safira,BSB,app
-C000611,2026-02-19,Diamante Unique,BSB,app
-C000612,2025-12-30,Safira,POA,web
-C000613,2021-01-07,Topázio,CGH,app
-C000614,2026-04-03,Diamante,GYN,app
-C000615,2022-10-29,Safira,GYN,app
-C000616,2020-03-18,Azul Fidelidade,REC,app
-C000617,2024-01-06,Azul Fidelidade,GYN,agency
-C000618,2021-03-24,Azul Fidelidade,VCP,app
-C000619,2023-05-14,Azul Fidelidade,SSA,app
-C000620,2021-08-02,Azul Fidelidade,SSA,web
-C000621,2021-01-08,Diamante,BSB,app
-C000622,2020-09-03,Azul Fidelidade,SSA,web
-C000623,2024-02-11,Azul Fidelidade,POA,web
-C000624,2023-09-16,Azul Fidelidade,SSA,app
-C000625,2022-04-15,Azul Fidelidade,CNF,app
-C000626,2025-04-18,Azul Fidelidade,CGH,app
-C000627,2022-11-24,Safira,BSB,app
-C000628,2021-04-25,Azul Fidelidade,BSB,app
-C000629,2021-08-08,Diamante,CWB,app
-C000630,2023-08-27,Azul Fidelidade,CWB,app
-C000631,2021-10-18,Azul Fidelidade,BSB,app
-C000632,2020-05-05,Topázio,POA,agency
-C000633,2025-12-19,Azul Fidelidade,CNF,app
-C000634,2022-01-03,Safira,REC,app
-C000635,2023-08-05,Diamante,CNF,app
-C000636,2022-02-23,Safira,CWB,agency
-C000637,2021-03-21,Topázio,CWB,agency
-C000638,2026-03-18,Safira,REC,app
-C000639,2022-05-26,Azul Fidelidade,SSA,app
-C000640,2021-03-02,Diamante,BSB,app
-C000641,2020-07-04,Diamante,CNF,app
-C000642,2021-05-29,Diamante,REC,web
-C000643,2022-07-10,Topázio,SDU,web
-C000644,2025-06-11,Azul Fidelidade,CWB,agency
-C000645,2024-07-14,Safira,SSA,app
-C000646,2023-03-04,Safira,VCP,app
-C000647,2023-06-24,Azul Fidelidade,VCP,web
-C000648,2021-04-18,Azul Fidelidade,CGH,app
-C000649,2022-05-03,Topázio,SDU,web
-C000650,2023-12-23,Azul Fidelidade,POA,web
-C000651,2026-08-16,Safira,BSB,app
-C000652,2021-10-11,Azul Fidelidade,VCP,app
-C000653,2020-10-03,Topázio,GYN,agency
-C000654,2025-07-20,Azul Fidelidade,CGH,app
-C000655,2026-01-04,Topázio,GYN,web
-C000656,2025-01-26,Topázio,POA,web
-C000657,2026-02-22,Topázio,BSB,web
-C000658,2026-08-06,Topázio,BSB,web
-C000659,2023-03-02,Diamante,REC,web
-C000660,2024-07-12,Azul Fidelidade,REC,app
-C000661,2026-08-11,Safira,CNF,app
-C000662,2026-06-27,Azul Fidelidade,GYN,web
-C000663,2022-03-27,Safira,POA,app
-C000664,2024-07-13,Diamante,CWB,web
-C000665,2024-04-12,Topázio,CNF,app
-C000666,2023-09-06,Topázio,CNF,web
-C000667,2026-04-14,Azul Fidelidade,CGH,app
-C000668,2023-09-26,Safira,VCP,app
-C000669,2026-07-08,Topázio,GYN,web
-C000670,2024-10-07,Safira,CWB,web
-C000671,2022-06-06,Topázio,CWB,app
-C000672,2021-01-24,Azul Fidelidade,POA,app
-C000673,2023-08-03,Azul Fidelidade,SDU,app
-C000674,2020-12-07,Azul Fidelidade,POA,app
-C000675,2026-05-28,Azul Fidelidade,POA,agency
-C000676,2025-01-05,Azul Fidelidade,REC,agency
-C000677,2022-08-03,Azul Fidelidade,BSB,app
-C000678,2022-05-25,Azul Fidelidade,POA,app
-C000679,2020-12-09,Azul Fidelidade,VCP,web
-C000680,2022-04-19,Azul Fidelidade,SSA,web
-C000681,2024-10-08,Diamante,GYN,agency
-C000682,2025-05-10,Topázio,SSA,web
-C000683,2024-08-15,Diamante,CGH,app
-C000684,2020-12-16,Azul Fidelidade,SDU,app
-C000685,2022-11-10,Azul Fidelidade,REC,app
-C000686,2021-07-07,Azul Fidelidade,VCP,app
-C000687,2024-02-26,Azul Fidelidade,CNF,web
-C000688,2021-04-24,Azul Fidelidade,SDU,agency
-C000689,2023-09-15,Topázio,CWB,app
-C000690,2021-07-28,Diamante,GYN,web
-C000691,2025-10-01,Azul Fidelidade,GYN,app
-C000692,2024-03-09,Azul Fidelidade,REC,app
-C000693,2023-11-06,Azul Fidelidade,CWB,app
-C000694,2025-12-25,Topázio,VCP,app
-C000695,2025-07-04,Azul Fidelidade,CNF,agency
-C000696,2024-08-22,Topázio,BSB,app
-C000697,2026-08-24,Safira,CGH,web
-C000698,2025-12-24,Topázio,SDU,agency
-C000699,2025-07-01,Diamante,SSA,web
-C000700,2020-05-20,Topázio,GYN,web
-C000701,2023-07-03,Azul Fidelidade,SDU,app
-C000702,2021-07-19,Azul Fidelidade,CNF,agency
-C000703,2024-01-30,Azul Fidelidade,GYN,app
-C000704,2025-06-18,Azul Fidelidade,SSA,app
-C000705,2021-04-07,Diamante,SSA,app
-C000706,2025-04-11,Azul Fidelidade,SDU,app
-C000707,2022-07-08,Topázio,SDU,app
-C000708,2023-04-11,Azul Fidelidade,POA,app
-C000709,2022-12-25,Topázio,POA,app
-C000710,2025-12-20,Azul Fidelidade,CGH,app
-C000711,2025-08-25,Diamante,CNF,app
-C000712,2021-11-17,Azul Fidelidade,CWB,app
-C000713,2021-01-21,Azul Fidelidade,VCP,app
-C000714,2023-05-31,Azul Fidelidade,VCP,web
-C000715,2024-12-05,Topázio,GYN,agency
-C000716,2021-05-13,Azul Fidelidade,CWB,web
-C000717,2025-07-07,Azul Fidelidade,SSA,agency
-C000718,2025-02-28,Topázio,BSB,app
-C000719,2025-03-22,Topázio,BSB,app
-C000720,2022-12-30,Azul Fidelidade,POA,app
-C000721,2025-02-17,Safira,POA,app
-C000722,2021-01-10,Safira,CGH,app
-C000723,2023-03-26,Topázio,BSB,web
-C000724,2021-05-04,Diamante,REC,web
-C000725,2026-08-21,Azul Fidelidade,CGH,web
-C000726,2023-01-15,Safira,POA,app
-C000727,2022-11-12,Azul Fidelidade,CGH,web
-C000728,2021-01-02,Safira,GYN,web
-C000729,2024-01-05,Topázio,CNF,app
-C000730,2020-07-06,Azul Fidelidade,SSA,app
-C000731,2020-09-22,Azul Fidelidade,VCP,web
-C000732,2022-10-24,Azul Fidelidade,GYN,app
-C000733,2023-05-05,Azul Fidelidade,BSB,web
-C000734,2020-04-10,Azul Fidelidade,BSB,web
-C000735,2022-11-12,Azul Fidelidade,BSB,web
-C000736,2021-12-17,Azul Fidelidade,SDU,app
-C000737,2022-01-25,Azul Fidelidade,CNF,app
-C000738,2024-06-14,Azul Fidelidade,BSB,app
-C000739,2021-08-10,Topázio,SSA,app
-C000740,2026-04-03,Azul Fidelidade,REC,app
-C000741,2022-10-03,Azul Fidelidade,CNF,web
-C000742,2021-01-17,Topázio,CGH,agency
-C000743,2024-01-02,Azul Fidelidade,CWB,web
-C000744,2021-09-28,Azul Fidelidade,GYN,app
-C000745,2023-10-04,Azul Fidelidade,SDU,app
-C000746,2020-07-22,Azul Fidelidade,BSB,agency
-C000747,2020-03-14,Topázio,GYN,agency
-C000748,2023-05-07,Azul Fidelidade,CGH,web
-C000749,2021-10-29,Azul Fidelidade,BSB,web
-C000750,2026-03-20,Azul Fidelidade,SSA,app
-C000751,2024-02-01,Azul Fidelidade,VCP,app
-C000752,2021-08-19,Diamante,POA,web
-C000753,2024-11-20,Safira,VCP,web
-C000754,2026-09-18,Azul Fidelidade,SSA,app
-C000755,2022-09-26,Azul Fidelidade,VCP,app
-C000756,2020-11-06,Azul Fidelidade,GYN,app
-C000757,2022-08-23,Safira,SSA,web
-C000758,2023-03-16,Diamante,SDU,web
-C000759,2025-12-21,Azul Fidelidade,CNF,web
-C000760,2025-10-12,Azul Fidelidade,CNF,app
-C000761,2024-09-13,Diamante,REC,web
-C000762,2026-03-02,Azul Fidelidade,REC,web
-C000763,2024-11-06,Safira,SSA,app
-C000764,2022-07-26,Azul Fidelidade,SDU,web
-C000765,2022-02-23,Azul Fidelidade,GYN,web
-C000766,2025-06-27,Azul Fidelidade,GYN,web
-C000767,2025-10-07,Topázio,CGH,web
-C000768,2025-12-10,Safira,REC,app
-C000769,2022-04-12,Topázio,CGH,web
-C000770,2020-02-11,Safira,GYN,app
-C000771,2024-09-28,Azul Fidelidade,CNF,web
-C000772,2025-11-07,Topázio,CGH,web
-C000773,2023-05-30,Diamante Unique,REC,web
-C000774,2021-03-02,Azul Fidelidade,SSA,agency
-C000775,2024-10-09,Azul Fidelidade,SDU,web
-C000776,2021-11-12,Topázio,CNF,app
-C000777,2024-11-12,Diamante,SSA,web
-C000778,2023-07-14,Azul Fidelidade,REC,app
-C000779,2022-10-21,Diamante,POA,web
-C000780,2023-05-17,Topázio,CWB,app
-C000781,2021-10-19,Diamante,SDU,web
-C000782,2024-12-06,Diamante,CNF,web
-C000783,2022-06-23,Azul Fidelidade,REC,app
-C000784,2022-12-10,Topázio,CWB,app
-C000785,2022-11-16,Safira,CGH,app
-C000786,2024-05-19,Topázio,REC,app
-C000787,2020-11-10,Safira,CWB,web
-C000788,2022-10-07,Safira,CGH,agency
-C000789,2023-04-24,Diamante,CNF,web
-C000790,2020-02-26,Azul Fidelidade,BSB,app
-C000791,2021-11-08,Azul Fidelidade,CGH,web
-C000792,2024-01-13,Azul Fidelidade,REC,app
-C000793,2022-11-11,Azul Fidelidade,REC,web
-C000794,2021-01-12,Topázio,CNF,app
-C000795,2021-11-03,Azul Fidelidade,POA,app
-C000796,2020-02-28,Azul Fidelidade,CNF,app
-C000797,2021-08-03,Topázio,POA,app
-C000798,2022-04-29,Azul Fidelidade,SDU,app
-C000799,2020-12-24,Azul Fidelidade,SDU,app
-C000800,2024-05-01,Diamante,CWB,app
-C000801,2023-05-30,Safira,GYN,app
-C000802,2026-09-23,Azul Fidelidade,POA,web
-C000803,2025-06-16,Azul Fidelidade,GYN,web
-C000804,2023-02-27,Azul Fidelidade,CGH,web
-C000805,2023-10-19,Diamante,CWB,app
-C000806,2022-12-09,Diamante,POA,app
-C000807,2022-08-01,Safira,BSB,web
-C000808,2025-11-07,Safira,SSA,agency
-C000809,2022-06-24,Topázio,CNF,web
-C000810,2021-12-19,Safira,BSB,app
-C000811,2022-09-17,Diamante Unique,GYN,app
-C000812,2024-03-03,Safira,CWB,web
-C000813,2024-03-04,Topázio,CGH,app
-C000814,2023-03-28,Azul Fidelidade,CNF,app
-C000815,2022-05-04,Azul Fidelidade,VCP,web
-C000816,2022-02-15,Safira,CNF,app
-C000817,2022-01-19,Azul Fidelidade,CGH,web
-C000818,2024-08-30,Diamante Unique,CNF,web
-C000819,2021-01-25,Azul Fidelidade,SDU,web
-C000820,2024-06-08,Topázio,CGH,web
-C000821,2021-05-29,Azul Fidelidade,SDU,app
-C000822,2022-03-30,Azul Fidelidade,CNF,app
-C000823,2020-06-21,Azul Fidelidade,SDU,app
-C000824,2020-10-14,Azul Fidelidade,CWB,web
-C000825,2021-01-19,Safira,CNF,app
-C000826,2024-12-24,Topázio,CGH,web
-C000827,2026-09-24,Topázio,CWB,web
-C000828,2020-10-25,Diamante,VCP,web
-C000829,2021-10-07,Topázio,POA,app
-C000830,2022-12-24,Topázio,REC,web
-C000831,2021-06-12,Azul Fidelidade,BSB,app
-C000832,2020-11-11,Azul Fidelidade,SDU,web
-C000833,2026-02-20,Topázio,VCP,app
-C000834,2024-12-30,Diamante,SDU,app
-C000835,2022-05-23,Azul Fidelidade,CWB,agency
-C000836,2023-01-19,Topázio,SDU,agency
-C000837,2021-08-25,Azul Fidelidade,CNF,app
-C000838,2024-01-17,Safira,CNF,web
-C000839,2021-06-09,Safira,REC,app
-C000840,2025-08-12,Diamante,CNF,app
-C000841,2023-09-28,Azul Fidelidade,VCP,app
-C000842,2022-05-17,Azul Fidelidade,VCP,web
-C000843,2026-03-09,Azul Fidelidade,CNF,web
-C000844,2022-03-03,Azul Fidelidade,BSB,app
-C000845,2024-05-01,Azul Fidelidade,SSA,web
-C000846,2025-04-25,Azul Fidelidade,CGH,app
-C000847,2024-05-05,Azul Fidelidade,GYN,app
-C000848,2020-12-27,Azul Fidelidade,CWB,app
-C000849,2022-01-23,Safira,REC,web
-C000850,2022-01-10,Topázio,SSA,app
-C000851,2023-09-03,Safira,CNF,web
-C000852,2026-08-29,Safira,CGH,web
-C000853,2021-12-02,Safira,REC,app
-C000854,2024-11-26,Topázio,CNF,web
-C000855,2021-09-18,Safira,CGH,app
-C000856,2025-05-29,Safira,CWB,agency
-C000857,2022-11-19,Topázio,SDU,web
-C000858,2026-04-01,Safira,REC,app
-C000859,2021-04-20,Topázio,VCP,app
-C000860,2020-02-09,Topázio,VCP,app
-C000861,2021-12-06,Azul Fidelidade,SDU,app
-C000862,2025-05-29,Azul Fidelidade,VCP,web
-C000863,2020-04-08,Azul Fidelidade,GYN,web
-C000864,2025-09-18,Topázio,SDU,app
-C000865,2024-04-25,Azul Fidelidade,SDU,web
-C000866,2023-01-13,Topázio,GYN,web
-C000867,2024-07-19,Azul Fidelidade,GYN,app
-C000868,2025-05-01,Topázio,POA,app
-C000869,2025-05-13,Safira,REC,app
-C000870,2025-12-23,Azul Fidelidade,CNF,app
-C000871,2021-04-30,Safira,GYN,app
-C000872,2025-01-08,Azul Fidelidade,CNF,web
-C000873,2022-10-22,Diamante Unique,BSB,agency
-C000874,2021-11-08,Safira,SSA,app
-C000875,2020-02-19,Topázio,GYN,web
-C000876,2023-09-13,Azul Fidelidade,GYN,web
-C000877,2020-05-26,Safira,CNF,web
-C000878,2020-09-23,Azul Fidelidade,GYN,app
-C000879,2021-11-19,Azul Fidelidade,SSA,app
-C000880,2025-03-03,Safira,CNF,web
-C000881,2023-08-14,Safira,POA,app
-C000882,2024-03-22,Azul Fidelidade,BSB,web
-C000883,2025-09-20,Topázio,SDU,app
-C000884,2026-04-12,Azul Fidelidade,CNF,app
-C000885,2021-01-06,Azul Fidelidade,CGH,app
-C000886,2021-04-21,Azul Fidelidade,CWB,app
-C000887,2025-12-14,Safira,SSA,web
-C000888,2026-01-07,Safira,GYN,web
-C000889,2024-03-14,Azul Fidelidade,CNF,web
-C000890,2023-05-15,Azul Fidelidade,CGH,app
-C000891,2026-07-07,Azul Fidelidade,GYN,app
-C000892,2023-11-04,Azul Fidelidade,CWB,app
-C000893,2022-01-25,Azul Fidelidade,BSB,app
-C000894,2026-02-18,Azul Fidelidade,SSA,app
-C000895,2024-01-13,Azul Fidelidade,GYN,agency
-C000896,2022-10-11,Safira,POA,web
-C000897,2023-05-01,Azul Fidelidade,POA,app
-C000898,2023-05-16,Azul Fidelidade,BSB,app
-C000899,2024-03-10,Azul Fidelidade,VCP,agency
-C000900,2022-02-22,Diamante,SSA,app
-C000901,2025-09-16,Topázio,CGH,web
-C000902,2023-04-23,Azul Fidelidade,CWB,agency
-C000903,2022-03-20,Azul Fidelidade,SSA,app
-C000904,2020-08-21,Diamante,CGH,app
-C000905,2023-01-04,Azul Fidelidade,SDU,web
-C000906,2022-03-23,Topázio,BSB,web
-C000907,2025-09-23,Topázio,BSB,web
-C000908,2025-07-08,Diamante,SSA,app
-C000909,2026-05-19,Topázio,POA,app
-C000910,2025-06-21,Azul Fidelidade,SSA,app
-C000911,2026-08-11,Azul Fidelidade,SDU,web
-C000912,2022-04-22,Safira,SSA,app
-C000913,2021-07-07,Topázio,CGH,app
-C000914,2026-02-04,Azul Fidelidade,SSA,web
-C000915,2021-11-18,Azul Fidelidade,CGH,web
-C000916,2025-03-10,Topázio,BSB,web
-C000917,2023-06-07,Azul Fidelidade,CGH,app
-C000918,2021-07-22,Diamante Unique,BSB,app
-C000919,2023-09-16,Azul Fidelidade,VCP,app
-C000920,2023-03-17,Azul Fidelidade,CGH,web
-C000921,2020-06-26,Azul Fidelidade,BSB,web
-C000922,2026-06-10,Topázio,CNF,app
-C000923,2022-08-09,Azul Fidelidade,BSB,agency
-C000924,2025-08-18,Diamante,CGH,app
-C000925,2023-01-16,Topázio,BSB,app
-C000926,2025-11-10,Azul Fidelidade,SDU,app
-C000927,2022-03-30,Diamante,CWB,web
-C000928,2022-06-29,Azul Fidelidade,SDU,web
-C000929,2025-06-18,Azul Fidelidade,REC,web
-C000930,2021-03-14,Safira,REC,app
-C000931,2022-12-17,Azul Fidelidade,VCP,app
-C000932,2022-08-20,Safira,CWB,web
-C000933,2026-01-16,Safira,SSA,app
-C000934,2026-07-24,Diamante,VCP,app
-C000935,2022-10-20,Azul Fidelidade,BSB,app
-C000936,2024-12-02,Azul Fidelidade,GYN,app
-C000937,2024-11-17,Safira,CNF,app
-C000938,2021-04-12,Azul Fidelidade,POA,app
-C000939,2025-08-21,Topázio,REC,app
-C000940,2020-09-25,Topázio,SDU,web
-C000941,2020-02-13,Azul Fidelidade,GYN,web
-C000942,2020-09-23,Azul Fidelidade,REC,web
-C000943,2026-01-07,Safira,GYN,app
-C000944,2022-10-08,Azul Fidelidade,CGH,web
-C000945,2025-02-11,Azul Fidelidade,SDU,web
-C000946,2022-04-29,Azul Fidelidade,CWB,agency
-C000947,2020-07-11,Azul Fidelidade,VCP,app
-C000948,2025-05-04,Diamante,POA,web
-C000949,2025-11-18,Topázio,CGH,app
-C000950,2020-04-25,Topázio,CGH,app
-C000951,2025-06-11,Diamante Unique,REC,app
-C000952,2026-03-17,Azul Fidelidade,BSB,web
-C000953,2026-02-13,Topázio,BSB,app
-C000954,2026-09-15,Safira,SDU,app
-C000955,2022-11-13,Safira,GYN,agency
-C000956,2025-09-05,Safira,CGH,agency
-C000957,2020-10-22,Safira,CWB,app
-C000958,2024-09-30,Azul Fidelidade,SSA,agency
-C000959,2026-07-02,Safira,CWB,app
-C000960,2026-06-26,Azul Fidelidade,VCP,web
-C000961,2022-10-29,Azul Fidelidade,POA,web
-C000962,2021-09-23,Diamante,GYN,app
-C000963,2020-02-04,Topázio,GYN,app
-C000964,2026-06-01,Azul Fidelidade,CGH,app
-C000965,2026-01-12,Safira,BSB,app
-C000966,2026-05-04,Safira,CGH,web
-C000967,2020-01-20,Diamante Unique,CGH,agency
-C000968,2024-04-09,Safira,SDU,app
-C000969,2022-12-05,Topázio,CWB,app
-C000970,2023-09-16,Azul Fidelidade,CGH,app
-C000971,2021-03-26,Diamante,REC,web
-C000972,2020-04-12,Azul Fidelidade,GYN,web
-C000973,2022-06-05,Topázio,CWB,app
-C000974,2025-03-20,Topázio,BSB,app
-C000975,2023-03-30,Topázio,BSB,web
-C000976,2025-02-08,Azul Fidelidade,SSA,web
-C000977,2021-12-30,Safira,BSB,app
-C000978,2026-07-15,Azul Fidelidade,VCP,web
-C000979,2024-08-20,Safira,POA,app
-C000980,2023-04-24,Diamante Unique,VCP,app
-C000981,2020-09-21,Azul Fidelidade,VCP,app
-C000982,2024-09-20,Safira,SDU,web
-C000983,2021-04-21,Azul Fidelidade,REC,web
-C000984,2024-08-11,Topázio,REC,web
-C000985,2026-09-11,Diamante Unique,CNF,app
-C000986,2026-08-13,Topázio,CNF,app
-C000987,2021-10-21,Azul Fidelidade,CGH,app
-C000988,2026-02-28,Topázio,SSA,app
-C000989,2022-02-02,Azul Fidelidade,CNF,web
-C000990,2020-05-14,Azul Fidelidade,GYN,app
-C000991,2024-10-06,Azul Fidelidade,BSB,app
-C000992,2021-06-15,Azul Fidelidade,SDU,web
-C000993,2020-01-20,Azul Fidelidade,CWB,web
-C000994,2023-10-03,Azul Fidelidade,VCP,web
-C000995,2024-02-28,Safira,GYN,app
-C000996,2024-10-13,Azul Fidelidade,GYN,app
-C000997,2023-01-28,Safira,BSB,web
-C000998,2020-06-12,Azul Fidelidade,CNF,web
-C000999,2020-02-29,Safira,REC,web
-C001000,2023-11-16,Azul Fidelidade,GYN,app
-C001001,2023-08-20,Azul Fidelidade,POA,app
-C001002,2022-12-23,Azul Fidelidade,REC,app
-C001003,2021-02-03,Topázio,VCP,web
-C001004,2024-03-06,Topázio,SSA,app
-C001005,2022-01-04,Topázio,REC,web
-C001006,2026-02-10,Safira,CNF,web
-C001007,2022-02-10,Azul Fidelidade,POA,web
-C001008,2022-07-23,Diamante Unique,SSA,web
-C001009,2025-03-20,Diamante,BSB,app
-C001010,2023-07-27,Diamante,REC,web
-C001011,2020-04-16,Azul Fidelidade,BSB,agency
-C001012,2020-08-09,Azul Fidelidade,CWB,agency
-C001013,2025-01-27,Topázio,SSA,app
-C001014,2022-10-13,Topázio,CGH,web
-C001015,2022-09-29,Azul Fidelidade,CNF,app
-C001016,2021-04-01,Azul Fidelidade,SDU,app
-C001017,2025-11-07,Safira,CWB,app
-C001018,2025-02-11,Diamante,REC,web
-C001019,2021-12-13,Azul Fidelidade,SDU,web
-C001020,2024-03-18,Safira,SSA,app
-C001021,2022-12-27,Azul Fidelidade,CWB,web
-C001022,2020-08-05,Topázio,CNF,web
-C001023,2021-01-16,Diamante Unique,REC,web
-C001024,2023-03-13,Azul Fidelidade,CGH,app
-C001025,2024-01-30,Topázio,GYN,app
-C001026,2021-12-07,Azul Fidelidade,REC,app
-C001027,2021-04-09,Azul Fidelidade,SSA,app
-C001028,2026-03-13,Azul Fidelidade,POA,app
-C001029,2020-01-08,Safira,SDU,web
-C001030,2024-02-11,Diamante,BSB,agency
-C001031,2023-06-05,Topázio,POA,app
-C001032,2026-03-22,Topázio,REC,app
-C001033,2025-11-13,Safira,CWB,app
-C001034,2023-05-17,Azul Fidelidade,SDU,app
-C001035,2024-04-23,Safira,CWB,app
-C001036,2023-02-08,Topázio,CGH,web
-C001037,2020-08-21,Azul Fidelidade,POA,app
-C001038,2022-12-25,Safira,GYN,app
-C001039,2024-08-09,Azul Fidelidade,SDU,web
-C001040,2024-09-04,Azul Fidelidade,REC,app
-C001041,2026-03-02,Safira,CGH,web
-C001042,2020-06-24,Topázio,VCP,app
-C001043,2020-02-06,Topázio,VCP,app
-C001044,2021-07-24,Azul Fidelidade,CNF,app
-C001045,2020-07-05,Azul Fidelidade,CGH,app
-C001046,2023-08-01,Azul Fidelidade,CNF,app
-C001047,2020-08-12,Azul Fidelidade,SSA,app
-C001048,2025-09-19,Azul Fidelidade,BSB,web
-C001049,2020-02-22,Azul Fidelidade,CGH,app
-C001050,2025-03-11,Topázio,REC,agency
-C001051,2026-03-10,Azul Fidelidade,GYN,agency
-C001052,2023-01-26,Topázio,POA,web
-C001053,2026-03-04,Azul Fidelidade,GYN,app
-C001054,2026-05-11,Azul Fidelidade,VCP,web
-C001055,2026-05-12,Azul Fidelidade,CNF,web
-C001056,2023-04-02,Diamante,GYN,app
-C001057,2020-12-13,Azul Fidelidade,CWB,app
-C001058,2022-06-20,Azul Fidelidade,CGH,app
-C001059,2026-02-13,Diamante,BSB,web
-C001060,2025-02-06,Topázio,POA,app
-C001061,2020-01-07,Topázio,BSB,app
-C001062,2024-01-31,Azul Fidelidade,SDU,app
-C001063,2021-12-07,Azul Fidelidade,CWB,web
-C001064,2020-04-02,Azul Fidelidade,POA,web
-C001065,2020-02-02,Topázio,REC,app
-C001066,2023-10-23,Azul Fidelidade,REC,agency
-C001067,2026-06-24,Azul Fidelidade,SSA,app
-C001068,2022-12-15,Safira,POA,agency
-C001069,2020-02-08,Diamante,BSB,app
-C001070,2020-07-11,Safira,SSA,web
-C001071,2022-07-14,Topázio,GYN,app
-C001072,2023-06-19,Azul Fidelidade,SDU,app
-C001073,2022-08-30,Azul Fidelidade,REC,app
-C001074,2022-10-28,Safira,REC,app
-C001075,2023-01-26,Azul Fidelidade,SSA,agency
-C001076,2021-01-14,Azul Fidelidade,VCP,web
-C001077,2025-06-15,Azul Fidelidade,CNF,web
-C001078,2020-03-30,Diamante Unique,CNF,app
-C001079,2021-04-21,Safira,BSB,app
-C001080,2026-05-22,Azul Fidelidade,CNF,app
-C001081,2021-05-06,Safira,POA,agency
-C001082,2020-04-23,Azul Fidelidade,VCP,app
-C001083,2022-03-22,Topázio,SDU,agency
-C001084,2026-03-30,Safira,CWB,app
-C001085,2025-10-25,Diamante,CGH,app
-C001086,2024-09-01,Azul Fidelidade,REC,app
-C001087,2024-12-23,Azul Fidelidade,CWB,web
-C001088,2022-12-18,Safira,VCP,app
-C001089,2026-08-28,Azul Fidelidade,REC,web
-C001090,2024-06-25,Azul Fidelidade,CWB,app
-C001091,2023-02-09,Azul Fidelidade,POA,web
-C001092,2026-04-04,Topázio,BSB,web
-C001093,2024-02-03,Azul Fidelidade,CWB,app
-C001094,2021-09-22,Azul Fidelidade,GYN,app
-C001095,2024-04-23,Azul Fidelidade,GYN,app
-C001096,2023-07-17,Safira,CGH,web
-C001097,2022-09-02,Topázio,REC,app
-C001098,2025-09-20,Safira,SDU,app
-C001099,2023-10-02,Azul Fidelidade,GYN,web
-C001100,2025-01-05,Azul Fidelidade,CWB,app
-C001101,2022-05-29,Safira,CNF,web
-C001102,2022-12-05,Azul Fidelidade,VCP,agency
-C001103,2025-12-01,Diamante,CGH,app
-C001104,2024-07-10,Azul Fidelidade,CGH,app
-C001105,2023-12-15,Diamante,REC,web
-C001106,2025-08-02,Diamante Unique,REC,app
-C001107,2024-03-31,Topázio,CNF,agency
-C001108,2023-03-12,Topázio,SSA,app
-C001109,2024-11-07,Azul Fidelidade,VCP,app
-C001110,2022-07-21,Diamante,POA,web
-C001111,2023-09-06,Azul Fidelidade,REC,agency
-C001112,2021-01-16,Azul Fidelidade,CWB,app
-C001113,2023-08-17,Safira,CWB,app
-C001114,2026-07-16,Topázio,BSB,app
-C001115,2022-03-13,Azul Fidelidade,SSA,app
-C001116,2025-09-26,Azul Fidelidade,CNF,app
-C001117,2020-01-29,Diamante,SDU,web
-C001118,2022-06-01,Safira,CWB,web
-C001119,2022-01-21,Azul Fidelidade,BSB,app
-C001120,2022-10-15,Azul Fidelidade,GYN,app
-C001121,2020-09-06,Azul Fidelidade,VCP,agency
-C001122,2022-05-21,Diamante,GYN,web
-C001123,2026-04-13,Diamante,VCP,web
-C001124,2020-04-10,Azul Fidelidade,POA,web
-C001125,2021-09-09,Safira,POA,web
-C001126,2023-02-03,Topázio,REC,app
-C001127,2021-08-22,Azul Fidelidade,BSB,app
-C001128,2024-10-09,Topázio,CWB,app
-C001129,2021-12-04,Azul Fidelidade,POA,web
-C001130,2024-03-11,Azul Fidelidade,CGH,app
-C001131,2023-03-30,Azul Fidelidade,VCP,web
-C001132,2020-01-29,Topázio,SDU,app
-C001133,2026-04-06,Azul Fidelidade,VCP,web
-C001134,2023-11-04,Topázio,SDU,web
-C001135,2021-03-01,Topázio,POA,agency
-C001136,2023-02-22,Azul Fidelidade,CGH,app
-C001137,2024-10-17,Azul Fidelidade,SSA,web
-C001138,2023-01-20,Diamante,GYN,web
-C001139,2020-02-08,Topázio,REC,app
-C001140,2020-12-05,Azul Fidelidade,CNF,app
-C001141,2020-05-22,Diamante,REC,web
-C001142,2025-06-25,Safira,POA,app
-C001143,2020-03-10,Topázio,CNF,app
-C001144,2026-04-02,Azul Fidelidade,POA,web
-C001145,2023-07-03,Topázio,CGH,app
-C001146,2020-09-22,Topázio,SSA,web
-C001147,2020-07-23,Azul Fidelidade,REC,agency
-C001148,2025-04-26,Azul Fidelidade,GYN,app
-C001149,2025-06-06,Azul Fidelidade,REC,app
-C001150,2024-04-16,Topázio,GYN,web
-C001151,2021-01-12,Azul Fidelidade,CNF,app
-C001152,2022-06-05,Safira,GYN,web
-C001153,2024-11-30,Safira,GYN,web
-C001154,2025-08-24,Diamante Unique,REC,app
-C001155,2023-10-08,Diamante,VCP,agency
-C001156,2021-09-18,Azul Fidelidade,REC,app
-C001157,2021-09-11,Safira,REC,app
-C001158,2026-08-11,Azul Fidelidade,CNF,app
-C001159,2026-01-18,Azul Fidelidade,SDU,web
-C001160,2024-05-01,Topázio,CGH,app
-C001161,2025-09-07,Diamante,POA,app
-C001162,2021-10-04,Azul Fidelidade,GYN,web
-C001163,2023-12-28,Topázio,REC,agency
-C001164,2026-05-24,Azul Fidelidade,SDU,web
-C001165,2020-04-20,Azul Fidelidade,POA,app
-C001166,2020-06-18,Diamante,SSA,app
-C001167,2020-02-06,Topázio,VCP,web
-C001168,2023-06-29,Azul Fidelidade,CGH,web
-C001169,2026-01-06,Topázio,CNF,app
-C001170,2024-04-03,Topázio,CNF,web
-C001171,2024-10-01,Azul Fidelidade,POA,agency
-C001172,2020-12-11,Azul Fidelidade,BSB,app
-C001173,2022-09-20,Azul Fidelidade,REC,app
-C001174,2022-07-08,Safira,SSA,app
-C001175,2025-09-14,Topázio,CWB,web
-C001176,2026-08-13,Azul Fidelidade,GYN,app
-C001177,2025-07-02,Azul Fidelidade,GYN,app
-C001178,2020-11-06,Topázio,CGH,web
-C001179,2023-06-15,Azul Fidelidade,GYN,web
-C001180,2026-01-23,Diamante,GYN,web
-C001181,2020-10-26,Topázio,SDU,web
-C001182,2025-01-13,Safira,POA,web
-C001183,2022-06-17,Azul Fidelidade,CNF,app
-C001184,2024-12-02,Azul Fidelidade,POA,app
-C001185,2022-01-26,Topázio,GYN,app
-C001186,2023-06-13,Diamante Unique,GYN,app
-C001187,2022-03-20,Safira,SSA,web
-C001188,2023-08-02,Azul Fidelidade,VCP,app
-C001189,2024-08-19,Azul Fidelidade,CWB,web
-C001190,2024-09-09,Safira,REC,app
-C001191,2024-03-20,Diamante Unique,VCP,app
-C001192,2020-04-20,Safira,CGH,app
-C001193,2023-04-02,Azul Fidelidade,CWB,app
-C001194,2024-11-08,Topázio,VCP,app
-C001195,2026-03-17,Diamante,VCP,web
-C001196,2026-06-18,Safira,VCP,app
-C001197,2026-05-29,Diamante,CWB,app
-C001198,2024-04-10,Azul Fidelidade,REC,app
-C001199,2020-11-16,Safira,POA,web
-C001200,2025-09-15,Diamante Unique,BSB,app
+customer_id,signup_date,loyalty_tier,home_airport,preferred_channel,points_balance,is_corporate,primary_cabin
+C000001,2026-04-22,Safira,VCP,app,12111,False,premium
+C000002,2024-03-02,Azul Fidelidade,SSA,app,3178,False,business
+C000003,2021-12-31,Azul Fidelidade,GYN,web,8829,False,economy
+C000004,2021-04-30,Diamante,VCP,app,18323,False,premium
+C000005,2023-11-18,Topázio,SSA,app,10097,False,economy
+C000006,2022-03-03,Azul Fidelidade,CWB,app,2901,False,economy
+C000007,2021-08-09,Topázio,SSA,web,11452,False,economy
+C000008,2020-03-25,Safira,REC,agency,10690,True,business
+C000009,2022-05-31,Topázio,SDU,web,13843,False,economy
+C000010,2024-03-10,Azul Fidelidade,SSA,web,7559,True,economy
+C000011,2022-03-05,Topázio,POA,web,8953,False,economy
+C000012,2022-12-06,Diamante Unique,REC,app,10241,False,premium
+C000013,2021-06-19,Azul Fidelidade,REC,web,2590,False,economy
+C000014,2024-03-06,Safira,REC,app,2528,False,premium
+C000015,2023-07-21,Azul Fidelidade,CWB,app,8077,False,economy
+C000016,2022-12-26,Safira,POA,web,5779,True,economy
+C000017,2021-06-22,Topázio,VCP,app,10643,False,economy
+C000018,2023-04-29,Azul Fidelidade,POA,agency,4323,False,economy
+C000019,2025-09-28,Diamante,SSA,web,22475,True,economy
+C000020,2023-11-14,Safira,CGH,app,23406,False,economy
+C000021,2023-08-11,Diamante,CNF,app,10675,False,premium
+C000022,2025-03-17,Safira,VCP,web,8784,False,business
+C000023,2024-05-30,Safira,CWB,app,6990,False,economy
+C000024,2025-03-03,Azul Fidelidade,BSB,app,7090,False,premium
+C000025,2023-11-24,Diamante,REC,app,2774,False,business
+C000026,2026-06-18,Topázio,REC,web,4293,False,economy
+C000027,2022-07-30,Topázio,SDU,app,2567,False,economy
+C000028,2021-03-02,Azul Fidelidade,SDU,app,2745,True,economy
+C000029,2021-06-10,Safira,SSA,web,8713,False,economy
+C000030,2023-09-12,Safira,SDU,app,9969,False,premium
+C000031,2023-11-28,Safira,SDU,app,7437,False,economy
+C000032,2022-01-10,Topázio,VCP,web,11469,False,economy
+C000033,2023-01-16,Diamante,VCP,app,5012,False,economy
+C000034,2023-08-13,Diamante Unique,VCP,agency,7282,False,business
+C000035,2026-02-22,Safira,POA,web,24487,False,economy
+C000036,2020-12-25,Topázio,POA,app,3468,True,premium
+C000037,2021-12-17,Topázio,CNF,web,16751,False,economy
+C000038,2020-07-18,Azul Fidelidade,BSB,app,5681,False,economy
+C000039,2021-01-01,Azul Fidelidade,CGH,app,21456,False,economy
+C000040,2025-07-07,Safira,CWB,agency,8272,False,economy
+C000041,2020-08-16,Azul Fidelidade,SSA,web,17902,False,economy
+C000042,2023-09-30,Safira,BSB,app,4749,False,premium
+C000043,2023-07-10,Safira,CNF,app,44619,False,economy
+C000044,2020-08-07,Azul Fidelidade,BSB,app,1685,False,economy
+C000045,2022-09-16,Azul Fidelidade,BSB,app,4004,True,economy
+C000046,2020-02-07,Azul Fidelidade,CGH,app,13547,False,economy
+C000047,2026-09-29,Azul Fidelidade,SSA,app,95353,False,economy
+C000048,2025-09-20,Azul Fidelidade,POA,app,4928,False,economy
+C000049,2026-02-18,Azul Fidelidade,VCP,web,15111,False,economy
+C000050,2021-05-29,Azul Fidelidade,BSB,web,3385,False,economy
+C000051,2025-07-23,Safira,SDU,app,16321,False,economy
+C000052,2023-08-16,Diamante,CGH,app,25538,False,economy
+C000053,2025-02-20,Topázio,CNF,agency,4744,False,economy
+C000054,2022-04-15,Safira,CNF,app,8625,False,economy
+C000055,2020-01-05,Azul Fidelidade,VCP,app,4941,False,economy
+C000056,2020-11-23,Azul Fidelidade,CGH,app,6028,False,economy
+C000057,2020-07-18,Azul Fidelidade,CGH,agency,33621,False,economy
+C000058,2024-11-27,Azul Fidelidade,SDU,app,3723,False,economy
+C000059,2020-05-02,Azul Fidelidade,REC,app,11263,False,economy
+C000060,2021-02-22,Topázio,SDU,app,1213,False,economy
+C000061,2020-12-02,Topázio,CWB,app,9421,False,economy
+C000062,2023-08-10,Azul Fidelidade,GYN,app,5329,False,economy
+C000063,2026-08-19,Topázio,BSB,web,1936,True,economy
+C000064,2021-08-25,Azul Fidelidade,CWB,agency,2073,False,economy
+C000065,2026-06-19,Azul Fidelidade,POA,web,6252,False,economy
+C000066,2022-07-08,Azul Fidelidade,VCP,agency,11714,False,economy
+C000067,2026-03-01,Diamante,CGH,web,10675,True,premium
+C000068,2026-07-16,Azul Fidelidade,SDU,app,17068,False,economy
+C000069,2026-07-15,Azul Fidelidade,POA,app,16313,False,economy
+C000070,2024-03-28,Topázio,SDU,web,6794,False,economy
+C000071,2021-10-10,Topázio,SSA,app,11921,False,economy
+C000072,2026-07-12,Azul Fidelidade,SSA,app,2485,False,economy
+C000073,2024-08-01,Diamante,GYN,app,19471,False,economy
+C000074,2025-01-25,Topázio,CGH,app,17075,False,economy
+C000075,2021-05-15,Topázio,REC,app,26943,False,economy
+C000076,2026-09-12,Azul Fidelidade,REC,agency,4486,False,economy
+C000077,2026-04-10,Azul Fidelidade,REC,app,7029,False,economy
+C000078,2024-02-29,Topázio,REC,web,20925,False,economy
+C000079,2024-04-13,Azul Fidelidade,POA,web,3923,False,economy
+C000080,2026-01-11,Azul Fidelidade,CWB,app,7506,False,economy
+C000081,2021-10-22,Topázio,REC,web,4137,False,premium
+C000082,2024-11-20,Azul Fidelidade,CNF,web,2685,False,economy
+C000083,2025-07-24,Diamante,SDU,agency,6192,False,economy
+C000084,2025-04-27,Diamante,BSB,app,8260,False,economy
+C000085,2024-06-12,Azul Fidelidade,CGH,agency,3459,False,economy
+C000086,2020-01-27,Azul Fidelidade,CWB,web,7584,False,economy
+C000087,2024-11-07,Safira,BSB,agency,3154,False,economy
+C000088,2023-02-01,Azul Fidelidade,SDU,web,7576,False,economy
+C000089,2024-11-25,Topázio,SDU,web,15868,False,economy
+C000090,2023-10-02,Azul Fidelidade,REC,app,4997,False,economy
+C000091,2021-08-19,Topázio,BSB,agency,17043,False,economy
+C000092,2022-10-17,Diamante,CNF,app,23529,False,premium
+C000093,2024-11-21,Safira,SDU,web,13925,False,economy
+C000094,2021-11-11,Diamante,POA,app,6558,False,economy
+C000095,2023-05-04,Azul Fidelidade,CWB,app,4813,False,economy
+C000096,2026-03-10,Azul Fidelidade,CWB,app,2837,False,economy
+C000097,2024-11-06,Azul Fidelidade,BSB,agency,5084,False,economy
+C000098,2023-02-19,Azul Fidelidade,CWB,web,7820,False,economy
+C000099,2026-04-16,Safira,CNF,app,4699,False,economy
+C000100,2024-07-23,Topázio,SDU,app,5154,False,economy
+C000101,2021-11-14,Topázio,CNF,app,9072,False,economy
+C000102,2024-12-15,Azul Fidelidade,REC,web,2155,False,economy
+C000103,2021-03-06,Azul Fidelidade,CNF,web,18786,False,economy
+C000104,2023-01-12,Topázio,SSA,app,13569,False,economy
+C000105,2021-11-28,Safira,CNF,app,6776,False,economy
+C000106,2021-07-03,Safira,POA,web,5971,False,economy
+C000107,2021-02-15,Azul Fidelidade,SSA,app,10244,False,economy
+C000108,2020-08-02,Azul Fidelidade,BSB,web,8285,False,economy
+C000109,2023-06-04,Topázio,CNF,app,8277,False,economy
+C000110,2024-03-25,Azul Fidelidade,CNF,app,2017,False,economy
+C000111,2025-12-27,Azul Fidelidade,POA,agency,3387,False,economy
+C000112,2021-05-04,Azul Fidelidade,CGH,web,2318,False,economy
+C000113,2024-09-21,Azul Fidelidade,GYN,agency,9325,False,economy
+C000114,2024-09-02,Azul Fidelidade,CGH,web,3183,False,economy
+C000115,2024-04-12,Azul Fidelidade,BSB,app,40197,False,economy
+C000116,2024-04-07,Azul Fidelidade,VCP,web,2543,False,economy
+C000117,2021-12-26,Topázio,VCP,web,21687,False,economy
+C000118,2021-05-06,Topázio,GYN,app,11557,False,economy
+C000119,2022-10-28,Azul Fidelidade,CGH,app,9353,False,economy
+C000120,2024-03-31,Topázio,CNF,app,9739,False,economy
+C000121,2020-08-27,Azul Fidelidade,BSB,app,2889,False,economy
+C000122,2022-01-28,Azul Fidelidade,VCP,agency,9823,False,economy
+C000123,2024-05-15,Azul Fidelidade,VCP,app,6601,False,economy
+C000124,2026-03-20,Diamante,SDU,app,9664,False,business
+C000125,2026-06-12,Azul Fidelidade,CGH,app,14526,False,economy
+C000126,2024-12-12,Safira,BSB,web,3376,False,premium
+C000127,2020-03-03,Diamante,SSA,app,2822,False,economy
+C000128,2026-07-07,Azul Fidelidade,CGH,app,6495,False,economy
+C000129,2024-02-09,Topázio,BSB,web,9592,False,economy
+C000130,2021-05-04,Azul Fidelidade,REC,app,3349,True,economy
+C000131,2025-09-17,Azul Fidelidade,CGH,app,798,False,economy
+C000132,2022-06-06,Azul Fidelidade,SSA,app,4406,False,economy
+C000133,2021-01-18,Topázio,POA,web,1346,False,economy
+C000134,2024-06-11,Azul Fidelidade,REC,web,7560,False,economy
+C000135,2021-07-31,Diamante,CGH,app,4917,True,premium
+C000136,2020-03-12,Azul Fidelidade,POA,web,12169,False,economy
+C000137,2025-07-08,Azul Fidelidade,CGH,web,14116,False,economy
+C000138,2023-05-29,Azul Fidelidade,CWB,web,6162,False,economy
+C000139,2021-03-22,Azul Fidelidade,SDU,web,5261,False,economy
+C000140,2025-08-26,Azul Fidelidade,SSA,app,6179,False,economy
+C000141,2022-11-07,Safira,GYN,web,8020,True,business
+C000142,2020-06-03,Azul Fidelidade,REC,web,2934,False,economy
+C000143,2025-03-29,Azul Fidelidade,CWB,web,5800,False,economy
+C000144,2022-12-06,Topázio,CNF,app,17432,False,economy
+C000145,2023-11-28,Azul Fidelidade,GYN,app,17892,False,economy
+C000146,2025-04-02,Azul Fidelidade,SSA,app,5605,False,economy
+C000147,2021-07-27,Azul Fidelidade,VCP,app,8741,False,economy
+C000148,2021-03-27,Safira,VCP,app,7476,True,economy
+C000149,2025-06-09,Topázio,GYN,app,2370,False,economy
+C000150,2022-09-21,Diamante Unique,REC,app,31510,False,business
+C000151,2022-10-08,Azul Fidelidade,REC,agency,3840,False,economy
+C000152,2023-01-14,Topázio,BSB,web,3551,False,economy
+C000153,2020-08-02,Azul Fidelidade,VCP,app,3703,False,economy
+C000154,2023-06-28,Safira,POA,app,7789,True,economy
+C000155,2024-12-02,Azul Fidelidade,CNF,app,6000,False,economy
+C000156,2022-11-30,Safira,CNF,app,5969,False,economy
+C000157,2024-06-23,Azul Fidelidade,CGH,agency,10330,False,premium
+C000158,2023-07-06,Safira,CWB,app,2928,False,economy
+C000159,2024-05-24,Topázio,GYN,web,3277,False,premium
+C000160,2025-05-24,Topázio,REC,web,8127,False,economy
+C000161,2025-11-25,Azul Fidelidade,CWB,app,3079,False,economy
+C000162,2025-11-25,Safira,CGH,app,2232,False,economy
+C000163,2025-07-10,Azul Fidelidade,SSA,app,2010,False,economy
+C000164,2022-01-12,Safira,GYN,app,3410,True,premium
+C000165,2024-09-19,Diamante Unique,VCP,web,5066,False,business
+C000166,2020-05-31,Diamante,CGH,app,3419,False,premium
+C000167,2023-10-21,Azul Fidelidade,GYN,web,8168,True,economy
+C000168,2021-08-23,Azul Fidelidade,CNF,app,4520,False,economy
+C000169,2021-06-10,Topázio,BSB,app,10207,False,economy
+C000170,2025-11-27,Azul Fidelidade,CNF,web,1900,False,economy
+C000171,2026-02-06,Azul Fidelidade,CWB,agency,4949,False,economy
+C000172,2025-05-31,Topázio,GYN,agency,8268,False,economy
+C000173,2020-08-30,Azul Fidelidade,REC,web,3879,False,economy
+C000174,2023-11-14,Azul Fidelidade,SSA,app,10064,False,economy
+C000175,2023-04-01,Topázio,SDU,app,9222,False,economy
+C000176,2020-09-05,Azul Fidelidade,SDU,web,4465,False,economy
+C000177,2021-08-04,Azul Fidelidade,BSB,web,9087,False,economy
+C000178,2022-02-08,Safira,SSA,app,5789,False,premium
+C000179,2026-04-18,Azul Fidelidade,POA,web,12342,False,economy
+C000180,2024-08-12,Azul Fidelidade,BSB,app,4759,False,economy
+C000181,2026-08-06,Topázio,POA,app,9917,False,economy
+C000182,2023-05-20,Azul Fidelidade,REC,app,7797,False,economy
+C000183,2022-01-23,Azul Fidelidade,CGH,app,4846,False,economy
+C000184,2025-04-03,Safira,CGH,web,10382,True,economy
+C000185,2020-04-25,Safira,CNF,app,6059,True,economy
+C000186,2024-11-29,Topázio,BSB,app,17082,False,economy
+C000187,2026-06-18,Topázio,CGH,web,15115,False,economy
+C000188,2025-05-21,Azul Fidelidade,CNF,app,2643,False,economy
+C000189,2022-05-14,Safira,POA,web,4687,False,economy
+C000190,2021-07-14,Azul Fidelidade,GYN,app,12885,False,economy
+C000191,2021-03-17,Topázio,POA,web,9074,False,economy
+C000192,2023-10-02,Topázio,GYN,agency,9924,False,premium
+C000193,2025-02-19,Topázio,CNF,app,5221,False,economy
+C000194,2026-08-27,Safira,POA,web,12048,False,economy
+C000195,2021-12-09,Topázio,CWB,web,5933,True,economy
+C000196,2023-08-17,Azul Fidelidade,CNF,app,7371,False,premium
+C000197,2020-07-25,Azul Fidelidade,POA,app,5198,False,economy
+C000198,2024-11-11,Azul Fidelidade,SDU,web,8171,False,economy
+C000199,2020-01-09,Topázio,POA,app,10893,False,economy
+C000200,2020-12-25,Azul Fidelidade,SDU,web,4220,False,economy
+C000201,2024-01-24,Azul Fidelidade,REC,app,9774,False,economy
+C000202,2021-05-14,Safira,SSA,app,2012,False,premium
+C000203,2021-05-02,Safira,SDU,app,5508,False,premium
+C000204,2024-03-10,Safira,REC,app,1832,False,economy
+C000205,2025-02-17,Topázio,SDU,web,14500,False,economy
+C000206,2023-07-02,Azul Fidelidade,CNF,agency,1990,False,economy
+C000207,2021-10-11,Azul Fidelidade,SDU,app,5678,False,economy
+C000208,2024-10-15,Azul Fidelidade,REC,agency,4217,False,economy
+C000209,2021-05-11,Safira,BSB,app,18520,False,economy
+C000210,2025-12-25,Azul Fidelidade,SSA,app,4856,False,economy
+C000211,2026-08-18,Azul Fidelidade,SSA,web,4279,False,economy
+C000212,2023-08-02,Azul Fidelidade,GYN,app,4381,False,economy
+C000213,2024-02-14,Diamante,SDU,web,11714,False,economy
+C000214,2020-03-14,Topázio,VCP,agency,13536,False,economy
+C000215,2022-08-08,Azul Fidelidade,CWB,app,5939,False,economy
+C000216,2025-05-14,Azul Fidelidade,CNF,app,14735,True,economy
+C000217,2023-02-15,Safira,SDU,web,5949,False,economy
+C000218,2024-03-27,Azul Fidelidade,CNF,web,7040,False,economy
+C000219,2020-03-11,Azul Fidelidade,POA,app,4317,False,economy
+C000220,2020-03-25,Azul Fidelidade,REC,app,5002,False,economy
+C000221,2025-06-21,Diamante,SSA,app,79540,True,premium
+C000222,2022-04-01,Azul Fidelidade,POA,agency,17593,False,economy
+C000223,2020-03-13,Topázio,REC,web,6365,False,economy
+C000224,2021-09-01,Azul Fidelidade,CWB,web,4654,False,economy
+C000225,2025-06-11,Topázio,CGH,app,8658,False,economy
+C000226,2025-06-15,Safira,BSB,web,24646,False,economy
+C000227,2023-01-01,Azul Fidelidade,VCP,web,6410,False,economy
+C000228,2022-07-01,Topázio,POA,app,1632,False,business
+C000229,2021-11-20,Azul Fidelidade,CGH,app,9204,False,economy
+C000230,2023-10-18,Topázio,GYN,app,9567,False,premium
+C000231,2022-07-19,Diamante,SDU,app,39335,False,business
+C000232,2025-05-22,Safira,GYN,web,12353,False,economy
+C000233,2024-05-20,Topázio,SSA,app,8664,True,economy
+C000234,2020-02-29,Azul Fidelidade,CGH,app,4954,False,economy
+C000235,2022-02-24,Safira,SSA,agency,15771,False,economy
+C000236,2020-03-29,Safira,BSB,web,12879,False,premium
+C000237,2023-10-03,Azul Fidelidade,VCP,app,2726,False,economy
+C000238,2024-01-23,Diamante,REC,app,30162,False,economy
+C000239,2021-04-26,Azul Fidelidade,SDU,web,3231,False,economy
+C000240,2021-11-21,Azul Fidelidade,GYN,app,7607,False,economy
+C000241,2020-07-05,Safira,VCP,web,8783,False,economy
+C000242,2021-10-03,Azul Fidelidade,SDU,app,5300,True,economy
+C000243,2020-06-09,Azul Fidelidade,GYN,app,7241,False,economy
+C000244,2024-12-24,Azul Fidelidade,REC,app,2265,False,economy
+C000245,2020-06-02,Azul Fidelidade,GYN,web,6161,False,business
+C000246,2025-08-27,Azul Fidelidade,CWB,web,19348,False,economy
+C000247,2021-05-17,Azul Fidelidade,CNF,app,20434,False,economy
+C000248,2020-12-03,Topázio,CWB,web,2790,False,economy
+C000249,2026-09-16,Diamante,SDU,web,53824,False,premium
+C000250,2024-06-09,Azul Fidelidade,CNF,app,2193,False,economy
+C000251,2020-08-05,Topázio,REC,app,19533,False,economy
+C000252,2023-09-07,Azul Fidelidade,BSB,web,33538,False,economy
+C000253,2022-10-20,Azul Fidelidade,CWB,app,8324,False,economy
+C000254,2022-01-14,Topázio,REC,web,4816,False,economy
+C000255,2020-07-31,Topázio,REC,app,5974,False,premium
+C000256,2024-08-29,Diamante,CNF,app,12163,False,business
+C000257,2025-06-19,Topázio,POA,web,11158,False,economy
+C000258,2021-07-01,Azul Fidelidade,CGH,app,11313,False,economy
+C000259,2020-03-02,Azul Fidelidade,SDU,app,6968,False,economy
+C000260,2021-08-18,Diamante,POA,app,9606,True,premium
+C000261,2021-11-01,Safira,REC,app,19719,True,economy
+C000262,2022-05-16,Topázio,REC,web,7604,True,premium
+C000263,2026-08-21,Azul Fidelidade,CGH,agency,12591,False,economy
+C000264,2024-12-19,Topázio,GYN,app,9569,True,premium
+C000265,2020-09-27,Safira,GYN,app,8400,False,economy
+C000266,2024-11-10,Diamante,GYN,app,9601,False,economy
+C000267,2022-01-09,Azul Fidelidade,CGH,web,3409,False,economy
+C000268,2020-02-20,Azul Fidelidade,POA,agency,7085,True,economy
+C000269,2026-06-08,Topázio,SDU,app,4531,False,economy
+C000270,2021-04-24,Azul Fidelidade,CWB,app,16203,False,economy
+C000271,2022-03-11,Azul Fidelidade,SDU,web,6721,False,economy
+C000272,2020-03-24,Azul Fidelidade,VCP,app,8518,False,economy
+C000273,2021-08-06,Azul Fidelidade,VCP,agency,4232,False,economy
+C000274,2021-02-18,Diamante,SDU,app,5802,False,business
+C000275,2025-10-31,Diamante Unique,REC,web,16704,True,premium
+C000276,2024-03-19,Safira,REC,app,18402,True,premium
+C000277,2024-05-26,Azul Fidelidade,GYN,web,14750,False,economy
+C000278,2022-12-25,Diamante Unique,CGH,web,8884,False,business
+C000279,2020-05-08,Azul Fidelidade,CWB,web,1269,False,economy
+C000280,2020-11-23,Diamante,GYN,agency,10853,False,economy
+C000281,2026-09-04,Topázio,CNF,web,16241,False,economy
+C000282,2022-06-06,Diamante,CGH,agency,9042,False,premium
+C000283,2025-04-21,Azul Fidelidade,CNF,app,11579,False,economy
+C000284,2024-12-25,Topázio,CNF,app,13198,False,premium
+C000285,2023-05-04,Safira,VCP,app,7449,True,economy
+C000286,2026-02-15,Azul Fidelidade,SSA,web,5944,False,economy
+C000287,2021-07-14,Azul Fidelidade,SDU,web,2081,False,economy
+C000288,2021-10-05,Topázio,BSB,agency,4721,False,economy
+C000289,2023-06-22,Azul Fidelidade,CGH,app,3254,False,economy
+C000290,2023-02-12,Topázio,REC,app,4232,False,economy
+C000291,2020-08-10,Azul Fidelidade,SDU,app,4289,False,economy
+C000292,2024-08-09,Azul Fidelidade,GYN,app,4520,False,economy
+C000293,2025-10-14,Azul Fidelidade,POA,app,6112,False,economy
+C000294,2023-11-30,Azul Fidelidade,CNF,web,13787,False,economy
+C000295,2026-09-05,Topázio,CWB,app,5985,False,premium
+C000296,2023-08-31,Topázio,BSB,app,30132,False,economy
+C000297,2021-03-29,Topázio,SSA,web,1768,False,premium
+C000298,2025-10-30,Azul Fidelidade,CGH,app,7417,False,economy
+C000299,2024-06-05,Topázio,POA,agency,24645,False,economy
+C000300,2021-10-19,Azul Fidelidade,SSA,app,15804,False,economy
+C000301,2020-12-10,Azul Fidelidade,VCP,web,2398,False,economy
+C000302,2022-05-28,Topázio,POA,agency,4645,False,economy
+C000303,2025-09-22,Azul Fidelidade,SSA,app,10448,False,premium
+C000304,2024-04-09,Safira,POA,web,7545,False,economy
+C000305,2026-05-19,Azul Fidelidade,GYN,web,7641,False,economy
+C000306,2025-10-12,Safira,GYN,app,19337,True,economy
+C000307,2022-12-29,Azul Fidelidade,SDU,web,5123,False,economy
+C000308,2022-03-29,Azul Fidelidade,CNF,app,7464,False,economy
+C000309,2025-08-12,Topázio,CWB,app,3308,False,economy
+C000310,2022-01-09,Diamante,VCP,app,36787,False,economy
+C000311,2021-05-18,Topázio,BSB,app,4739,False,business
+C000312,2023-10-29,Topázio,REC,app,10427,False,economy
+C000313,2023-12-01,Safira,CGH,app,4607,False,economy
+C000314,2026-04-25,Azul Fidelidade,VCP,agency,4547,False,premium
+C000315,2023-03-08,Topázio,REC,web,8398,False,economy
+C000316,2021-06-06,Safira,BSB,agency,5358,False,economy
+C000317,2026-01-24,Azul Fidelidade,BSB,app,14656,False,economy
+C000318,2024-09-26,Safira,CWB,web,2049,False,premium
+C000319,2021-07-05,Azul Fidelidade,CNF,agency,6338,False,economy
+C000320,2022-06-21,Topázio,SSA,app,7953,False,economy
+C000321,2022-04-25,Azul Fidelidade,SSA,app,4487,False,economy
+C000322,2026-06-08,Azul Fidelidade,REC,web,1471,False,economy
+C000323,2023-08-21,Azul Fidelidade,VCP,app,3730,False,economy
+C000324,2024-08-03,Safira,SDU,app,18608,False,economy
+C000325,2022-05-06,Safira,GYN,web,20149,True,business
+C000326,2022-01-08,Safira,BSB,web,7250,False,economy
+C000327,2022-07-06,Safira,VCP,app,11939,False,premium
+C000328,2024-01-27,Topázio,CNF,web,10376,False,economy
+C000329,2022-01-19,Azul Fidelidade,CNF,app,13941,False,economy
+C000330,2022-03-07,Azul Fidelidade,BSB,web,23320,False,economy
+C000331,2022-10-13,Azul Fidelidade,SDU,web,1947,False,economy
+C000332,2021-11-22,Safira,REC,web,17408,False,premium
+C000333,2020-06-07,Topázio,GYN,app,3233,False,economy
+C000334,2026-02-10,Azul Fidelidade,CNF,app,13127,False,economy
+C000335,2026-06-26,Azul Fidelidade,SSA,app,12690,True,economy
+C000336,2021-07-31,Topázio,VCP,agency,4403,False,economy
+C000337,2024-09-09,Azul Fidelidade,POA,web,6019,False,economy
+C000338,2025-10-02,Topázio,BSB,app,10529,False,economy
+C000339,2022-01-10,Topázio,POA,app,7357,False,premium
+C000340,2025-09-03,Safira,SSA,app,8252,False,premium
+C000341,2024-03-04,Safira,REC,app,6031,True,economy
+C000342,2023-05-13,Azul Fidelidade,CGH,agency,4941,False,economy
+C000343,2023-11-11,Safira,GYN,app,17237,False,economy
+C000344,2020-07-27,Azul Fidelidade,CWB,web,1584,False,economy
+C000345,2026-06-25,Topázio,SDU,web,3418,False,economy
+C000346,2021-10-26,Topázio,CNF,app,10731,False,premium
+C000347,2021-02-13,Azul Fidelidade,CGH,app,2231,False,economy
+C000348,2024-04-28,Safira,CWB,app,4839,False,economy
+C000349,2026-05-25,Azul Fidelidade,CNF,web,5392,False,economy
+C000350,2021-01-14,Diamante Unique,VCP,app,8980,False,business
+C000351,2022-05-09,Diamante,GYN,app,2055,False,business
+C000352,2024-03-07,Diamante,GYN,app,10389,False,economy
+C000353,2026-02-04,Azul Fidelidade,POA,web,4276,False,economy
+C000354,2023-01-27,Safira,CGH,app,2581,True,economy
+C000355,2021-02-27,Azul Fidelidade,REC,app,9594,False,economy
+C000356,2022-03-28,Azul Fidelidade,REC,web,5358,False,economy
+C000357,2020-03-24,Azul Fidelidade,REC,web,5920,False,economy
+C000358,2024-10-07,Topázio,BSB,web,23311,False,economy
+C000359,2025-09-14,Diamante,SDU,app,37332,False,premium
+C000360,2025-03-17,Azul Fidelidade,CGH,agency,18974,False,economy
+C000361,2020-06-21,Azul Fidelidade,REC,web,2298,False,economy
+C000362,2023-04-02,Diamante,CNF,app,9229,False,economy
+C000363,2022-12-21,Safira,SDU,app,14972,False,economy
+C000364,2021-01-06,Topázio,POA,app,22993,False,economy
+C000365,2025-06-01,Azul Fidelidade,GYN,app,6733,True,premium
+C000366,2026-04-24,Azul Fidelidade,GYN,agency,11968,False,economy
+C000367,2021-11-14,Azul Fidelidade,SDU,app,5072,False,economy
+C000368,2023-08-25,Azul Fidelidade,SSA,web,7456,False,economy
+C000369,2022-09-26,Safira,CWB,app,16064,False,economy
+C000370,2026-04-08,Safira,GYN,app,7578,False,premium
+C000371,2020-06-26,Azul Fidelidade,REC,agency,12584,False,economy
+C000372,2020-09-08,Diamante Unique,CNF,agency,4654,True,premium
+C000373,2022-08-14,Diamante Unique,CGH,agency,35686,False,economy
+C000374,2022-02-28,Diamante Unique,CWB,web,40346,False,premium
+C000375,2023-04-25,Azul Fidelidade,VCP,web,3908,False,economy
+C000376,2020-12-19,Topázio,SSA,web,7975,False,economy
+C000377,2024-02-08,Azul Fidelidade,BSB,app,2604,False,economy
+C000378,2021-05-14,Topázio,CWB,agency,8739,False,economy
+C000379,2021-01-05,Azul Fidelidade,BSB,agency,6330,False,economy
+C000380,2024-07-29,Azul Fidelidade,SSA,app,7986,False,economy
+C000381,2024-10-07,Topázio,REC,app,13174,False,premium
+C000382,2026-01-12,Azul Fidelidade,POA,agency,3466,False,economy
+C000383,2020-06-30,Safira,GYN,app,8449,False,economy
+C000384,2020-05-25,Azul Fidelidade,GYN,web,3856,False,economy
+C000385,2024-01-07,Azul Fidelidade,CNF,web,7063,False,economy
+C000386,2024-05-23,Topázio,POA,app,11723,False,business
+C000387,2025-09-22,Azul Fidelidade,CGH,web,6502,False,economy
+C000388,2024-06-16,Diamante,SSA,app,3319,False,economy
+C000389,2023-10-13,Diamante,SSA,web,5274,False,premium
+C000390,2026-05-22,Azul Fidelidade,SDU,web,4211,False,economy
+C000391,2020-02-27,Azul Fidelidade,REC,app,14908,False,economy
+C000392,2026-09-08,Azul Fidelidade,VCP,app,2694,False,economy
+C000393,2025-06-12,Azul Fidelidade,CNF,app,6164,False,economy
+C000394,2022-04-24,Topázio,CWB,app,5393,False,business
+C000395,2020-07-01,Topázio,SSA,app,7555,True,business
+C000396,2023-09-22,Azul Fidelidade,CWB,web,6211,False,premium
+C000397,2026-07-06,Topázio,VCP,web,2383,True,economy
+C000398,2021-06-28,Azul Fidelidade,SDU,web,5937,False,premium
+C000399,2026-07-11,Azul Fidelidade,GYN,web,6281,False,economy
+C000400,2024-06-06,Azul Fidelidade,VCP,web,3606,False,economy
+C000401,2022-10-17,Azul Fidelidade,REC,app,4040,True,premium
+C000402,2024-11-19,Azul Fidelidade,GYN,app,10376,False,economy
+C000403,2021-01-02,Azul Fidelidade,CGH,web,5086,False,economy
+C000404,2023-04-24,Azul Fidelidade,BSB,web,6442,False,economy
+C000405,2022-05-12,Topázio,REC,app,15661,False,economy
+C000406,2024-05-23,Azul Fidelidade,GYN,app,4035,False,economy
+C000407,2022-05-27,Topázio,VCP,app,2859,False,economy
+C000408,2022-03-20,Azul Fidelidade,POA,web,2319,False,economy
+C000409,2026-07-17,Azul Fidelidade,SSA,web,1446,False,economy
+C000410,2024-03-13,Azul Fidelidade,VCP,agency,18856,False,economy
+C000411,2024-09-06,Azul Fidelidade,REC,web,6985,False,economy
+C000412,2023-05-22,Safira,CGH,app,14950,False,premium
+C000413,2026-04-14,Topázio,REC,app,6938,False,economy
+C000414,2020-01-02,Topázio,VCP,agency,19817,True,economy
+C000415,2022-07-20,Topázio,REC,app,5193,False,economy
+C000416,2020-11-30,Safira,VCP,web,39164,False,economy
+C000417,2022-10-19,Topázio,CNF,app,14681,False,premium
+C000418,2024-11-04,Diamante,VCP,web,9229,False,premium
+C000419,2026-09-14,Azul Fidelidade,CNF,app,3932,False,economy
+C000420,2025-06-01,Azul Fidelidade,CGH,web,2446,False,economy
+C000421,2026-06-22,Topázio,POA,web,3298,False,economy
+C000422,2024-03-12,Safira,VCP,web,5203,False,economy
+C000423,2024-10-21,Azul Fidelidade,BSB,app,11246,False,economy
+C000424,2022-11-25,Diamante,SSA,web,20434,False,economy
+C000425,2020-09-14,Topázio,CWB,agency,5275,False,economy
+C000426,2020-10-31,Diamante,REC,app,4308,False,economy
+C000427,2021-12-14,Safira,BSB,app,3067,False,economy
+C000428,2025-09-10,Safira,BSB,app,3183,False,economy
+C000429,2024-02-17,Diamante Unique,VCP,web,7112,True,business
+C000430,2026-04-26,Safira,CGH,agency,10916,False,economy
+C000431,2026-04-04,Azul Fidelidade,CWB,app,4728,False,economy
+C000432,2020-10-24,Azul Fidelidade,BSB,web,5035,False,economy
+C000433,2022-11-30,Topázio,REC,web,10661,True,economy
+C000434,2021-02-26,Azul Fidelidade,SSA,web,7440,False,economy
+C000435,2025-04-26,Azul Fidelidade,CNF,app,6889,False,economy
+C000436,2023-01-27,Topázio,CNF,app,12535,False,economy
+C000437,2020-02-08,Topázio,SSA,web,27527,False,economy
+C000438,2020-09-25,Azul Fidelidade,CWB,app,5649,False,economy
+C000439,2024-06-06,Safira,VCP,web,5915,False,economy
+C000440,2023-09-16,Azul Fidelidade,CNF,app,4429,False,economy
+C000441,2024-04-02,Azul Fidelidade,GYN,app,6040,False,economy
+C000442,2024-12-03,Azul Fidelidade,CNF,app,7353,False,economy
+C000443,2025-04-24,Topázio,POA,web,3345,False,economy
+C000444,2026-09-13,Diamante,CGH,web,13730,False,economy
+C000445,2024-07-31,Safira,CNF,app,4454,True,economy
+C000446,2023-09-11,Safira,CGH,app,11617,True,economy
+C000447,2023-09-09,Azul Fidelidade,GYN,web,9438,False,economy
+C000448,2021-10-30,Diamante Unique,REC,app,9163,False,business
+C000449,2026-03-30,Azul Fidelidade,CNF,agency,10154,False,economy
+C000450,2023-07-16,Azul Fidelidade,SDU,app,2155,False,economy
+C000451,2023-05-04,Topázio,SDU,app,2404,False,economy
+C000452,2025-05-01,Azul Fidelidade,CNF,app,10072,True,economy
+C000453,2020-10-06,Topázio,CGH,web,10944,False,economy
+C000454,2026-06-06,Azul Fidelidade,SSA,web,13440,False,economy
+C000455,2025-07-20,Safira,CGH,app,3755,False,economy
+C000456,2023-08-14,Azul Fidelidade,SDU,app,3413,False,economy
+C000457,2024-05-25,Topázio,CGH,web,8242,False,economy
+C000458,2022-11-20,Azul Fidelidade,REC,app,3183,False,economy
+C000459,2021-04-17,Diamante,VCP,app,6103,True,premium
+C000460,2023-08-04,Azul Fidelidade,SSA,web,1957,True,premium
+C000461,2021-07-09,Topázio,VCP,app,24028,False,economy
+C000462,2022-06-02,Topázio,CWB,web,6258,False,economy
+C000463,2021-10-15,Safira,REC,app,9765,False,economy
+C000464,2024-03-30,Azul Fidelidade,POA,web,14194,False,economy
+C000465,2022-04-24,Diamante,CGH,app,10481,False,economy
+C000466,2026-04-10,Topázio,SDU,web,5860,True,economy
+C000467,2025-10-08,Azul Fidelidade,CWB,app,1062,False,economy
+C000468,2020-07-03,Diamante,BSB,app,24904,False,economy
+C000469,2023-03-08,Topázio,VCP,app,5824,False,economy
+C000470,2026-07-07,Azul Fidelidade,CGH,web,7468,False,economy
+C000471,2025-12-19,Safira,SSA,agency,14456,True,economy
+C000472,2021-05-21,Azul Fidelidade,VCP,app,3343,False,economy
+C000473,2023-03-09,Azul Fidelidade,POA,app,7921,False,economy
+C000474,2021-09-30,Topázio,SSA,web,8115,True,economy
+C000475,2022-03-31,Azul Fidelidade,REC,app,21398,False,economy
+C000476,2025-01-24,Azul Fidelidade,BSB,app,13784,False,economy
+C000477,2025-08-24,Azul Fidelidade,REC,app,2647,False,economy
+C000478,2026-07-11,Azul Fidelidade,CNF,app,17649,False,economy
+C000479,2024-02-02,Topázio,REC,web,10536,False,economy
+C000480,2025-02-10,Azul Fidelidade,CNF,app,2054,False,economy
+C000481,2022-02-28,Azul Fidelidade,SDU,agency,6657,False,economy
+C000482,2023-09-27,Azul Fidelidade,CNF,app,2047,False,economy
+C000483,2023-05-06,Azul Fidelidade,GYN,app,2723,False,economy
+C000484,2023-09-21,Azul Fidelidade,POA,agency,6455,False,economy
+C000485,2020-04-14,Safira,CWB,app,4451,False,economy
+C000486,2025-07-01,Azul Fidelidade,BSB,web,4436,False,economy
+C000487,2025-01-15,Topázio,GYN,app,4097,False,premium
+C000488,2024-11-09,Azul Fidelidade,VCP,web,7848,False,economy
+C000489,2022-06-03,Azul Fidelidade,CNF,web,9994,False,economy
+C000490,2020-06-12,Topázio,SSA,app,3456,False,economy
+C000491,2024-08-05,Safira,BSB,web,13133,False,economy
+C000492,2025-10-03,Azul Fidelidade,REC,web,3749,False,economy
+C000493,2026-03-26,Topázio,VCP,app,14424,False,economy
+C000494,2022-05-14,Azul Fidelidade,SSA,web,9505,False,economy
+C000495,2026-01-06,Topázio,SSA,app,6866,True,economy
+C000496,2024-10-11,Diamante,REC,app,27715,False,business
+C000497,2021-01-23,Topázio,CGH,web,47270,False,economy
+C000498,2021-06-09,Diamante,BSB,web,26960,False,premium
+C000499,2026-03-16,Azul Fidelidade,POA,web,21223,False,economy
+C000500,2021-11-04,Azul Fidelidade,SDU,app,7621,False,premium
+C000501,2023-07-07,Topázio,CGH,app,2231,False,economy
+C000502,2020-06-28,Safira,CNF,app,3623,False,premium
+C000503,2022-12-25,Topázio,REC,app,9597,True,economy
+C000504,2022-12-05,Azul Fidelidade,CWB,app,11645,False,economy
+C000505,2025-01-22,Azul Fidelidade,REC,agency,10747,False,economy
+C000506,2023-07-29,Azul Fidelidade,CNF,app,2244,False,economy
+C000507,2024-02-14,Safira,SSA,web,15347,False,premium
+C000508,2026-03-05,Safira,SDU,app,7478,False,economy
+C000509,2023-03-14,Safira,VCP,app,8556,False,premium
+C000510,2023-12-20,Azul Fidelidade,SDU,app,2794,False,economy
+C000511,2024-03-16,Topázio,VCP,app,11759,False,economy
+C000512,2020-07-20,Diamante,CNF,app,23987,False,economy
+C000513,2021-04-22,Azul Fidelidade,VCP,app,12209,False,economy
+C000514,2023-08-31,Safira,SSA,app,9133,False,economy
+C000515,2023-05-10,Diamante,SDU,app,14056,False,premium
+C000516,2021-05-06,Azul Fidelidade,POA,web,8836,False,economy
+C000517,2024-01-22,Azul Fidelidade,CNF,web,3352,False,premium
+C000518,2025-11-18,Safira,CNF,web,4142,False,economy
+C000519,2024-08-12,Topázio,VCP,app,4263,False,economy
+C000520,2020-05-25,Topázio,SDU,app,2019,False,economy
+C000521,2024-03-28,Safira,REC,app,10400,False,economy
+C000522,2024-12-21,Azul Fidelidade,POA,app,3737,False,economy
+C000523,2020-05-26,Diamante,CGH,app,5741,False,economy
+C000524,2026-06-07,Topázio,VCP,agency,7173,False,premium
+C000525,2026-05-28,Azul Fidelidade,BSB,app,2428,False,premium
+C000526,2023-01-16,Diamante,POA,web,12937,True,business
+C000527,2026-03-31,Azul Fidelidade,CNF,app,4608,True,economy
+C000528,2023-01-10,Azul Fidelidade,REC,web,6288,False,economy
+C000529,2022-03-03,Safira,SSA,web,9017,False,economy
+C000530,2022-12-23,Azul Fidelidade,CNF,web,5590,False,business
+C000531,2020-11-11,Azul Fidelidade,BSB,app,3600,True,economy
+C000532,2026-06-09,Azul Fidelidade,CGH,app,10517,False,economy
+C000533,2025-08-23,Safira,POA,app,30798,False,premium
+C000534,2022-02-27,Azul Fidelidade,SSA,web,8163,False,economy
+C000535,2021-08-05,Azul Fidelidade,VCP,web,3442,False,premium
+C000536,2023-05-28,Topázio,BSB,app,6178,False,economy
+C000537,2026-03-17,Diamante,BSB,web,7596,False,economy
+C000538,2023-03-22,Topázio,BSB,web,5203,False,premium
+C000539,2024-07-10,Azul Fidelidade,BSB,app,6429,False,economy
+C000540,2024-07-13,Azul Fidelidade,SSA,agency,13238,False,economy
+C000541,2025-12-13,Safira,VCP,agency,17526,False,premium
+C000542,2026-03-16,Topázio,CGH,app,5305,True,economy
+C000543,2023-06-21,Safira,SDU,app,16632,False,premium
+C000544,2026-01-21,Azul Fidelidade,SDU,app,9171,False,economy
+C000545,2024-04-18,Safira,BSB,web,22354,False,economy
+C000546,2021-10-24,Azul Fidelidade,POA,web,1981,False,economy
+C000547,2022-05-30,Azul Fidelidade,SSA,app,9153,False,economy
+C000548,2020-08-01,Topázio,SDU,app,5094,False,economy
+C000549,2025-04-18,Azul Fidelidade,GYN,app,14606,False,economy
+C000550,2024-11-14,Azul Fidelidade,BSB,app,21464,False,economy
+C000551,2021-03-03,Topázio,CWB,app,4731,False,economy
+C000552,2026-09-28,Azul Fidelidade,SDU,web,4071,False,economy
+C000553,2026-09-23,Azul Fidelidade,CNF,web,6268,False,economy
+C000554,2026-06-07,Safira,CGH,app,23739,False,economy
+C000555,2021-04-13,Safira,CGH,web,6396,True,economy
+C000556,2022-05-24,Azul Fidelidade,VCP,web,6017,False,economy
+C000557,2021-01-09,Diamante,SSA,app,32018,False,economy
+C000558,2025-10-27,Topázio,BSB,agency,48140,False,economy
+C000559,2021-12-23,Diamante,CWB,web,1787,False,premium
+C000560,2025-08-22,Safira,SDU,app,10703,False,economy
+C000561,2025-02-05,Azul Fidelidade,GYN,app,9448,False,economy
+C000562,2020-10-10,Safira,SSA,app,9469,False,economy
+C000563,2025-01-21,Diamante Unique,CNF,app,8990,False,premium
+C000564,2021-06-19,Topázio,BSB,app,15093,False,economy
+C000565,2024-03-11,Azul Fidelidade,POA,web,5067,False,economy
+C000566,2024-01-29,Diamante,GYN,app,44595,False,business
+C000567,2024-04-30,Azul Fidelidade,CGH,app,8872,False,economy
+C000568,2024-08-08,Safira,REC,web,11760,False,economy
+C000569,2020-11-14,Topázio,CGH,app,5422,False,economy
+C000570,2020-09-15,Topázio,BSB,app,6487,False,economy
+C000571,2022-07-16,Azul Fidelidade,SSA,app,13602,False,economy
+C000572,2023-10-27,Azul Fidelidade,CNF,app,5127,False,economy
+C000573,2025-04-15,Azul Fidelidade,CWB,web,8114,False,economy
+C000574,2024-01-01,Diamante Unique,CGH,web,19710,False,premium
+C000575,2026-03-31,Azul Fidelidade,SDU,app,2700,False,economy
+C000576,2025-12-20,Azul Fidelidade,REC,app,3709,False,premium
+C000577,2021-10-13,Safira,VCP,app,4316,False,economy
+C000578,2021-03-30,Safira,GYN,web,6736,False,economy
+C000579,2021-07-12,Azul Fidelidade,CGH,app,7031,False,economy
+C000580,2021-07-20,Safira,GYN,web,35996,False,economy
+C000581,2021-12-02,Azul Fidelidade,CGH,app,12234,False,economy
+C000582,2023-05-03,Azul Fidelidade,VCP,web,11456,False,economy
+C000583,2022-02-14,Safira,VCP,app,4626,False,premium
+C000584,2021-03-08,Azul Fidelidade,CWB,web,4541,False,economy
+C000585,2024-11-11,Azul Fidelidade,BSB,app,9818,False,economy
+C000586,2023-08-19,Azul Fidelidade,SSA,app,14947,False,economy
+C000587,2021-11-02,Topázio,CWB,app,7316,False,economy
+C000588,2023-05-27,Topázio,CNF,agency,3812,False,economy
+C000589,2022-07-28,Topázio,SSA,web,7352,False,premium
+C000590,2025-10-05,Azul Fidelidade,CGH,web,2508,False,economy
+C000591,2024-11-03,Safira,CWB,app,5802,False,economy
+C000592,2020-11-17,Azul Fidelidade,VCP,web,4782,False,economy
+C000593,2020-10-11,Azul Fidelidade,SSA,app,4764,False,economy
+C000594,2025-10-03,Azul Fidelidade,REC,web,6627,False,economy
+C000595,2025-06-23,Azul Fidelidade,CGH,app,6011,False,economy
+C000596,2022-11-07,Safira,GYN,app,8197,True,economy
+C000597,2023-08-15,Azul Fidelidade,BSB,app,3580,False,economy
+C000598,2021-09-06,Azul Fidelidade,CGH,app,10371,False,economy
+C000599,2024-08-29,Azul Fidelidade,CNF,app,22553,False,economy
+C000600,2021-08-28,Azul Fidelidade,POA,app,2729,False,economy
+C000601,2022-12-24,Topázio,SSA,app,2656,False,economy
+C000602,2020-08-13,Topázio,SSA,app,1306,False,premium
+C000603,2020-02-02,Diamante,CNF,web,9276,False,premium
+C000604,2020-01-06,Azul Fidelidade,REC,app,4529,False,economy
+C000605,2026-09-03,Azul Fidelidade,BSB,app,3451,False,economy
+C000606,2024-03-09,Topázio,CNF,app,11743,False,economy
+C000607,2024-12-20,Safira,CNF,app,7730,False,economy
+C000608,2022-03-30,Topázio,SDU,app,5383,False,economy
+C000609,2021-11-15,Azul Fidelidade,SSA,web,4299,True,premium
+C000610,2022-01-29,Safira,BSB,app,5331,False,economy
+C000611,2026-02-19,Diamante Unique,BSB,app,5660,True,business
+C000612,2025-12-30,Safira,POA,web,4712,False,premium
+C000613,2021-01-07,Topázio,CGH,app,7474,False,economy
+C000614,2026-04-03,Diamante,GYN,app,23020,False,business
+C000615,2022-10-29,Safira,GYN,app,5662,False,economy
+C000616,2020-03-18,Azul Fidelidade,REC,app,3078,True,economy
+C000617,2024-01-06,Azul Fidelidade,GYN,agency,2579,False,economy
+C000618,2021-03-24,Azul Fidelidade,VCP,app,3941,False,economy
+C000619,2023-05-14,Azul Fidelidade,SSA,app,2546,False,premium
+C000620,2021-08-02,Azul Fidelidade,SSA,web,44102,False,economy
+C000621,2021-01-08,Diamante,BSB,app,21706,False,premium
+C000622,2020-09-03,Azul Fidelidade,SSA,web,4907,True,economy
+C000623,2024-02-11,Azul Fidelidade,POA,web,2657,False,premium
+C000624,2023-09-16,Azul Fidelidade,SSA,app,11476,False,economy
+C000625,2022-04-15,Azul Fidelidade,CNF,app,9635,False,economy
+C000626,2025-04-18,Azul Fidelidade,CGH,app,4300,True,economy
+C000627,2022-11-24,Safira,BSB,app,10206,False,premium
+C000628,2021-04-25,Azul Fidelidade,BSB,app,2184,False,premium
+C000629,2021-08-08,Diamante,CWB,app,10706,False,premium
+C000630,2023-08-27,Azul Fidelidade,CWB,app,8783,False,premium
+C000631,2021-10-18,Azul Fidelidade,BSB,app,4862,False,premium
+C000632,2020-05-05,Topázio,POA,agency,5327,False,premium
+C000633,2025-12-19,Azul Fidelidade,CNF,app,7075,False,economy
+C000634,2022-01-03,Safira,REC,app,11374,False,premium
+C000635,2023-08-05,Diamante,CNF,app,4466,False,business
+C000636,2022-02-23,Safira,CWB,agency,19688,False,economy
+C000637,2021-03-21,Topázio,CWB,agency,2677,False,economy
+C000638,2026-03-18,Safira,REC,app,6375,True,economy
+C000639,2022-05-26,Azul Fidelidade,SSA,app,8223,False,premium
+C000640,2021-03-02,Diamante,BSB,app,15278,True,economy
+C000641,2020-07-04,Diamante,CNF,app,26233,False,premium
+C000642,2021-05-29,Diamante,REC,web,18133,False,business
+C000643,2022-07-10,Topázio,SDU,web,2121,False,economy
+C000644,2025-06-11,Azul Fidelidade,CWB,agency,2606,False,economy
+C000645,2024-07-14,Safira,SSA,app,5210,True,economy
+C000646,2023-03-04,Safira,VCP,app,2190,True,economy
+C000647,2023-06-24,Azul Fidelidade,VCP,web,14111,False,economy
+C000648,2021-04-18,Azul Fidelidade,CGH,app,3499,False,economy
+C000649,2022-05-03,Topázio,SDU,web,22758,False,economy
+C000650,2023-12-23,Azul Fidelidade,POA,web,9373,False,economy
+C000651,2026-08-16,Safira,BSB,app,14427,False,economy
+C000652,2021-10-11,Azul Fidelidade,VCP,app,2331,False,economy
+C000653,2020-10-03,Topázio,GYN,agency,67920,False,economy
+C000654,2025-07-20,Azul Fidelidade,CGH,app,8461,False,premium
+C000655,2026-01-04,Topázio,GYN,web,2354,False,economy
+C000656,2025-01-26,Topázio,POA,web,24279,False,economy
+C000657,2026-02-22,Topázio,BSB,web,5567,False,premium
+C000658,2026-08-06,Topázio,BSB,web,7636,False,economy
+C000659,2023-03-02,Diamante,REC,web,5568,True,economy
+C000660,2024-07-12,Azul Fidelidade,REC,app,3717,False,economy
+C000661,2026-08-11,Safira,CNF,app,9552,False,economy
+C000662,2026-06-27,Azul Fidelidade,GYN,web,5139,False,economy
+C000663,2022-03-27,Safira,POA,app,9328,False,economy
+C000664,2024-07-13,Diamante,CWB,web,9988,False,premium
+C000665,2024-04-12,Topázio,CNF,app,4122,False,economy
+C000666,2023-09-06,Topázio,CNF,web,6562,False,premium
+C000667,2026-04-14,Azul Fidelidade,CGH,app,4328,False,premium
+C000668,2023-09-26,Safira,VCP,app,10174,False,economy
+C000669,2026-07-08,Topázio,GYN,web,7840,False,economy
+C000670,2024-10-07,Safira,CWB,web,5506,False,economy
+C000671,2022-06-06,Topázio,CWB,app,5370,False,economy
+C000672,2021-01-24,Azul Fidelidade,POA,app,5899,False,economy
+C000673,2023-08-03,Azul Fidelidade,SDU,app,9471,False,economy
+C000674,2020-12-07,Azul Fidelidade,POA,app,5052,False,economy
+C000675,2026-05-28,Azul Fidelidade,POA,agency,11119,False,economy
+C000676,2025-01-05,Azul Fidelidade,REC,agency,6191,False,economy
+C000677,2022-08-03,Azul Fidelidade,BSB,app,13171,False,economy
+C000678,2022-05-25,Azul Fidelidade,POA,app,10339,False,economy
+C000679,2020-12-09,Azul Fidelidade,VCP,web,2185,False,economy
+C000680,2022-04-19,Azul Fidelidade,SSA,web,5412,False,economy
+C000681,2024-10-08,Diamante,GYN,agency,22096,False,economy
+C000682,2025-05-10,Topázio,SSA,web,14863,False,economy
+C000683,2024-08-15,Diamante,CGH,app,10139,False,business
+C000684,2020-12-16,Azul Fidelidade,SDU,app,7686,True,economy
+C000685,2022-11-10,Azul Fidelidade,REC,app,2181,False,economy
+C000686,2021-07-07,Azul Fidelidade,VCP,app,7722,False,economy
+C000687,2024-02-26,Azul Fidelidade,CNF,web,5626,False,economy
+C000688,2021-04-24,Azul Fidelidade,SDU,agency,5481,False,premium
+C000689,2023-09-15,Topázio,CWB,app,4426,False,premium
+C000690,2021-07-28,Diamante,GYN,web,21368,False,economy
+C000691,2025-10-01,Azul Fidelidade,GYN,app,5455,False,economy
+C000692,2024-03-09,Azul Fidelidade,REC,app,7193,False,economy
+C000693,2023-11-06,Azul Fidelidade,CWB,app,10795,False,premium
+C000694,2025-12-25,Topázio,VCP,app,3095,True,economy
+C000695,2025-07-04,Azul Fidelidade,CNF,agency,3167,False,economy
+C000696,2024-08-22,Topázio,BSB,app,11302,False,economy
+C000697,2026-08-24,Safira,CGH,web,4167,False,premium
+C000698,2025-12-24,Topázio,SDU,agency,5440,False,economy
+C000699,2025-07-01,Diamante,SSA,web,4026,False,economy
+C000700,2020-05-20,Topázio,GYN,web,8743,False,economy
+C000701,2023-07-03,Azul Fidelidade,SDU,app,6488,False,economy
+C000702,2021-07-19,Azul Fidelidade,CNF,agency,5305,False,economy
+C000703,2024-01-30,Azul Fidelidade,GYN,app,12245,False,economy
+C000704,2025-06-18,Azul Fidelidade,SSA,app,3741,False,economy
+C000705,2021-04-07,Diamante,SSA,app,11286,False,business
+C000706,2025-04-11,Azul Fidelidade,SDU,app,2518,False,economy
+C000707,2022-07-08,Topázio,SDU,app,8693,False,economy
+C000708,2023-04-11,Azul Fidelidade,POA,app,2898,False,economy
+C000709,2022-12-25,Topázio,POA,app,4348,False,economy
+C000710,2025-12-20,Azul Fidelidade,CGH,app,1044,False,economy
+C000711,2025-08-25,Diamante,CNF,app,12489,False,economy
+C000712,2021-11-17,Azul Fidelidade,CWB,app,5949,False,premium
+C000713,2021-01-21,Azul Fidelidade,VCP,app,7872,False,economy
+C000714,2023-05-31,Azul Fidelidade,VCP,web,4487,False,economy
+C000715,2024-12-05,Topázio,GYN,agency,6746,False,economy
+C000716,2021-05-13,Azul Fidelidade,CWB,web,3370,False,economy
+C000717,2025-07-07,Azul Fidelidade,SSA,agency,8222,False,economy
+C000718,2025-02-28,Topázio,BSB,app,6381,False,economy
+C000719,2025-03-22,Topázio,BSB,app,7092,False,economy
+C000720,2022-12-30,Azul Fidelidade,POA,app,7509,False,economy
+C000721,2025-02-17,Safira,POA,app,9941,False,economy
+C000722,2021-01-10,Safira,CGH,app,53458,False,economy
+C000723,2023-03-26,Topázio,BSB,web,4913,False,premium
+C000724,2021-05-04,Diamante,REC,web,6523,True,premium
+C000725,2026-08-21,Azul Fidelidade,CGH,web,7671,False,economy
+C000726,2023-01-15,Safira,POA,app,14196,True,premium
+C000727,2022-11-12,Azul Fidelidade,CGH,web,3164,False,economy
+C000728,2021-01-02,Safira,GYN,web,18022,False,economy
+C000729,2024-01-05,Topázio,CNF,app,8881,False,economy
+C000730,2020-07-06,Azul Fidelidade,SSA,app,2724,False,economy
+C000731,2020-09-22,Azul Fidelidade,VCP,web,25422,True,economy
+C000732,2022-10-24,Azul Fidelidade,GYN,app,17364,False,economy
+C000733,2023-05-05,Azul Fidelidade,BSB,web,15042,False,economy
+C000734,2020-04-10,Azul Fidelidade,BSB,web,5071,False,economy
+C000735,2022-11-12,Azul Fidelidade,BSB,web,5444,False,economy
+C000736,2021-12-17,Azul Fidelidade,SDU,app,3280,False,economy
+C000737,2022-01-25,Azul Fidelidade,CNF,app,9821,False,economy
+C000738,2024-06-14,Azul Fidelidade,BSB,app,3941,False,economy
+C000739,2021-08-10,Topázio,SSA,app,7277,False,economy
+C000740,2026-04-03,Azul Fidelidade,REC,app,2360,False,economy
+C000741,2022-10-03,Azul Fidelidade,CNF,web,1639,True,economy
+C000742,2021-01-17,Topázio,CGH,agency,5189,False,economy
+C000743,2024-01-02,Azul Fidelidade,CWB,web,1703,False,economy
+C000744,2021-09-28,Azul Fidelidade,GYN,app,3285,False,economy
+C000745,2023-10-04,Azul Fidelidade,SDU,app,5666,False,economy
+C000746,2020-07-22,Azul Fidelidade,BSB,agency,10663,False,economy
+C000747,2020-03-14,Topázio,GYN,agency,9653,False,economy
+C000748,2023-05-07,Azul Fidelidade,CGH,web,5704,False,economy
+C000749,2021-10-29,Azul Fidelidade,BSB,web,6326,False,economy
+C000750,2026-03-20,Azul Fidelidade,SSA,app,13288,False,economy
+C000751,2024-02-01,Azul Fidelidade,VCP,app,13780,False,economy
+C000752,2021-08-19,Diamante,POA,web,19184,False,premium
+C000753,2024-11-20,Safira,VCP,web,4734,True,premium
+C000754,2026-09-18,Azul Fidelidade,SSA,app,3541,False,economy
+C000755,2022-09-26,Azul Fidelidade,VCP,app,8940,False,economy
+C000756,2020-11-06,Azul Fidelidade,GYN,app,2042,True,economy
+C000757,2022-08-23,Safira,SSA,web,11348,False,premium
+C000758,2023-03-16,Diamante,SDU,web,13526,False,premium
+C000759,2025-12-21,Azul Fidelidade,CNF,web,1992,False,economy
+C000760,2025-10-12,Azul Fidelidade,CNF,app,6883,False,economy
+C000761,2024-09-13,Diamante,REC,web,6798,False,premium
+C000762,2026-03-02,Azul Fidelidade,REC,web,2529,False,economy
+C000763,2024-11-06,Safira,SSA,app,18401,False,economy
+C000764,2022-07-26,Azul Fidelidade,SDU,web,4992,False,economy
+C000765,2022-02-23,Azul Fidelidade,GYN,web,9436,False,economy
+C000766,2025-06-27,Azul Fidelidade,GYN,web,7717,False,economy
+C000767,2025-10-07,Topázio,CGH,web,16938,False,economy
+C000768,2025-12-10,Safira,REC,app,26073,False,premium
+C000769,2022-04-12,Topázio,CGH,web,5321,True,economy
+C000770,2020-02-11,Safira,GYN,app,41140,False,economy
+C000771,2024-09-28,Azul Fidelidade,CNF,web,5273,False,economy
+C000772,2025-11-07,Topázio,CGH,web,23288,False,premium
+C000773,2023-05-30,Diamante Unique,REC,web,13561,False,economy
+C000774,2021-03-02,Azul Fidelidade,SSA,agency,4082,False,economy
+C000775,2024-10-09,Azul Fidelidade,SDU,web,8676,False,economy
+C000776,2021-11-12,Topázio,CNF,app,12747,False,economy
+C000777,2024-11-12,Diamante,SSA,web,5204,False,business
+C000778,2023-07-14,Azul Fidelidade,REC,app,3370,False,economy
+C000779,2022-10-21,Diamante,POA,web,7233,False,business
+C000780,2023-05-17,Topázio,CWB,app,9349,False,economy
+C000781,2021-10-19,Diamante,SDU,web,7117,False,economy
+C000782,2024-12-06,Diamante,CNF,web,14794,False,business
+C000783,2022-06-23,Azul Fidelidade,REC,app,9557,False,economy
+C000784,2022-12-10,Topázio,CWB,app,4527,False,economy
+C000785,2022-11-16,Safira,CGH,app,6529,True,economy
+C000786,2024-05-19,Topázio,REC,app,5786,False,economy
+C000787,2020-11-10,Safira,CWB,web,13482,True,economy
+C000788,2022-10-07,Safira,CGH,agency,13659,False,economy
+C000789,2023-04-24,Diamante,CNF,web,6330,False,premium
+C000790,2020-02-26,Azul Fidelidade,BSB,app,10201,False,economy
+C000791,2021-11-08,Azul Fidelidade,CGH,web,2848,False,economy
+C000792,2024-01-13,Azul Fidelidade,REC,app,1950,False,economy
+C000793,2022-11-11,Azul Fidelidade,REC,web,9967,False,economy
+C000794,2021-01-12,Topázio,CNF,app,6918,False,economy
+C000795,2021-11-03,Azul Fidelidade,POA,app,6570,False,economy
+C000796,2020-02-28,Azul Fidelidade,CNF,app,1655,False,economy
+C000797,2021-08-03,Topázio,POA,app,5339,False,economy
+C000798,2022-04-29,Azul Fidelidade,SDU,app,2076,False,economy
+C000799,2020-12-24,Azul Fidelidade,SDU,app,4380,False,economy
+C000800,2024-05-01,Diamante,CWB,app,5482,True,premium
+C000801,2023-05-30,Safira,GYN,app,4470,False,economy
+C000802,2026-09-23,Azul Fidelidade,POA,web,3137,False,economy
+C000803,2025-06-16,Azul Fidelidade,GYN,web,2428,False,economy
+C000804,2023-02-27,Azul Fidelidade,CGH,web,3234,False,economy
+C000805,2023-10-19,Diamante,CWB,app,8568,False,economy
+C000806,2022-12-09,Diamante,POA,app,14431,True,economy
+C000807,2022-08-01,Safira,BSB,web,6510,False,premium
+C000808,2025-11-07,Safira,SSA,agency,10520,True,economy
+C000809,2022-06-24,Topázio,CNF,web,3205,False,premium
+C000810,2021-12-19,Safira,BSB,app,5952,False,economy
+C000811,2022-09-17,Diamante Unique,GYN,app,29175,False,economy
+C000812,2024-03-03,Safira,CWB,web,9731,False,economy
+C000813,2024-03-04,Topázio,CGH,app,8110,False,economy
+C000814,2023-03-28,Azul Fidelidade,CNF,app,6116,False,economy
+C000815,2022-05-04,Azul Fidelidade,VCP,web,24780,False,business
+C000816,2022-02-15,Safira,CNF,app,2892,False,economy
+C000817,2022-01-19,Azul Fidelidade,CGH,web,2082,False,economy
+C000818,2024-08-30,Diamante Unique,CNF,web,6645,True,economy
+C000819,2021-01-25,Azul Fidelidade,SDU,web,12828,False,economy
+C000820,2024-06-08,Topázio,CGH,web,5844,True,economy
+C000821,2021-05-29,Azul Fidelidade,SDU,app,5074,False,economy
+C000822,2022-03-30,Azul Fidelidade,CNF,app,6338,False,economy
+C000823,2020-06-21,Azul Fidelidade,SDU,app,2467,True,economy
+C000824,2020-10-14,Azul Fidelidade,CWB,web,11486,False,economy
+C000825,2021-01-19,Safira,CNF,app,7765,False,premium
+C000826,2024-12-24,Topázio,CGH,web,9317,False,economy
+C000827,2026-09-24,Topázio,CWB,web,15493,False,economy
+C000828,2020-10-25,Diamante,VCP,web,2119,False,economy
+C000829,2021-10-07,Topázio,POA,app,4182,False,economy
+C000830,2022-12-24,Topázio,REC,web,6950,False,economy
+C000831,2021-06-12,Azul Fidelidade,BSB,app,3515,False,economy
+C000832,2020-11-11,Azul Fidelidade,SDU,web,3871,False,economy
+C000833,2026-02-20,Topázio,VCP,app,2016,False,economy
+C000834,2024-12-30,Diamante,SDU,app,9004,False,business
+C000835,2022-05-23,Azul Fidelidade,CWB,agency,5947,False,premium
+C000836,2023-01-19,Topázio,SDU,agency,10895,False,economy
+C000837,2021-08-25,Azul Fidelidade,CNF,app,19386,False,economy
+C000838,2024-01-17,Safira,CNF,web,19494,False,premium
+C000839,2021-06-09,Safira,REC,app,3445,False,economy
+C000840,2025-08-12,Diamante,CNF,app,4979,False,economy
+C000841,2023-09-28,Azul Fidelidade,VCP,app,5808,False,economy
+C000842,2022-05-17,Azul Fidelidade,VCP,web,10260,False,economy
+C000843,2026-03-09,Azul Fidelidade,CNF,web,5749,False,economy
+C000844,2022-03-03,Azul Fidelidade,BSB,app,1897,False,economy
+C000845,2024-05-01,Azul Fidelidade,SSA,web,12895,False,economy
+C000846,2025-04-25,Azul Fidelidade,CGH,app,5324,False,economy
+C000847,2024-05-05,Azul Fidelidade,GYN,app,8608,False,economy
+C000848,2020-12-27,Azul Fidelidade,CWB,app,8399,False,economy
+C000849,2022-01-23,Safira,REC,web,14003,False,economy
+C000850,2022-01-10,Topázio,SSA,app,5936,False,economy
+C000851,2023-09-03,Safira,CNF,web,1435,False,premium
+C000852,2026-08-29,Safira,CGH,web,16658,False,economy
+C000853,2021-12-02,Safira,REC,app,3531,False,economy
+C000854,2024-11-26,Topázio,CNF,web,9428,False,economy
+C000855,2021-09-18,Safira,CGH,app,6507,False,premium
+C000856,2025-05-29,Safira,CWB,agency,13464,False,economy
+C000857,2022-11-19,Topázio,SDU,web,58386,False,business
+C000858,2026-04-01,Safira,REC,app,1884,False,economy
+C000859,2021-04-20,Topázio,VCP,app,3750,False,economy
+C000860,2020-02-09,Topázio,VCP,app,5131,False,economy
+C000861,2021-12-06,Azul Fidelidade,SDU,app,5930,True,economy
+C000862,2025-05-29,Azul Fidelidade,VCP,web,1925,False,economy
+C000863,2020-04-08,Azul Fidelidade,GYN,web,4968,False,economy
+C000864,2025-09-18,Topázio,SDU,app,26707,False,economy
+C000865,2024-04-25,Azul Fidelidade,SDU,web,9807,True,economy
+C000866,2023-01-13,Topázio,GYN,web,15777,False,economy
+C000867,2024-07-19,Azul Fidelidade,GYN,app,5462,False,economy
+C000868,2025-05-01,Topázio,POA,app,9690,False,economy
+C000869,2025-05-13,Safira,REC,app,6059,False,economy
+C000870,2025-12-23,Azul Fidelidade,CNF,app,6250,False,economy
+C000871,2021-04-30,Safira,GYN,app,2130,False,economy
+C000872,2025-01-08,Azul Fidelidade,CNF,web,1470,False,economy
+C000873,2022-10-22,Diamante Unique,BSB,agency,5035,False,business
+C000874,2021-11-08,Safira,SSA,app,12135,False,economy
+C000875,2020-02-19,Topázio,GYN,web,3097,False,economy
+C000876,2023-09-13,Azul Fidelidade,GYN,web,3113,False,economy
+C000877,2020-05-26,Safira,CNF,web,5214,False,business
+C000878,2020-09-23,Azul Fidelidade,GYN,app,8403,False,economy
+C000879,2021-11-19,Azul Fidelidade,SSA,app,6463,False,economy
+C000880,2025-03-03,Safira,CNF,web,6182,False,premium
+C000881,2023-08-14,Safira,POA,app,8154,True,business
+C000882,2024-03-22,Azul Fidelidade,BSB,web,4090,False,economy
+C000883,2025-09-20,Topázio,SDU,app,8147,True,economy
+C000884,2026-04-12,Azul Fidelidade,CNF,app,10002,False,economy
+C000885,2021-01-06,Azul Fidelidade,CGH,app,8096,False,premium
+C000886,2021-04-21,Azul Fidelidade,CWB,app,6247,False,economy
+C000887,2025-12-14,Safira,SSA,web,14903,False,economy
+C000888,2026-01-07,Safira,GYN,web,4227,False,economy
+C000889,2024-03-14,Azul Fidelidade,CNF,web,5327,False,premium
+C000890,2023-05-15,Azul Fidelidade,CGH,app,8242,False,economy
+C000891,2026-07-07,Azul Fidelidade,GYN,app,2182,False,economy
+C000892,2023-11-04,Azul Fidelidade,CWB,app,24601,False,economy
+C000893,2022-01-25,Azul Fidelidade,BSB,app,7013,False,economy
+C000894,2026-02-18,Azul Fidelidade,SSA,app,1990,False,economy
+C000895,2024-01-13,Azul Fidelidade,GYN,agency,5179,False,economy
+C000896,2022-10-11,Safira,POA,web,19652,False,economy
+C000897,2023-05-01,Azul Fidelidade,POA,app,4389,False,business
+C000898,2023-05-16,Azul Fidelidade,BSB,app,2654,False,business
+C000899,2024-03-10,Azul Fidelidade,VCP,agency,3951,False,economy
+C000900,2022-02-22,Diamante,SSA,app,5644,False,premium
+C000901,2025-09-16,Topázio,CGH,web,8683,False,economy
+C000902,2023-04-23,Azul Fidelidade,CWB,agency,4440,False,economy
+C000903,2022-03-20,Azul Fidelidade,SSA,app,18379,False,economy
+C000904,2020-08-21,Diamante,CGH,app,15154,True,premium
+C000905,2023-01-04,Azul Fidelidade,SDU,web,7831,False,premium
+C000906,2022-03-23,Topázio,BSB,web,5594,False,business
+C000907,2025-09-23,Topázio,BSB,web,5424,False,economy
+C000908,2025-07-08,Diamante,SSA,app,10051,False,economy
+C000909,2026-05-19,Topázio,POA,app,14950,False,economy
+C000910,2025-06-21,Azul Fidelidade,SSA,app,1759,False,economy
+C000911,2026-08-11,Azul Fidelidade,SDU,web,4743,False,economy
+C000912,2022-04-22,Safira,SSA,app,13063,False,economy
+C000913,2021-07-07,Topázio,CGH,app,11162,False,economy
+C000914,2026-02-04,Azul Fidelidade,SSA,web,6634,False,economy
+C000915,2021-11-18,Azul Fidelidade,CGH,web,9755,False,economy
+C000916,2025-03-10,Topázio,BSB,web,2427,False,economy
+C000917,2023-06-07,Azul Fidelidade,CGH,app,5420,False,economy
+C000918,2021-07-22,Diamante Unique,BSB,app,9137,False,business
+C000919,2023-09-16,Azul Fidelidade,VCP,app,12601,False,economy
+C000920,2023-03-17,Azul Fidelidade,CGH,web,2664,False,economy
+C000921,2020-06-26,Azul Fidelidade,BSB,web,3130,True,economy
+C000922,2026-06-10,Topázio,CNF,app,4976,False,economy
+C000923,2022-08-09,Azul Fidelidade,BSB,agency,62327,False,economy
+C000924,2025-08-18,Diamante,CGH,app,29188,False,economy
+C000925,2023-01-16,Topázio,BSB,app,8269,False,economy
+C000926,2025-11-10,Azul Fidelidade,SDU,app,5387,False,economy
+C000927,2022-03-30,Diamante,CWB,web,13962,False,economy
+C000928,2022-06-29,Azul Fidelidade,SDU,web,12044,False,economy
+C000929,2025-06-18,Azul Fidelidade,REC,web,4198,False,economy
+C000930,2021-03-14,Safira,REC,app,13373,False,economy
+C000931,2022-12-17,Azul Fidelidade,VCP,app,2356,False,economy
+C000932,2022-08-20,Safira,CWB,web,3270,False,economy
+C000933,2026-01-16,Safira,SSA,app,5276,True,economy
+C000934,2026-07-24,Diamante,VCP,app,10609,False,business
+C000935,2022-10-20,Azul Fidelidade,BSB,app,6492,False,economy
+C000936,2024-12-02,Azul Fidelidade,GYN,app,8006,False,economy
+C000937,2024-11-17,Safira,CNF,app,2819,False,economy
+C000938,2021-04-12,Azul Fidelidade,POA,app,10768,False,economy
+C000939,2025-08-21,Topázio,REC,app,11251,False,economy
+C000940,2020-09-25,Topázio,SDU,web,17018,False,economy
+C000941,2020-02-13,Azul Fidelidade,GYN,web,7892,False,economy
+C000942,2020-09-23,Azul Fidelidade,REC,web,12726,False,economy
+C000943,2026-01-07,Safira,GYN,app,7510,False,business
+C000944,2022-10-08,Azul Fidelidade,CGH,web,4718,False,business
+C000945,2025-02-11,Azul Fidelidade,SDU,web,6587,False,economy
+C000946,2022-04-29,Azul Fidelidade,CWB,agency,10340,False,economy
+C000947,2020-07-11,Azul Fidelidade,VCP,app,3856,False,economy
+C000948,2025-05-04,Diamante,POA,web,6009,False,economy
+C000949,2025-11-18,Topázio,CGH,app,5147,False,economy
+C000950,2020-04-25,Topázio,CGH,app,1799,True,economy
+C000951,2025-06-11,Diamante Unique,REC,app,5259,False,business
+C000952,2026-03-17,Azul Fidelidade,BSB,web,5230,False,economy
+C000953,2026-02-13,Topázio,BSB,app,7265,False,economy
+C000954,2026-09-15,Safira,SDU,app,6212,False,economy
+C000955,2022-11-13,Safira,GYN,agency,4953,True,economy
+C000956,2025-09-05,Safira,CGH,agency,13711,True,economy
+C000957,2020-10-22,Safira,CWB,app,8051,True,premium
+C000958,2024-09-30,Azul Fidelidade,SSA,agency,2788,False,premium
+C000959,2026-07-02,Safira,CWB,app,2760,False,economy
+C000960,2026-06-26,Azul Fidelidade,VCP,web,8121,False,economy
+C000961,2022-10-29,Azul Fidelidade,POA,web,9463,False,economy
+C000962,2021-09-23,Diamante,GYN,app,4561,True,premium
+C000963,2020-02-04,Topázio,GYN,app,3257,False,premium
+C000964,2026-06-01,Azul Fidelidade,CGH,app,10229,False,economy
+C000965,2026-01-12,Safira,BSB,app,11674,False,economy
+C000966,2026-05-04,Safira,CGH,web,9985,True,economy
+C000967,2020-01-20,Diamante Unique,CGH,agency,14388,False,economy
+C000968,2024-04-09,Safira,SDU,app,11552,False,economy
+C000969,2022-12-05,Topázio,CWB,app,10751,False,economy
+C000970,2023-09-16,Azul Fidelidade,CGH,app,2632,False,economy
+C000971,2021-03-26,Diamante,REC,web,17320,False,business
+C000972,2020-04-12,Azul Fidelidade,GYN,web,9176,False,economy
+C000973,2022-06-05,Topázio,CWB,app,10661,False,economy
+C000974,2025-03-20,Topázio,BSB,app,12044,False,economy
+C000975,2023-03-30,Topázio,BSB,web,3764,False,economy
+C000976,2025-02-08,Azul Fidelidade,SSA,web,5865,False,economy
+C000977,2021-12-30,Safira,BSB,app,4247,False,business
+C000978,2026-07-15,Azul Fidelidade,VCP,web,22415,True,economy
+C000979,2024-08-20,Safira,POA,app,8795,False,premium
+C000980,2023-04-24,Diamante Unique,VCP,app,17765,False,economy
+C000981,2020-09-21,Azul Fidelidade,VCP,app,2502,False,economy
+C000982,2024-09-20,Safira,SDU,web,16225,False,economy
+C000983,2021-04-21,Azul Fidelidade,REC,web,7957,False,economy
+C000984,2024-08-11,Topázio,REC,web,19096,False,economy
+C000985,2026-09-11,Diamante Unique,CNF,app,9261,False,premium
+C000986,2026-08-13,Topázio,CNF,app,2737,False,economy
+C000987,2021-10-21,Azul Fidelidade,CGH,app,10049,False,economy
+C000988,2026-02-28,Topázio,SSA,app,7093,False,economy
+C000989,2022-02-02,Azul Fidelidade,CNF,web,19611,False,economy
+C000990,2020-05-14,Azul Fidelidade,GYN,app,1886,False,economy
+C000991,2024-10-06,Azul Fidelidade,BSB,app,10308,False,economy
+C000992,2021-06-15,Azul Fidelidade,SDU,web,13352,False,economy
+C000993,2020-01-20,Azul Fidelidade,CWB,web,3265,False,economy
+C000994,2023-10-03,Azul Fidelidade,VCP,web,15807,False,economy
+C000995,2024-02-28,Safira,GYN,app,12299,False,premium
+C000996,2024-10-13,Azul Fidelidade,GYN,app,15131,False,economy
+C000997,2023-01-28,Safira,BSB,web,9234,False,economy
+C000998,2020-06-12,Azul Fidelidade,CNF,web,12772,False,premium
+C000999,2020-02-29,Safira,REC,web,10246,False,economy
+C001000,2023-11-16,Azul Fidelidade,GYN,app,6267,False,economy
+C001001,2023-08-20,Azul Fidelidade,POA,app,1889,False,economy
+C001002,2022-12-23,Azul Fidelidade,REC,app,3285,False,economy
+C001003,2021-02-03,Topázio,VCP,web,5318,False,premium
+C001004,2024-03-06,Topázio,SSA,app,2483,False,economy
+C001005,2022-01-04,Topázio,REC,web,10458,False,economy
+C001006,2026-02-10,Safira,CNF,web,4724,False,economy
+C001007,2022-02-10,Azul Fidelidade,POA,web,3496,False,economy
+C001008,2022-07-23,Diamante Unique,SSA,web,7003,False,economy
+C001009,2025-03-20,Diamante,BSB,app,12126,False,economy
+C001010,2023-07-27,Diamante,REC,web,4109,True,economy
+C001011,2020-04-16,Azul Fidelidade,BSB,agency,8580,False,economy
+C001012,2020-08-09,Azul Fidelidade,CWB,agency,7406,False,economy
+C001013,2025-01-27,Topázio,SSA,app,2199,False,economy
+C001014,2022-10-13,Topázio,CGH,web,3485,False,economy
+C001015,2022-09-29,Azul Fidelidade,CNF,app,14926,False,economy
+C001016,2021-04-01,Azul Fidelidade,SDU,app,15682,False,economy
+C001017,2025-11-07,Safira,CWB,app,7938,False,premium
+C001018,2025-02-11,Diamante,REC,web,5888,True,economy
+C001019,2021-12-13,Azul Fidelidade,SDU,web,16726,False,economy
+C001020,2024-03-18,Safira,SSA,app,10237,False,business
+C001021,2022-12-27,Azul Fidelidade,CWB,web,5360,False,economy
+C001022,2020-08-05,Topázio,CNF,web,12990,False,economy
+C001023,2021-01-16,Diamante Unique,REC,web,3969,False,premium
+C001024,2023-03-13,Azul Fidelidade,CGH,app,6919,False,economy
+C001025,2024-01-30,Topázio,GYN,app,13996,False,economy
+C001026,2021-12-07,Azul Fidelidade,REC,app,9807,False,economy
+C001027,2021-04-09,Azul Fidelidade,SSA,app,13527,False,economy
+C001028,2026-03-13,Azul Fidelidade,POA,app,5336,False,economy
+C001029,2020-01-08,Safira,SDU,web,4435,False,premium
+C001030,2024-02-11,Diamante,BSB,agency,29938,False,economy
+C001031,2023-06-05,Topázio,POA,app,6742,False,premium
+C001032,2026-03-22,Topázio,REC,app,5931,False,economy
+C001033,2025-11-13,Safira,CWB,app,3648,False,economy
+C001034,2023-05-17,Azul Fidelidade,SDU,app,4121,False,economy
+C001035,2024-04-23,Safira,CWB,app,6112,False,economy
+C001036,2023-02-08,Topázio,CGH,web,10501,False,premium
+C001037,2020-08-21,Azul Fidelidade,POA,app,3644,False,economy
+C001038,2022-12-25,Safira,GYN,app,14659,False,economy
+C001039,2024-08-09,Azul Fidelidade,SDU,web,7807,False,economy
+C001040,2024-09-04,Azul Fidelidade,REC,app,5507,False,economy
+C001041,2026-03-02,Safira,CGH,web,2029,True,economy
+C001042,2020-06-24,Topázio,VCP,app,4111,False,economy
+C001043,2020-02-06,Topázio,VCP,app,20698,False,economy
+C001044,2021-07-24,Azul Fidelidade,CNF,app,8369,False,economy
+C001045,2020-07-05,Azul Fidelidade,CGH,app,14296,False,economy
+C001046,2023-08-01,Azul Fidelidade,CNF,app,8974,False,economy
+C001047,2020-08-12,Azul Fidelidade,SSA,app,1241,False,economy
+C001048,2025-09-19,Azul Fidelidade,BSB,web,6331,True,economy
+C001049,2020-02-22,Azul Fidelidade,CGH,app,13931,False,economy
+C001050,2025-03-11,Topázio,REC,agency,2093,True,economy
+C001051,2026-03-10,Azul Fidelidade,GYN,agency,4288,False,economy
+C001052,2023-01-26,Topázio,POA,web,7082,False,premium
+C001053,2026-03-04,Azul Fidelidade,GYN,app,4028,False,economy
+C001054,2026-05-11,Azul Fidelidade,VCP,web,14747,True,economy
+C001055,2026-05-12,Azul Fidelidade,CNF,web,5567,False,economy
+C001056,2023-04-02,Diamante,GYN,app,4627,False,economy
+C001057,2020-12-13,Azul Fidelidade,CWB,app,15768,False,economy
+C001058,2022-06-20,Azul Fidelidade,CGH,app,5365,False,economy
+C001059,2026-02-13,Diamante,BSB,web,8766,False,premium
+C001060,2025-02-06,Topázio,POA,app,6982,False,premium
+C001061,2020-01-07,Topázio,BSB,app,7182,False,premium
+C001062,2024-01-31,Azul Fidelidade,SDU,app,2715,False,premium
+C001063,2021-12-07,Azul Fidelidade,CWB,web,5877,False,economy
+C001064,2020-04-02,Azul Fidelidade,POA,web,8052,False,economy
+C001065,2020-02-02,Topázio,REC,app,3249,False,economy
+C001066,2023-10-23,Azul Fidelidade,REC,agency,3908,False,economy
+C001067,2026-06-24,Azul Fidelidade,SSA,app,2756,False,economy
+C001068,2022-12-15,Safira,POA,agency,17035,False,economy
+C001069,2020-02-08,Diamante,BSB,app,9360,False,business
+C001070,2020-07-11,Safira,SSA,web,8328,True,economy
+C001071,2022-07-14,Topázio,GYN,app,16028,False,economy
+C001072,2023-06-19,Azul Fidelidade,SDU,app,3710,False,economy
+C001073,2022-08-30,Azul Fidelidade,REC,app,4098,False,economy
+C001074,2022-10-28,Safira,REC,app,8446,False,economy
+C001075,2023-01-26,Azul Fidelidade,SSA,agency,14960,False,economy
+C001076,2021-01-14,Azul Fidelidade,VCP,web,3003,False,economy
+C001077,2025-06-15,Azul Fidelidade,CNF,web,9351,False,economy
+C001078,2020-03-30,Diamante Unique,CNF,app,16606,False,business
+C001079,2021-04-21,Safira,BSB,app,7345,True,economy
+C001080,2026-05-22,Azul Fidelidade,CNF,app,8471,False,economy
+C001081,2021-05-06,Safira,POA,agency,6363,False,business
+C001082,2020-04-23,Azul Fidelidade,VCP,app,12817,False,economy
+C001083,2022-03-22,Topázio,SDU,agency,17851,False,economy
+C001084,2026-03-30,Safira,CWB,app,10322,False,economy
+C001085,2025-10-25,Diamante,CGH,app,10818,False,economy
+C001086,2024-09-01,Azul Fidelidade,REC,app,7220,False,economy
+C001087,2024-12-23,Azul Fidelidade,CWB,web,9998,False,economy
+C001088,2022-12-18,Safira,VCP,app,13112,False,premium
+C001089,2026-08-28,Azul Fidelidade,REC,web,9970,True,economy
+C001090,2024-06-25,Azul Fidelidade,CWB,app,3583,False,economy
+C001091,2023-02-09,Azul Fidelidade,POA,web,3767,False,economy
+C001092,2026-04-04,Topázio,BSB,web,2773,False,premium
+C001093,2024-02-03,Azul Fidelidade,CWB,app,5266,False,economy
+C001094,2021-09-22,Azul Fidelidade,GYN,app,16556,False,economy
+C001095,2024-04-23,Azul Fidelidade,GYN,app,4837,False,economy
+C001096,2023-07-17,Safira,CGH,web,4724,False,economy
+C001097,2022-09-02,Topázio,REC,app,15134,False,economy
+C001098,2025-09-20,Safira,SDU,app,24499,True,economy
+C001099,2023-10-02,Azul Fidelidade,GYN,web,6640,False,economy
+C001100,2025-01-05,Azul Fidelidade,CWB,app,6555,False,economy
+C001101,2022-05-29,Safira,CNF,web,8774,False,economy
+C001102,2022-12-05,Azul Fidelidade,VCP,agency,16123,False,economy
+C001103,2025-12-01,Diamante,CGH,app,15549,False,premium
+C001104,2024-07-10,Azul Fidelidade,CGH,app,2891,False,economy
+C001105,2023-12-15,Diamante,REC,web,6465,False,economy
+C001106,2025-08-02,Diamante Unique,REC,app,3789,False,economy
+C001107,2024-03-31,Topázio,CNF,agency,7611,False,economy
+C001108,2023-03-12,Topázio,SSA,app,5482,False,premium
+C001109,2024-11-07,Azul Fidelidade,VCP,app,3104,False,economy
+C001110,2022-07-21,Diamante,POA,web,12870,True,economy
+C001111,2023-09-06,Azul Fidelidade,REC,agency,1742,False,economy
+C001112,2021-01-16,Azul Fidelidade,CWB,app,7641,False,economy
+C001113,2023-08-17,Safira,CWB,app,7716,False,economy
+C001114,2026-07-16,Topázio,BSB,app,9891,False,economy
+C001115,2022-03-13,Azul Fidelidade,SSA,app,7081,True,economy
+C001116,2025-09-26,Azul Fidelidade,CNF,app,5276,False,economy
+C001117,2020-01-29,Diamante,SDU,web,2898,False,economy
+C001118,2022-06-01,Safira,CWB,web,30028,False,business
+C001119,2022-01-21,Azul Fidelidade,BSB,app,5372,False,economy
+C001120,2022-10-15,Azul Fidelidade,GYN,app,9140,False,economy
+C001121,2020-09-06,Azul Fidelidade,VCP,agency,7035,False,economy
+C001122,2022-05-21,Diamante,GYN,web,9131,True,business
+C001123,2026-04-13,Diamante,VCP,web,19727,False,economy
+C001124,2020-04-10,Azul Fidelidade,POA,web,7092,True,economy
+C001125,2021-09-09,Safira,POA,web,6831,False,economy
+C001126,2023-02-03,Topázio,REC,app,2595,False,premium
+C001127,2021-08-22,Azul Fidelidade,BSB,app,6749,False,economy
+C001128,2024-10-09,Topázio,CWB,app,5316,False,economy
+C001129,2021-12-04,Azul Fidelidade,POA,web,5372,False,economy
+C001130,2024-03-11,Azul Fidelidade,CGH,app,8604,False,economy
+C001131,2023-03-30,Azul Fidelidade,VCP,web,1350,False,economy
+C001132,2020-01-29,Topázio,SDU,app,16379,False,premium
+C001133,2026-04-06,Azul Fidelidade,VCP,web,5731,False,economy
+C001134,2023-11-04,Topázio,SDU,web,19816,False,premium
+C001135,2021-03-01,Topázio,POA,agency,6624,False,economy
+C001136,2023-02-22,Azul Fidelidade,CGH,app,14706,False,economy
+C001137,2024-10-17,Azul Fidelidade,SSA,web,4379,True,economy
+C001138,2023-01-20,Diamante,GYN,web,5439,False,economy
+C001139,2020-02-08,Topázio,REC,app,6011,False,economy
+C001140,2020-12-05,Azul Fidelidade,CNF,app,6763,False,economy
+C001141,2020-05-22,Diamante,REC,web,10819,False,business
+C001142,2025-06-25,Safira,POA,app,3782,False,economy
+C001143,2020-03-10,Topázio,CNF,app,5455,False,economy
+C001144,2026-04-02,Azul Fidelidade,POA,web,4567,False,economy
+C001145,2023-07-03,Topázio,CGH,app,5275,False,economy
+C001146,2020-09-22,Topázio,SSA,web,2123,False,economy
+C001147,2020-07-23,Azul Fidelidade,REC,agency,3865,False,economy
+C001148,2025-04-26,Azul Fidelidade,GYN,app,16442,True,economy
+C001149,2025-06-06,Azul Fidelidade,REC,app,1391,False,economy
+C001150,2024-04-16,Topázio,GYN,web,13570,False,economy
+C001151,2021-01-12,Azul Fidelidade,CNF,app,9756,False,economy
+C001152,2022-06-05,Safira,GYN,web,4808,True,premium
+C001153,2024-11-30,Safira,GYN,web,21675,False,economy
+C001154,2025-08-24,Diamante Unique,REC,app,24320,False,premium
+C001155,2023-10-08,Diamante,VCP,agency,3643,False,premium
+C001156,2021-09-18,Azul Fidelidade,REC,app,4318,False,economy
+C001157,2021-09-11,Safira,REC,app,11867,True,economy
+C001158,2026-08-11,Azul Fidelidade,CNF,app,2232,False,economy
+C001159,2026-01-18,Azul Fidelidade,SDU,web,5012,False,economy
+C001160,2024-05-01,Topázio,CGH,app,3936,False,economy
+C001161,2025-09-07,Diamante,POA,app,15835,False,premium
+C001162,2021-10-04,Azul Fidelidade,GYN,web,5306,False,economy
+C001163,2023-12-28,Topázio,REC,agency,8977,False,economy
+C001164,2026-05-24,Azul Fidelidade,SDU,web,16702,False,economy
+C001165,2020-04-20,Azul Fidelidade,POA,app,8521,False,economy
+C001166,2020-06-18,Diamante,SSA,app,3787,False,premium
+C001167,2020-02-06,Topázio,VCP,web,8995,True,economy
+C001168,2023-06-29,Azul Fidelidade,CGH,web,11063,False,economy
+C001169,2026-01-06,Topázio,CNF,app,7193,False,economy
+C001170,2024-04-03,Topázio,CNF,web,15393,False,economy
+C001171,2024-10-01,Azul Fidelidade,POA,agency,3640,False,economy
+C001172,2020-12-11,Azul Fidelidade,BSB,app,5125,False,economy
+C001173,2022-09-20,Azul Fidelidade,REC,app,1440,False,economy
+C001174,2022-07-08,Safira,SSA,app,20612,False,economy
+C001175,2025-09-14,Topázio,CWB,web,7368,True,economy
+C001176,2026-08-13,Azul Fidelidade,GYN,app,5140,False,economy
+C001177,2025-07-02,Azul Fidelidade,GYN,app,3765,False,economy
+C001178,2020-11-06,Topázio,CGH,web,21376,False,premium
+C001179,2023-06-15,Azul Fidelidade,GYN,web,9297,False,economy
+C001180,2026-01-23,Diamante,GYN,web,6933,False,economy
+C001181,2020-10-26,Topázio,SDU,web,5158,False,economy
+C001182,2025-01-13,Safira,POA,web,26118,False,economy
+C001183,2022-06-17,Azul Fidelidade,CNF,app,14618,True,economy
+C001184,2024-12-02,Azul Fidelidade,POA,app,3804,False,economy
+C001185,2022-01-26,Topázio,GYN,app,8418,False,economy
+C001186,2023-06-13,Diamante Unique,GYN,app,9721,False,economy
+C001187,2022-03-20,Safira,SSA,web,13549,False,premium
+C001188,2023-08-02,Azul Fidelidade,VCP,app,5030,False,business
+C001189,2024-08-19,Azul Fidelidade,CWB,web,7039,False,economy
+C001190,2024-09-09,Safira,REC,app,5578,False,economy
+C001191,2024-03-20,Diamante Unique,VCP,app,49759,True,business
+C001192,2020-04-20,Safira,CGH,app,5656,False,premium
+C001193,2023-04-02,Azul Fidelidade,CWB,app,6381,False,economy
+C001194,2024-11-08,Topázio,VCP,app,3389,False,economy
+C001195,2026-03-17,Diamante,VCP,web,23859,True,economy
+C001196,2026-06-18,Safira,VCP,app,7108,False,economy
+C001197,2026-05-29,Diamante,CWB,app,3959,False,economy
+C001198,2024-04-10,Azul Fidelidade,REC,app,10573,False,economy
+C001199,2020-11-16,Safira,POA,web,2417,False,economy
+C001200,2025-09-15,Diamante Unique,BSB,app,14297,True,premium
