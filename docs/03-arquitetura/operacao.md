@@ -91,6 +91,8 @@ Versionadas em `db/migrations/`, aplicadas em ordem por `python -m src.db migrat
 - Provider padrão: `rules` (sem credencial). `AGENT_LLM_PROVIDER=llm` exige `AGENT_LLM_API_KEY`, `AGENT_LLM_BASE_URL` (https) e `AGENT_LLM_MODEL` por ambiente; sem eles, ou em erro/saída inválida, cai em `rules` e registra `fallback_reason`.
 - Busca de regras: score mínimo + ao menos uma palavra de conteúdo em comum (embedding por hash é ruidoso). Sem fonte, o agente diz que não encontrou.
 - Logs só com metadados (ferramentas, provider, latência).
+- Guardrails (`src/agent/guardrails.py`, sem LLM): **entrada** com sanitização (NFKC, caracteres de controle/invisíveis), redação de PII e bloqueio de prompt injection e pedidos de ativação antes de qualquer ferramenta; **saída** com JSON Schema, citação obrigatória de fonte `https://*.voeazul.com.br` (ou aviso explícito de que não há fonte), sem PII, valores/benefícios só se vierem das ferramentas, teto de benefício (maior custo do catálogo de premissas), ação apenas elegível e igual à calculada, `requires_approval` sempre `true` e bloqueio de frases de ativação consumada. Violação do LLM → fallback `rules` (`guardrail_violation`); se ainda violar → recusa segura. O relatório (`guardrails`) guarda só códigos de regra.
+- Fontes ingeridas com instruções dirigidas a modelos são rejeitadas na ingestão e, por defesa em profundidade, descartadas do contexto.
 
 ## 5. API
 

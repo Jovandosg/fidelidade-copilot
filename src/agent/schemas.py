@@ -88,7 +88,14 @@ class ProposedAction(Strict):
     customer_id: str
     action: str
     expected_margin_brl: float
-    requires_approval: bool = True
+    requires_approval: Literal[True] = True  # nenhuma proposta do agente dispensa aprovacao humana
+
+
+class GuardrailReport(Strict):
+    status: Literal["passed", "fallback", "blocked"] = "passed"
+    input_flags: list[str] = Field(default_factory=list)
+    output_violations: list[str] = Field(default_factory=list)  # codigos, nunca trechos do conteudo
+    checks: list[str] = Field(default_factory=list)
 
 
 class AgentAnswer(Strict):
@@ -99,6 +106,7 @@ class AgentAnswer(Strict):
     tools_used: list[str]
     provider: Literal["rules", "llm"]
     fallback_used: bool
-    fallback_reason: Literal["no_credential", "provider_error", "invalid_output"] | None = None
+    fallback_reason: Literal["no_credential", "provider_error", "invalid_output", "guardrail_violation"] | None = None
+    guardrails: GuardrailReport = Field(default_factory=GuardrailReport)
     simulated: bool = True
     notice: str = SIMULATED_NOTICE

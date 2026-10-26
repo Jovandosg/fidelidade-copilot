@@ -17,6 +17,7 @@ from urllib.parse import urlparse
 import psycopg
 from psycopg.types.json import Jsonb
 
+from ..agent.guardrails import PII_PATTERNS, detect_injection
 from .chunking import chunk_markdown
 from .embeddings import Embedder, HashingEmbedder, to_pgvector
 
@@ -24,11 +25,6 @@ SOURCES_DIR = Path(__file__).parents[2] / "knowledge" / "sources"
 ALLOWED_HOST = "voeazul.com.br"  # somente o dominio publico do programa
 MAX_BODY_CHARS = 200_000
 REQUIRED = ("url", "title", "publisher", "consulted_at")
-PII_PATTERNS = {
-    "email": re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+"),
-    "cpf": re.compile(r"\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b"),
-    "telefone": re.compile(r"(?:\+?55\s?)?\(?\d{2}\)?\s?9?\d{4}-?\d{4}\b"),
-}
 
 
 class SourceError(ValueError):
@@ -81,6 +77,8 @@ def parse_source(path: Path) -> Source:
     for label, pattern in PII_PATTERNS.items():
         if pattern.search(body):
             raise SourceError(f"{path.name}: possivel PII ({label}) no texto; fontes devem ser regras publicas")
+    if detect_injection(body):
+        raise SourceError(f"{path.name}: texto com instrucoes dirigidas a modelos (possivel prompt injection); fontes devem ser so regras publicas")
     return Source(meta["url"], meta["title"], meta["publisher"], consulted, meta.get("license_note") or None, body, path)
 
 
