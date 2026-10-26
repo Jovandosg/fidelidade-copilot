@@ -98,6 +98,8 @@ docker compose down -v; Remove-Item .env
 
 ## Testes
 
+> Operação, rotinas, papéis, rotação de segredos e resposta a incidentes: [docs/03-arquitetura/operacao.md](docs/03-arquitetura/operacao.md).
+
 ```powershell
 .\scripts\test.ps1     # pytest + tsc + vitest
 ```

@@ -248,3 +248,23 @@ def test_audit_requires_auditor_and_validates_filters(live):
     assert c.get("/audit", params={"entity_id": "x' OR '1'='1"}, headers=tok("auditor")).status_code == 422
     assert c.get("/audit", params={"limit": 1000}, headers=tok("auditor")).status_code == 422
     assert c.get("/audit", headers=tok("auditor")).json()["total"] >= 0
+
+
+@needs_db
+def test_hostile_inputs_never_cause_500_or_leak_details(live):
+    c, features, _, _ = live
+    need = features.loc[features.nba_requires_approval, "customer_id"].iloc[2]
+    hostile = [
+        c.post(f"/nba/{need}/aprovacao", content=b"{not json", headers={**tok("gestor"), "Content-Type": "application/json"}),
+        c.post(f"/nba/{need}/aprovacao", json={"decision": "approve", "reason": "x" * 2_000_000}, headers=tok("gestor")),
+        c.post(f"/nba/{need}/aprovacao", json={"decision": ["approve"], "reason": {"a": 1}}, headers=tok("gestor")),
+        c.post("/nba/C000001'; DROP TABLE ops.audit_log;--/aprovacao", json={"decision": "approve", "reason": "motivo suficiente"}, headers=tok("gestor")),
+        c.get("/clientes/C000001'%20OR%20'1'='1", headers=tok("analista")),
+        c.get("/clientes", params={"sort": "hvs; DROP TABLE x", "segment": "' OR 1=1 --"}, headers=tok("analista")),
+        c.get("/audit", params={"offset": -1}, headers=tok("auditor")),
+    ]
+    for r in hostile:
+        assert r.status_code in (404, 422), (r.status_code, r.text[:200])
+        assert "psycopg" not in r.text and "Traceback" not in r.text and "ops.audit_log" not in r.text.replace("DROP TABLE ops.audit_log", "")
+    assert c.get("/audit", params={"entity_id": need}, headers=tok("auditor")).json()["total"] == 0
+    assert c.get("/audit", headers=tok("auditor")).status_code == 200  # tabela intacta
