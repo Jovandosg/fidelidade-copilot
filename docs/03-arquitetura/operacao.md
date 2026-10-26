@@ -56,7 +56,7 @@ Manual: `python -m src.pipeline`, `python -m src.db all`, `uvicorn src.api.main:
 | `raw` | dados de origem sintéticos | etl | owner |
 | `treated` | dados tratados | etl | etl |
 | `analytics` | features, HVS, risco, NBA, IVR servidos à API | etl | api_ro, api_audit |
-| `ops` | `pipeline_runs`, `data_quality_results`, `model_registry`, `drift_metrics`, `audit_log` | etl (sem `audit_log`); api_audit só insere em `audit_log` | api_ro (sem `audit_log`); api_audit lê `audit_log` |
+| `ops` | `pipeline_runs`, `data_quality_results`, `model_registry`, `drift_metrics`, `audit_log`, `agent_proposals` | etl (sem `audit_log` e `agent_proposals`); api_audit só insere em `audit_log` e cria/decide `agent_proposals` (UPDATE só nas colunas de decisão) | api_ro (sem `audit_log`); api_audit lê `audit_log` |
 
 `ops.audit_log` é **append-only**: um trigger bloqueia UPDATE, DELETE e TRUNCATE, até para o owner. O owner ainda pode desabilitar o trigger; por isso restrinja o uso do owner em produção e monitore DDL.
 
@@ -73,6 +73,7 @@ Versionadas em `db/migrations/`, aplicadas em ordem por `python -m src.db migrat
 | `005_ops_tables.sql` | tabelas `ops.*` e trigger de `audit_log` |
 | `006_grants.sql` | privilégios mínimos por papel |
 | `007_pipeline_run_instrumentation.sql` | colunas de instrumentação (versão de código, seed, linhas por entidade) |
+| `008_agent_proposals.sql` | `ops.agent_proposals` (propostas do agente; máquina de estados por trigger) |
 
 ## 5. API
 
@@ -86,6 +87,7 @@ python -m src.api.tokens --sub seu.apelido --role gestor --hours 8   # analista 
 |---|---|---|---|
 | `GET /kpis`, `/clientes`, `/clientes/{customer_id}`, `/rotas`, `/nba` | ✔ | ✔ | ✔ |
 | `GET /ops/runs`, `/ops/quality`, `/ops/models`, `/ops/drift` | ✔ | ✔ | ✔ |
+| `GET /propostas`, `/propostas/{proposal_id}` | ✔ | ✔ | ✔ |
 | `GET /nba/aprovacoes` | — | ✔ | ✔ |
 | `POST /nba/{customer_id}/aprovacao` | — | ✔ | — |
 | `GET /audit` | — | — | ✔ |

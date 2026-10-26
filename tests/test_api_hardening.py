@@ -52,11 +52,11 @@ def test_unknown_path_returns_generic_404():
 
 
 def test_database_failure_does_not_leak_dsn_or_password(monkeypatch):
-    monkeypatch.setenv("DATABASE_URL_RO", "postgresql://fidelidade_ro:Sup3rSecretPw@127.0.0.1:1/fidelidade?connect_timeout=1")
+    monkeypatch.setenv("DATABASE_URL_RO", "postgresql://fidelidade_ro:change-me-canary@127.0.0.1:1/fidelidade?connect_timeout=1")
     r = TestClient(app, raise_server_exceptions=False).get("/kpis", headers=bearer("analista"))
     assert r.status_code >= 500
     text = r.text + str(dict(r.headers))
-    for leak in ("Sup3rSecretPw", "fidelidade_ro", "127.0.0.1", "Traceback", "psycopg"):
+    for leak in ("change-me-canary", "fidelidade_ro", "127.0.0.1", "Traceback", "psycopg"):
         assert leak not in text
 
 
