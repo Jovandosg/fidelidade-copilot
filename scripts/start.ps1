@@ -67,6 +67,7 @@ Run "pipeline" { python -m src.pipeline }
 
 Step "Migracoes e carga idempotente no Postgres"
 Run "carga" { python -m src.db all }
+Run "base de conhecimento" { python -m src.knowledge ingest }
 
 if ($SetupOnly) { Write-Host "`nPreparo concluido (-SetupOnly)." -ForegroundColor Green; exit 0 }
 
