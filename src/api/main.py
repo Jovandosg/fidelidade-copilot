@@ -2,18 +2,18 @@
 from __future__ import annotations
 
 import os
-from collections.abc import Iterator
 from typing import Annotated
 
-import psycopg
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi import Path as PathParam
 from fastapi.middleware.cors import CORSMiddleware
 from psycopg import sql
-from psycopg.rows import dict_row
 
 from ..schemas import CustomerFeature, RouteMetric
+from .deps import Conn
 from .models import CustomerPage, DistributionItem, Kpis, NbaPage, NbaSummary, RoutePage
+from .ops import router as ops_router
+from .security import RateLimitMiddleware, RequestLogMiddleware, SecurityHeadersMiddleware, configure_logging, make_limiter, require
 
 DEFAULT_ORIGINS = "http://localhost:5173,http://127.0.0.1:5173"
 CUSTOMER_SORTS = tuple(CustomerFeature.model_fields)
@@ -21,23 +21,9 @@ ROUTE_SORTS = tuple(RouteMetric.model_fields)
 NBA_COLS = ("customer_id", "profile", "segment", "hvs", "risk_score", "nba_action", "nba_expected_margin_brl", "nba_requires_approval")
 MAX_LIMIT = 200
 CUSTOMER_ID_PATTERN = r"^C\d{6}$"
+READ = [Depends(require("analista", "gestor", "auditor"))]
 
 
-def get_conn() -> Iterator[psycopg.Connection]:
-    dsn = os.environ.get("DATABASE_URL_RO")
-    if not dsn:
-        raise HTTPException(status_code=503, detail="Banco nao configurado")
-    try:
-        conn = psycopg.connect(dsn, row_factory=dict_row, options="-c default_transaction_read_only=on")
-    except psycopg.OperationalError:
-        raise HTTPException(status_code=503, detail="Banco indisponivel") from None
-    try:
-        yield conn
-    finally:
-        conn.close()
-
-
-Conn = Annotated[psycopg.Connection, Depends(get_conn)]
 Limit = Annotated[int, Query(ge=1, le=MAX_LIMIT)]
 Offset = Annotated[int, Query(ge=0)]
 
@@ -58,18 +44,26 @@ def _table(name: str) -> sql.Composable:
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="Ancora Azul - API de analytics (somente leitura)",
-        version="1.0.0",
-        description="Dados SINTETICOS. Somente GET; le exclusivamente do PostgreSQL. Sem PII.",
+        title="Ancora Azul - API de analytics",
+        version="1.1.0",
+        description="Dados SINTETICOS. Autenticacao por JWT (perfis analista, gestor, auditor); leitura do PostgreSQL e um unico POST de aprovacao que grava em ops.audit_log. Sem PII.",
     )
+    configure_logging()
     origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", DEFAULT_ORIGINS).split(",") if o.strip()]
-    app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET"], allow_headers=["Content-Type"], allow_credentials=False)
+    app.state.limiter = make_limiter()
+    # o ultimo adicionado e o mais externo: CORS > log > headers > rate limit
+    app.add_middleware(RateLimitMiddleware, limiter=app.state.limiter)
+    app.add_middleware(SecurityHeadersMiddleware)
+    app.add_middleware(RequestLogMiddleware)
+    app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET", "POST"], allow_headers=["Content-Type", "Authorization", "X-Request-ID"],
+                       expose_headers=["X-Request-ID", "Retry-After"], allow_credentials=False)
+    app.include_router(ops_router)
 
     @app.get("/health", include_in_schema=False)
     def health() -> dict[str, str]:
         return {"status": "ok"}
 
-    @app.get("/kpis", response_model=Kpis, summary="Indicadores executivos")
+    @app.get("/kpis", response_model=Kpis, summary="Indicadores executivos", dependencies=READ)
     def kpis(conn: Conn, risk_threshold: Annotated[float, Query(ge=0, le=100)] = 40.0) -> Kpis:
         cf, rm = _table("customer_features"), _table("route_metrics")
         row = conn.execute(
@@ -93,7 +87,7 @@ def create_app() -> FastAPI:
 
         return Kpis(risk_threshold=risk_threshold, avg_route_ivr=ivr, profiles=dist("profile"), segments=dist("segment"), **row)
 
-    @app.get("/clientes", response_model=CustomerPage, summary="Lista de clientes (paginada)")
+    @app.get("/clientes", response_model=CustomerPage, summary="Lista de clientes (paginada)", dependencies=READ)
     def clientes(
         conn: Conn,
         limit: Limit = 50,
@@ -120,14 +114,14 @@ def create_app() -> FastAPI:
         ).fetchall()
         return CustomerPage(total=total, limit=limit, offset=offset, items=rows)
 
-    @app.get("/clientes/{customer_id}", response_model=CustomerFeature, summary="Perfil e explicacao de um cliente")
+    @app.get("/clientes/{customer_id}", response_model=CustomerFeature, summary="Perfil e explicacao de um cliente", dependencies=READ)
     def cliente(conn: Conn, customer_id: Annotated[str, PathParam(pattern=CUSTOMER_ID_PATTERN)]) -> CustomerFeature:
         row = conn.execute(sql.SQL("SELECT * FROM {} WHERE customer_id = %s").format(_table("customer_features")), (customer_id,)).fetchone()
         if row is None:
             raise HTTPException(status_code=404, detail="Cliente nao encontrado")
         return CustomerFeature.model_validate(row)
 
-    @app.get("/rotas", response_model=RoutePage, summary="Metricas por rota (IVR)")
+    @app.get("/rotas", response_model=RoutePage, summary="Metricas por rota (IVR)", dependencies=READ)
     def rotas(conn: Conn, limit: Limit = 50, offset: Offset = 0, sort: str = "ivr", desc: bool = True) -> RoutePage:
         order = _order(sort, ROUTE_SORTS, desc, "route")
         total = conn.execute(sql.SQL("SELECT count(*) AS n FROM {}").format(_table("route_metrics"))).fetchone()["n"]
@@ -137,7 +131,7 @@ def create_app() -> FastAPI:
         ).fetchall()
         return RoutePage(total=total, limit=limit, offset=offset, items=rows)
 
-    @app.get("/nba", response_model=NbaPage, summary="Next Best Action (sugestoes; exigem aprovacao humana quando indicado)")
+    @app.get("/nba", response_model=NbaPage, summary="Next Best Action (sugestoes; exigem aprovacao humana quando indicado)", dependencies=READ)
     def nba(
         conn: Conn,
         limit: Limit = 50,

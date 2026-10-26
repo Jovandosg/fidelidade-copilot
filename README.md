@@ -39,7 +39,7 @@ O script: cria `.env` com senhas aleatórias se não existir → sobe o Postgres
 |---|---|
 | Dashboard | http://localhost:5173 |
 | API (docs interativas) | http://localhost:8000/docs |
-| KPIs (teste rápido) | http://localhost:8000/kpis |
+| KPIs (teste rápido) | http://localhost:8000/kpis (exige token JWT; veja "API (JWT + RBAC)") |
 
 A API não tem rota em `/`: o `404` em `GET /` é esperado. `Ctrl+C` encerra API e frontend; o Postgres continua no Docker (`docker compose down` para parar).
 `.\scripts\start.ps1 -SetupOnly` prepara banco e dados e sai, sem subir os servidores.
@@ -105,9 +105,25 @@ docker compose down -v; Remove-Item .env
 - `pytest -q`: pipeline, contrato, modelos e paridade (contrato × pandera × DDL × Pydantic) rodam sempre. Testes de banco e de API (`tests/test_db.py`, `tests/test_api.py`) usam um banco temporário descartável e são **pulados** sem `DATABASE_URL`/`DATABASE_URL_RO`.
 - `cd frontend && npm test`: vitest (cliente da API, formatação e fluxos das telas, com ApexCharts simulado). `npm run build` roda `tsc` e o build do Vite.
 
-## API somente leitura
+## API (JWT + RBAC)
 
-Somente GET, paginada, sem PII, conectando com o papel `fidelidade_ro` (apenas SELECT) via `DATABASE_URL_RO`: `/kpis`, `/clientes` (filtros `profile`, `segment`, `min_risk`, `max_risk`, `sort`, `desc`), `/clientes/{id}`, `/rotas`, `/nba`. CORS restrito a `CORS_ORIGINS` (padrão `http://localhost:5173`).
+Toda rota exceto `/health` exige `Authorization: Bearer <jwt>`. Gere um token local (usa `JWT_SECRET` do `.env`, ≥ 32 caracteres; sem ele a API responde 503 e nada é liberado):
+
+```powershell
+python -m src.api.tokens --sub seu.apelido --role gestor   # analista | gestor | auditor; --hours até 24
+```
+
+| Perfil | Pode |
+|---|---|
+| `analista` | ler `/kpis`, `/clientes`, `/rotas`, `/nba`, `/ops/*` |
+| `gestor` | tudo do analista + `POST /nba/{id}/aprovacao` e `GET /nba/aprovacoes` |
+| `auditor` | leitura + `GET /audit` (trilha) e `GET /nba/aprovacoes`; não aprova |
+
+Dados em `analytics`/`ops` via `fidelidade_ro` (somente SELECT, `DATABASE_URL_RO`); a aprovação e a leitura da trilha usam `fidelidade_api_audit` (`DATABASE_URL_AUDIT`, INSERT/SELECT só em `ops.audit_log`). Cada aprovação grava quem, quando, o quê e antes/depois (decisão única por cliente; a trilha é imutável). Sem PII: `sub` é um apelido e a justificativa não deve conter dados pessoais.
+
+Endpoints: `/kpis`, `/clientes` (filtros `profile`, `segment`, `min_risk`, `max_risk`, `sort`, `desc`), `/clientes/{id}`, `/rotas`, `/nba`, `/ops/runs`, `/ops/quality`, `/ops/models`, `/ops/drift`, `/audit`. Proteções: rate limit por IP (`RATE_LIMIT_PER_MINUTE`=120 leitura, `RATE_LIMIT_WRITE_PER_MINUTE`=20 escrita; em memória, por processo → 429 com `Retry-After`), logs JSON por requisição (`request_id`, status, duração, `sub`/`role`; sem query string nem token), headers de segurança (CSP, nosniff, X-Frame-Options, HSTS, no-store) e CORS restrito a `CORS_ORIGINS`.
+
+> O frontend atual ainda não envia token: a integração (login e as novas abas) é a Task6 do Prompt B.
 
 Tipos TypeScript: `scripts/gen_types.ps1` gera `frontend/openapi.json` e `frontend/src/api/schema.d.ts` a partir da API (um teste falha se o `openapi.json` ficar desatualizado).
 

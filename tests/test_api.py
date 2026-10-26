@@ -11,19 +11,31 @@ from psycopg.conninfo import make_conninfo
 from scripts.export_openapi import TARGET, render
 from src import db
 from src.api.main import app
+from src.api.security import issue_token
 from src.pipeline import ROOT, main
 from src.schemas import CustomerFeature, RouteMetric
 
 DSN, DSN_RO = os.environ.get("DATABASE_URL"), os.environ.get("DATABASE_URL_RO")
 needs_db = pytest.mark.skipif(not (DSN and DSN_RO), reason="DATABASE_URL/DATABASE_URL_RO nao definidos")
+TEST_SECRET = "test-secret-" + "x" * 32
 
 PII = {"name", "email", "cpf", "phone", "birth_date", "nome", "telefone"}
 
 
+@pytest.fixture(autouse=True)
+def _auth_env(monkeypatch):
+    monkeypatch.setenv("JWT_SECRET", TEST_SECRET)
+    app.state.limiter.reset()
+
+
+def _auth(role: str = "analista") -> dict[str, str]:
+    return {"Authorization": f"Bearer {issue_token('tester', role, secret=TEST_SECRET)}"}
+
+
 # ---------- estaticos (sem banco) ----------
-def test_api_is_read_only():
-    methods = {m for r in app.routes if hasattr(r, "methods") for m in r.methods}
-    assert methods <= {"GET", "HEAD", "OPTIONS"}
+def test_only_the_approval_endpoint_writes():
+    ops = {(m.upper(), p) for p, v in app.openapi()["paths"].items() for m in v}
+    assert {(m, p) for m, p in ops if m != "GET"} == {("POST", "/nba/{customer_id}/aprovacao")}
 
 
 def test_openapi_exposes_required_endpoints_and_mirrors_tables():
@@ -55,7 +67,7 @@ def test_cors_is_restricted():
 
 def test_without_database_url_returns_503(monkeypatch):
     monkeypatch.delenv("DATABASE_URL_RO", raising=False)
-    assert TestClient(app).get("/kpis").status_code == 503
+    assert TestClient(app).get("/kpis", headers=_auth()).status_code == 503
 
 
 # ---------- vivos ----------
@@ -74,7 +86,7 @@ def client():
     mp = pytest.MonkeyPatch()
     mp.setenv("DATABASE_URL_RO", make_conninfo(DSN_RO, dbname=name))
     try:
-        yield TestClient(app), features, routes
+        yield TestClient(app, headers=_auth()), features, routes
     finally:
         mp.undo()
         with psycopg.connect(DSN, autocommit=True) as admin:
