@@ -12,8 +12,8 @@ Identificar clientes de alto valor atual ou futuro, estimar risco de evasão, ex
 
 - Python 3.11+
 - pandas, NumPy, scikit-learn e Parquet
-- Streamlit para o dashboard
-- Plotly/Streamlit para visualização
+- Dashboard: legado em Streamlit (`legacy/`); novo front React + API previsto (ver `docs/03-arquitetura/`)
+- Plotly para visualização
 - Evolução prevista: DuckDB, FastAPI, LangGraph, Pydantic, SHAP e testes pytest
 
 ## Execução local
@@ -22,17 +22,18 @@ Identificar clientes de alto valor atual ou futuro, estimar risco de evasão, ex
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-python pipeline.py
-streamlit run app.py
+python -m src.pipeline
 ```
+
+O dashboard Streamlit antigo foi movido para `legacy/` e nao deve ser executado.
 
 ## Estrutura
 
 - `data/raw`: snapshot sintético de origem
 - `data/treated`: reservado para dados tratados
 - `data/analytics`: features, scores, segmentos e recomendações
-- `pipeline.py`: geração e materialização da base
-- `app.py`: dashboard Streamlit
+- `src/`: pipeline oficial (gerador, transformacao, validacao pelo contrato)
+- `legacy/`: MVP antigo preservado por historico
 - `docs`: documentação complementar
 - `tests`: testes automatizados
 
