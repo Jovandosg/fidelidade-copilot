@@ -42,7 +42,10 @@ class Agent:
                 except ToolError as exc:
                     ctx.errors.append(f"{name}: {exc}")
         try:
-            hits = self.tools.call("buscar_regra", {"query": content_query(CUSTOMER_ID.sub(" ", question)), "k": 3}).hits
+            plain_query = CUSTOMER_ID.sub(" ", question)
+            hits = self.tools.call("buscar_regra", {"query": content_query(plain_query), "k": 3}).hits
+            if not hits:  # sem palavras de enchimento o score pode cair; tenta com a pergunta inteira (o filtro de palavra de conteudo continua valendo)
+                hits = self.tools.call("buscar_regra", {"query": plain_query.strip() or question, "k": 3}).hits
             ctx.hits = [h for h in hits if not detect_injection(h.content)]  # defesa em profundidade: fonte com instrucoes nunca vira contexto
             used.append("buscar_regra")
         except ToolError as exc:
