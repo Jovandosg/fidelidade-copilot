@@ -21,33 +21,80 @@ O contrato de dados (`docs/02-dados/data_contracts.yml`, v1.1.0) é a fonte da v
 
 ## Pré-requisitos
 
-Python 3.11+, Node 20+ (testado com 24), Docker (Desktop) e PowerShell.
+- Python 3.11+, Node 20+ (testado com 24) e Docker (Desktop) **em execução**.
+- PowerShell (Windows) para o script de subida; em Linux/macOS use o passo a passo manual.
+- Você precisa estar numa branch/commit que contenha `src/db.py` e `src/api/` (branch `Dev_Agent_harness&guardrails` ou posterior). Em versões antigas, `python -m src.db` e `uvicorn src.api.main:app` falham com "No module named".
+- Rode todos os comandos **na raiz do repositório**.
 
-## Execução rápida (um comando)
+## Execução rápida (um comando, Windows)
 
 ```powershell
+git checkout "Dev_Agent_harness&guardrails"; git pull
 .\scripts\start.ps1
 ```
 
-O script: cria `.env` com senhas aleatórias se não existir → sobe o Postgres (docker) → instala dependências → gera os dados e valida → aplica migrações e carrega no banco → sobe a API em http://localhost:8000/docs e o frontend em http://localhost:5173. `Ctrl+C` encerra API e frontend (o Postgres continua no Docker; `docker compose down` para parar).
+O script: cria `.env` com senhas aleatórias se não existir → sobe o Postgres (docker) e espera ficar `healthy` → instala dependências → gera os dados e valida → aplica migrações e carrega no banco → sobe a API e o frontend.
+
+| Serviço | URL |
+|---|---|
+| Dashboard | http://localhost:5173 |
+| API (docs interativas) | http://localhost:8000/docs |
+| KPIs (teste rápido) | http://localhost:8000/kpis |
+
+A API não tem rota em `/`: o `404` em `GET /` é esperado. `Ctrl+C` encerra API e frontend; o Postgres continua no Docker (`docker compose down` para parar).
 `.\scripts\start.ps1 -SetupOnly` prepara banco e dados e sai, sem subir os servidores.
 
-> O script é PowerShell. Em Linux/macOS, use os passos manuais abaixo.
+## Passo a passo manual (qualquer SO)
 
-## Passo a passo manual
+Importante: `python -m src.db` e a API **não leem o arquivo `.env`**; leem variáveis de ambiente. Por isso o passo 4 exporta o `.env` no terminal. Faça isso em cada terminal novo.
 
-```bash
-python -m venv .venv && source .venv/bin/activate     # no Windows: .venv\Scripts\Activate.ps1
+**1. Dependências**
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1          # Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env            # troque as senhas; .env não é versionado
-docker compose up -d            # postgres:16, somente em 127.0.0.1
-python -m src.pipeline          # gera/valida data/raw, data/treated, data/analytics
-python -m src.db all            # migrações versionadas + carga idempotente (upsert)
-uvicorn src.api.main:app --port 8000
-cd frontend && npm install && npm run dev
 ```
 
-Exporte as variáveis do `.env` no shell (`DATABASE_URL`, `DATABASE_URL_RO`, `CORS_ORIGINS`) antes de rodar `src.db` e a API.
+**2. Configuração** (o `.env` não é versionado)
+```powershell
+Copy-Item .env.example .env         # Linux/macOS: cp .env.example .env
+```
+Edite o `.env`: troque as senhas. `POSTGRES_PORT`, `DATABASE_URL` e `DATABASE_URL_RO` devem usar a mesma porta e as mesmas senhas.
+
+**3. Banco**
+```powershell
+docker compose up -d
+docker ps                           # aguarde "Up (healthy)"
+```
+
+**4. Carregar o `.env` no terminal**
+```powershell
+# PowerShell
+Get-Content .env | ForEach-Object { if ($_ -match '^\s*([^#=\s][^=]*)=(.*)$') { Set-Item "env:$($matches[1].Trim())" $matches[2].Trim() } }
+```
+```bash
+# Linux/macOS
+set -a; source .env; set +a
+```
+
+**5. Dados, migrações e carga**
+```powershell
+python -m src.pipeline              # gera/valida data/raw, data/treated, data/analytics
+python -m src.db all                # migrações versionadas + carga idempotente (upsert)
+```
+Leva poucos segundos. Se travar, o `DATABASE_URL` não bate com o container (veja a solução de problemas).
+
+**6. API e frontend** (dois terminais, ambos com o `.env` carregado no da API)
+```powershell
+uvicorn src.api.main:app --port 8000
+cd frontend; npm install; npm run dev
+```
+
+**Recriar tudo do zero** (os dados são sintéticos e reproduzíveis):
+```powershell
+docker compose down -v; Remove-Item .env
+.\scripts\start.ps1
+```
 
 ## Testes
 
@@ -71,7 +118,10 @@ Visão Executiva, Mapa Valor × Risco, Fila de Risco, Perfil do Cliente (explica
 ## Solução de problemas
 
 - `db/init/*.sh` precisa de finais de linha LF (garantido por `.gitattributes`); com CRLF o container não cria o login da API. Se o volume foi criado assim, rode `docker compose down -v` e suba de novo.
-- Porta 5432 ocupada: defina `POSTGRES_PORT` e as URLs no `.env`.
+- `No module named src.db` ou `src.api`: você está numa branch antiga ou fora da raiz do repositório. Atualize a branch (veja Pré-requisitos).
+- `python -m src.db all` trava ou `DATABASE_URL nao definido`: o terminal não tem as variáveis do `.env` ou a porta/senha da URL não bate com o container. Rode o passo 4 do manual, confira `echo $env:DATABASE_URL` e `docker ps`, ou use `.\scripts\start.ps1`.
+- API responde 500 em `/kpis`: o banco está vazio ou inacessível; rode `python -m src.db all`.
+- Porta 5432 ocupada (outro Postgres local): defina `POSTGRES_PORT=55432` e use essa porta em `DATABASE_URL` e `DATABASE_URL_RO` no `.env`.
 - Senha do banco mudou depois da primeira subida: as senhas só valem na criação do volume; use `docker compose down -v` (apaga os dados locais, que são sintéticos e reproduzíveis).
 
 ## Limitações conhecidas
