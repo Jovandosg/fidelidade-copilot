@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "./auth";
+import { AgentPage } from "./pages/AgentPage";
 import { CustomerPage } from "./pages/CustomerPage";
 import { ExecutivePage } from "./pages/ExecutivePage";
 import { HealthPage } from "./pages/HealthPage";
@@ -13,6 +14,7 @@ const TABS = [
   { id: "executivo", label: "Executivo" },
   { id: "proteger", label: "Proteger (Radar)" },
   { id: "crescer", label: "Crescer (NBA)" },
+  { id: "agente", label: "Agente (simulado)" },
   { id: "rotas", label: "Rotas (IVR)" },
   { id: "cliente", label: "Perfil do Cliente" },
   { id: "saude", label: "Saúde da plataforma" },
@@ -56,11 +58,12 @@ export default function App() {
         {tab === "executivo" && <ExecutivePage />}
         {tab === "proteger" && (
           <div className="space-y-6">
-            <RiskQueuePage onSelect={openCustomer} />
             <ValueRiskPage onSelect={openCustomer} />
+            <RiskQueuePage onSelect={openCustomer} />
           </div>
         )}
         {tab === "crescer" && <NbaPage onSelect={openCustomer} />}
+        {tab === "agente" && <AgentPage />}
         {tab === "rotas" && <RoutesPage />}
         {tab === "cliente" && <CustomerPage customerId={customerId} onSelect={openCustomer} />}
         {tab === "saude" && <HealthPage />}

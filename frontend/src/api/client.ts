@@ -41,6 +41,57 @@ async function request<T>(method: "GET" | "POST", path: string, opts: { params?:
   return res.json() as Promise<T>;
 }
 
+export type SseEvent = { event: string; data: unknown };
+
+export function parseSseBlock(block: string): SseEvent | null {
+  let event = "message";
+  const data: string[] = [];
+  for (const line of block.split("\n")) {
+    if (line.startsWith(":")) continue;
+    if (line.startsWith("event:")) event = line.slice(6).trim();
+    else if (line.startsWith("data:")) data.push(line.slice(5).trimStart());
+  }
+  if (!data.length) return null;
+  try { return { event, data: JSON.parse(data.join("\n")) }; } catch { return null; }
+}
+
+// EventSource nao envia Authorization: le o stream via fetch para manter o JWT no header (nunca na URL).
+export async function streamSse(method: "GET" | "POST", path: string, onEvent: (e: SseEvent) => void, opts: { body?: unknown; signal?: AbortSignal } = {}): Promise<void> {
+  const headers: Record<string, string> = { Accept: "text/event-stream" };
+  if (token) headers.Authorization = `Bearer ${token}`;
+  if (opts.body !== undefined) headers["Content-Type"] = "application/json";
+  const res = await fetch(new URL(path, API_URL), { method, headers, signal: opts.signal, body: opts.body === undefined ? undefined : JSON.stringify(opts.body) });
+  if (!res.ok || !res.body) {
+    if (res.status === 401) onUnauthorized?.();
+    const detail = await res.json().then((j) => (typeof j.detail === "string" ? j.detail : "")).catch(() => "");
+    throw new Error(`Erro ${res.status} ao consultar ${path}${detail ? `: ${detail}` : ""}`);
+  }
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buf = "";
+  for (;;) {
+    const { done, value } = await reader.read();
+    buf += decoder.decode(value, { stream: !done }).replace(/\r\n/g, "\n");
+    let i: number;
+    while ((i = buf.indexOf("\n\n")) >= 0) {
+      const ev = parseSseBlock(buf.slice(0, i));
+      buf = buf.slice(i + 2);
+      if (ev) onEvent(ev);
+    }
+    if (done) break;
+  }
+}
+
+export type AgentCitation = { ref: number; url: string; title: string; version: number; consulted_at: string; section: string; score: number };
+export type GuardrailReport = { status: "passed" | "fallback" | "blocked"; input_flags: string[]; output_violations: string[]; checks: string[] };
+export type ProposedAction = { customer_id: string; action: string; expected_margin_brl: number; requires_approval: true };
+export type AgentMeta = { simulated: boolean; notice: string; provider: "rules" | "llm"; fallback_used: boolean; fallback_reason: string | null; tools_used: string[] };
+export type Proposal = {
+  proposal_id: string; created_at: string; customer_id: string; action: string; expected_margin_brl: number; rationale: string; sources: AgentCitation[];
+  guardrails: Partial<GuardrailReport>; provider: "rules" | "llm"; simulated: boolean; status: "pending" | "approved" | "rejected"; requested_by: string;
+  decided_by: string | null; decided_at: string | null; decision_reason: string | null;
+};
+
 export const get = <T>(path: string, params: Params = {}, signal?: AbortSignal) => request<T>("GET", path, { params, signal });
 
 export const api = {
@@ -57,6 +108,10 @@ export const api = {
   approvals: () => get<ApprovalStatus[]>("/nba/aprovacoes"),
   decide: (customerId: string, decision: Decision, reason: string) =>
     request<ApprovalResult>("POST", `/nba/${encodeURIComponent(customerId)}/aprovacao`, { body: { decision, reason } }),
+  demoEnabled: () => get<{ enabled: boolean }>("/auth/demo"),
+  demoToken: (role: string) => request<{ token: string; role: string; expires_in: number }>("POST", `/auth/demo/${encodeURIComponent(role)}`),
+  decideProposal: (id: string, decision: Decision, reason: string) =>
+    request<Proposal>("POST", `/propostas/${encodeURIComponent(id)}/decisao`, { body: { decision, reason } }),
   // A API limita a pagina a 200 itens; percorre as paginas para o mapa valor x risco.
   async allCustomers(cap = 2000): Promise<Customer[]> {
     const first = await get<CustomerPage>("/clientes", { limit: MAX_LIMIT, offset: 0 });

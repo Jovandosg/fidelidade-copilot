@@ -44,7 +44,7 @@ def base_claims(**over) -> dict:
 
 
 # ---------- JWT (sem banco: a autenticacao ocorre antes de qualquer consulta) ----------
-PROTECTED = ["/kpis", "/clientes", "/clientes/C000001", "/rotas", "/nba", "/ops/runs", "/ops/quality", "/ops/models", "/ops/drift", "/audit", "/nba/aprovacoes"]
+PROTECTED = ["/kpis", "/clientes", "/clientes/C000001", "/rotas", "/nba", "/ops/runs", "/ops/quality", "/ops/models", "/ops/drift", "/audit", "/nba/aprovacoes", "/propostas", f"/propostas/{uuid.UUID(int=1)}"]
 
 
 @pytest.mark.parametrize("path", PROTECTED)

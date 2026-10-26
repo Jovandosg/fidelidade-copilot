@@ -56,7 +56,7 @@ Manual: `python -m src.pipeline`, `python -m src.db all`, `uvicorn src.api.main:
 | `raw` | dados de origem sintéticos | etl | owner |
 | `treated` | dados tratados | etl | etl |
 | `analytics` | features, HVS, risco, NBA, IVR servidos à API | etl | api_ro, api_audit |
-| `ops` | `pipeline_runs`, `data_quality_results`, `model_registry`, `drift_metrics`, `audit_log` | etl (sem `audit_log`); api_audit só insere em `audit_log` | api_ro (sem `audit_log`); api_audit lê `audit_log` |
+| `ops` | `pipeline_runs`, `data_quality_results`, `model_registry`, `drift_metrics`, `audit_log`, `agent_proposals` | etl (sem `audit_log` e `agent_proposals`); api_audit só insere em `audit_log` e cria/decide `agent_proposals` (UPDATE só nas colunas de decisão) | api_ro (sem `audit_log`); api_audit lê `audit_log` |
 
 `ops.audit_log` é **append-only**: um trigger bloqueia UPDATE, DELETE e TRUNCATE, até para o owner. O owner ainda pode desabilitar o trigger; por isso restrinja o uso do owner em produção e monitore DDL.
 
@@ -73,6 +73,29 @@ Versionadas em `db/migrations/`, aplicadas em ordem por `python -m src.db migrat
 | `005_ops_tables.sql` | tabelas `ops.*` e trigger de `audit_log` |
 | `006_grants.sql` | privilégios mínimos por papel |
 | `007_pipeline_run_instrumentation.sql` | colunas de instrumentação (versão de código, seed, linhas por entidade) |
+| `008_agent_proposals.sql` | `ops.agent_proposals` (propostas do agente; máquina de estados por trigger) |
+| `009_knowledge_base.sql` | extensão `vector` (pgvector), schema `knowledge`: `public_sources` (URL, data de consulta, versão) e `rule_chunks` (chunks + embedding `vector(256)`); versionado, sem UPDATE/DELETE |
+
+### 4.3 Base de conhecimento do RAG (`knowledge`)
+
+- Exige a imagem `pgvector/pgvector:pg16` (já no `docker-compose.yml`). Volume antigo criado com `postgres:16-alpine` deve ser recriado: `docker compose down -v` **no seu checkout**, depois `.\scripts\start.ps1`.
+- Fontes ficam em `knowledge/sources/*.md` (front-matter `url`, `title`, `publisher`, `consulted_at`, `license_note` + texto). Só `https` no domínio `voeazul.com.br`, sem PII; veja `_TEMPLATE.md`. O texto é transcrito/resumido por uma pessoa a partir da página pública: nada é raspado automaticamente (o site bloqueia acesso automatizado).
+- Ingestão: `python -m src.knowledge` (papel `etl`). Texto igual não muda nada; texto alterado cria nova versão e a anterior deixa de ser corrente (continua no banco para auditoria).
+- Embeddings: `hash-256-v1`, determinístico e local (sem credencial). O modelo é gravado por chunk e a busca só compara vetores do mesmo modelo.
+- As fontes semeadas são **resumos de pesquisa sem valores numéricos**; critérios e benefícios exatos precisam ser adicionados a partir das páginas oficiais antes de qualquer afirmação numérica pelo agente.
+
+### 4.4 Agente (`src/agent`)
+
+Documentação completa, riscos e red team: [agente/](agente/README.md), [riscos](agente/riscos.md), [redteam](agente/redteam.md).
+
+- Ferramentas tipadas e fechadas (`consultar_cliente`, `calcular_elegibilidade`, `buscar_regra`), sobre conexão somente leitura; sem SQL livre.
+- Plano fixo de ferramentas; a ação proposta vem sempre da elegibilidade determinística (`requires_approval`), o LLM só redige o texto.
+- Provider padrão: `rules` (sem credencial). `AGENT_LLM_PROVIDER=llm` exige `AGENT_LLM_API_KEY`, `AGENT_LLM_BASE_URL` (https) e `AGENT_LLM_MODEL` por ambiente; sem eles, ou em erro/saída inválida, cai em `rules` e registra `fallback_reason`.
+- Busca de regras: score mínimo + ao menos uma palavra de conteúdo em comum (embedding por hash é ruidoso). Sem fonte, o agente diz que não encontrou.
+- Logs só com metadados (ferramentas, provider, latência).
+- Guardrails (`src/agent/guardrails.py`, sem LLM): **entrada** com sanitização (NFKC, caracteres de controle/invisíveis), redação de PII e bloqueio de prompt injection e pedidos de ativação antes de qualquer ferramenta; **saída** com JSON Schema, citação obrigatória de fonte `https://*.voeazul.com.br` (ou aviso explícito de que não há fonte), sem PII, valores/benefícios só se vierem das ferramentas, teto de benefício (maior custo do catálogo de premissas), ação apenas elegível e igual à calculada, `requires_approval` sempre `true` e bloqueio de frases de ativação consumada. Violação do LLM → fallback `rules` (`guardrail_violation`); se ainda violar → recusa segura. O relatório (`guardrails`) guarda só códigos de regra.
+- Fontes ingeridas com instruções dirigidas a modelos são rejeitadas na ingestão e, por defesa em profundidade, descartadas do contexto.
+- Harness de avaliação (`src/agent/evals.py`, casos em `eval_cases.py`, `tests/test_agent_evals.py`): 27 casos (feliz, sem fonte, adversarial na entrada e na saída do LLM simulado). Mede groundedness, violações de guardrail residuais, contenção adversarial e taxa de fallback; o pytest exige groundedness 1,0, 0 violações residuais e contenção 1,0, e também prova que o harness falha se um guardrail for enfraquecido. Rodar à mão: `python -m src.agent.evals` (usa `DATABASE_URL_RO`). Métricas sobre dados sintéticos e LLM simulado: detectam regressão de política, não desempenho real.
 
 ## 5. API
 
@@ -86,13 +109,23 @@ python -m src.api.tokens --sub seu.apelido --role gestor --hours 8   # analista 
 |---|---|---|---|
 | `GET /kpis`, `/clientes`, `/clientes/{customer_id}`, `/rotas`, `/nba` | ✔ | ✔ | ✔ |
 | `GET /ops/runs`, `/ops/quality`, `/ops/models`, `/ops/drift` | ✔ | ✔ | ✔ |
+| `GET /propostas`, `/propostas/{proposal_id}` | ✔ | ✔ | ✔ |
+| `GET /propostas/fila/stream` (SSE) | ✔ | ✔ | ✔ |
+| `POST /agente/perguntar` (SSE) | ✔ | ✔ | — |
+| `POST /nba/{customer_id}/proposta` (SSE) | ✔ | ✔ | — |
+| `POST /propostas/{proposal_id}/decisao` | — | ✔ | — |
 | `GET /nba/aprovacoes` | — | ✔ | ✔ |
 | `POST /nba/{customer_id}/aprovacao` | — | ✔ | — |
+| `GET /auth/demo`, `POST /auth/demo/{role}` (públicos; só com `DEMO_LOGIN=1`, senão 404) | — | — | — |
 | `GET /audit` | — | — | ✔ |
 
 Códigos: 401 sem token válido, 403 perfil insuficiente, 404 cliente inexistente, 409 ação sem aprovação exigida ou decisão já registrada, 422 entrada inválida, 429 limite excedido (`Retry-After`), 503 banco ou segredo indisponível.
 
 **Aprovação:** corpo `{decision: approve|reject, reason: 5–500 caracteres}` sem dados pessoais. Grava em `ops.audit_log` quem (`actor`, `actor_role`), quando, o quê (`action`, `entity_id`), `before`/`after` e `request_id`, com lock por cliente. Uma decisão por cliente.
+
+**Streaming SSE (agente e fila):** eventos `meta`, `guardrails`, `sources`, `proposed_action`, `delta`, `proposal`, `done` (e `queue`, `end`, `error` na fila). A resposta só é transmitida depois de validada pelos guardrails; `perguntar` nunca grava, `proposta` grava `pending` + `proposal.create` no audit_log, e `decisao` grava `before`/`after` (só gestor). `EventSource` não envia `Authorization`: o cliente deve usar `fetch` com leitura do stream. A fila faz polling a cada 2 s, reabre a cada 60 s (`end {reconnect:true}`) e aceita no máximo 10 conexões simultâneas.
+
+**Frontend (aba "Agente (simulado)"):** `frontend/src/pages/AgentPage.tsx` usa `streamSse` (fetch + leitura de stream, JWT só no header) para exibir resposta incremental, fontes citadas (só links `https`), status dos guardrails e o selo "simulado"; a fila reconecta sozinha ao receber `end`/erro e só o gestor vê Aprovar/Rejeitar (justificativa de 5–500 caracteres). Texto do agente é renderizado como texto puro (sem HTML).
 
 **Proteções:** JWT com `iss`, `sub`, `role`, `iat`, `exp` obrigatórios e validade máxima de 24 h; rate limit por IP em memória (por processo; `X-Forwarded-For` não é confiado); logs JSON no logger `ancora.api` (`request_id`, rota, status, duração, `sub`, `role`; sem query string, corpo ou token); headers CSP, nosniff, X-Frame-Options, HSTS, no-store, Referrer-Policy.
 

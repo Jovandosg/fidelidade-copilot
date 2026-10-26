@@ -31,8 +31,10 @@ def test_every_documented_operation_requires_a_token():
     ops = list(openapi_operations())
     assert len(ops) >= 12
     c = TestClient(app)
-    open_ops = [(m, p) for m, p in ops if c.request(m, p, json={} if m == "POST" else None).status_code != 401]
+    open_ops = [(m, p) for m, p in ops if not p.startswith("/auth/demo") and c.request(m, p, json={} if m == "POST" else None).status_code != 401]
     assert open_ops == []
+    # login de demo: publico por desenho, mas 404 enquanto DEMO_LOGIN != 1
+    assert c.get("/auth/demo").json() == {"enabled": False} and c.post("/auth/demo/gestor").status_code in (404, 503)
 
 
 def test_health_is_the_only_undocumented_public_route():
@@ -52,11 +54,11 @@ def test_unknown_path_returns_generic_404():
 
 
 def test_database_failure_does_not_leak_dsn_or_password(monkeypatch):
-    monkeypatch.setenv("DATABASE_URL_RO", "postgresql://fidelidade_ro:Sup3rSecretPw@127.0.0.1:1/fidelidade?connect_timeout=1")
+    monkeypatch.setenv("DATABASE_URL_RO", "postgresql://fidelidade_ro:change-me-canary@127.0.0.1:1/fidelidade?connect_timeout=1")
     r = TestClient(app, raise_server_exceptions=False).get("/kpis", headers=bearer("analista"))
     assert r.status_code >= 500
     text = r.text + str(dict(r.headers))
-    for leak in ("Sup3rSecretPw", "fidelidade_ro", "127.0.0.1", "Traceback", "psycopg"):
+    for leak in ("change-me-canary", "fidelidade_ro", "127.0.0.1", "Traceback", "psycopg"):
         assert leak not in text
 
 

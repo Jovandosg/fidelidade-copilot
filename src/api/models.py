@@ -158,6 +158,25 @@ class ApprovalResult(BaseModel):
     after: dict
 
 
+class ProposalOut(BaseModel):
+    proposal_id: str
+    created_at: datetime
+    customer_id: str
+    action: str
+    expected_margin_brl: float
+    rationale: str
+    sources: list[dict]
+    guardrails: dict
+    provider: Literal["rules", "llm"]
+    simulated: bool
+    status: Literal["pending", "approved", "rejected"]
+    requested_by: str
+    request_id: str | None
+    decided_by: str | None
+    decided_at: datetime | None
+    decision_reason: str | None
+
+
 class ApprovalStatus(BaseModel):
     customer_id: str
     decision: Literal["approve", "reject"]

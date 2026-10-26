@@ -2,15 +2,16 @@
 from __future__ import annotations
 
 import uuid
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi import Path as PathParam
 from psycopg.types.json import Jsonb
 
 from .deps import AuditConn, Conn
-from .models import (ApprovalRequest, ApprovalResult, ApprovalStatus, AuditEntry, AuditPage, DriftReport, ModelOut, PipelineRunOut, QualityOut)
+from .models import (ApprovalRequest, ApprovalResult, ApprovalStatus, AuditEntry, AuditPage, DriftReport, ModelOut, PipelineRunOut, ProposalOut, QualityOut)
 from .security import Principal, require
+from ..proposals import COLUMNS as PROPOSAL_COLUMNS
 
 CUSTOMER_ID_PATTERN = r"^C\d{6}$"
 NBA_ENTITY = "nba_recommendation"
@@ -62,6 +63,23 @@ def audit(_: Annotated[Principal, Depends(require("auditor"))], conn: AuditConn,
     items = conn.execute(f"SELECT id, occurred_at, actor, actor_role, action, entity, entity_id, before, after, request_id FROM ops.audit_log {where} "
                          "ORDER BY id DESC LIMIT %s OFFSET %s", (*params, limit, offset)).fetchall()
     return AuditPage(total=total, limit=limit, offset=offset, items=[AuditEntry(**i) for i in items])
+
+
+@router.get("/propostas", response_model=list[ProposalOut], summary="Propostas do agente persistidas (simuladas; exigem aprovacao humana)",
+            dependencies=[Depends(ALL_ROLES)])
+def proposals(conn: Conn, status: Annotated[Literal["pending", "approved", "rejected"] | None, Query()] = None,
+              customer_id: Annotated[str | None, Query(pattern=CUSTOMER_ID_PATTERN)] = None, limit: Annotated[int, Query(ge=1, le=200)] = 50):
+    return conn.execute(
+        f"""SELECT {PROPOSAL_COLUMNS} FROM ops.agent_proposals WHERE (%(s)s::text IS NULL OR status = %(s)s) AND (%(c)s::text IS NULL OR customer_id = %(c)s)
+            ORDER BY created_at DESC LIMIT %(l)s""", {"s": status, "c": customer_id, "l": limit}).fetchall()
+
+
+@router.get("/propostas/{proposal_id}", response_model=ProposalOut, summary="Detalhe de uma proposta do agente", dependencies=[Depends(ALL_ROLES)])
+def proposal(proposal_id: uuid.UUID, conn: Conn):
+    row = conn.execute(f"SELECT {PROPOSAL_COLUMNS} FROM ops.agent_proposals WHERE proposal_id = %s", (proposal_id,)).fetchone()
+    if row is None:
+        raise HTTPException(status_code=404, detail="Proposta nao encontrada")
+    return row
 
 
 @router.get("/nba/aprovacoes", response_model=list[ApprovalStatus], summary="Decisoes de aprovacao vigentes (gestor e auditor)",

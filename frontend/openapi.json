@@ -104,6 +104,22 @@
         "title": "ApprovalStatus",
         "type": "object"
       },
+      "AskRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "question": {
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AskRequest",
+        "type": "object"
+      },
       "AuditEntry": {
         "properties": {
           "action": {
@@ -406,6 +422,47 @@
           "items"
         ],
         "title": "CustomerPage",
+        "type": "object"
+      },
+      "DemoStatus": {
+        "properties": {
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "enabled"
+        ],
+        "title": "DemoStatus",
+        "type": "object"
+      },
+      "DemoToken": {
+        "properties": {
+          "expires_in": {
+            "title": "Expires In",
+            "type": "integer"
+          },
+          "role": {
+            "enum": [
+              "analista",
+              "gestor",
+              "auditor"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "token": {
+            "title": "Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "role",
+          "expires_in"
+        ],
+        "title": "DemoToken",
         "type": "object"
       },
       "DistributionItem": {
@@ -858,6 +915,138 @@
         "title": "PipelineRunOut",
         "type": "object"
       },
+      "ProposalOut": {
+        "properties": {
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "customer_id": {
+            "title": "Customer Id",
+            "type": "string"
+          },
+          "decided_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decided At"
+          },
+          "decided_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decided By"
+          },
+          "decision_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision Reason"
+          },
+          "expected_margin_brl": {
+            "title": "Expected Margin Brl",
+            "type": "number"
+          },
+          "guardrails": {
+            "additionalProperties": true,
+            "title": "Guardrails",
+            "type": "object"
+          },
+          "proposal_id": {
+            "title": "Proposal Id",
+            "type": "string"
+          },
+          "provider": {
+            "enum": [
+              "rules",
+              "llm"
+            ],
+            "title": "Provider",
+            "type": "string"
+          },
+          "rationale": {
+            "title": "Rationale",
+            "type": "string"
+          },
+          "request_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Request Id"
+          },
+          "requested_by": {
+            "title": "Requested By",
+            "type": "string"
+          },
+          "simulated": {
+            "title": "Simulated",
+            "type": "boolean"
+          },
+          "sources": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "proposal_id",
+          "created_at",
+          "customer_id",
+          "action",
+          "expected_margin_brl",
+          "rationale",
+          "sources",
+          "guardrails",
+          "provider",
+          "simulated",
+          "status",
+          "requested_by",
+          "request_id",
+          "decided_by",
+          "decided_at",
+          "decision_reason"
+        ],
+        "title": "ProposalOut",
+        "type": "object"
+      },
       "QualityOut": {
         "properties": {
           "failed_rules": {
@@ -1060,12 +1249,51 @@
     }
   },
   "info": {
-    "description": "Dados SINTETICOS. Autenticacao por JWT (perfis analista, gestor, auditor); leitura do PostgreSQL e um unico POST de aprovacao que grava em ops.audit_log. Sem PII.",
+    "description": "Dados SINTETICOS. Autenticacao por JWT (perfis analista, gestor, auditor); leitura do PostgreSQL, agente de IA com SSE (somente propoe) e POSTs de aprovacao/decisao que gravam em ops.audit_log. Sem PII.",
     "title": "Ancora Azul - API de analytics",
     "version": "1.1.0"
   },
   "openapi": "3.1.0",
   "paths": {
+    "/agente/perguntar": {
+      "post": {
+        "operationId": "ask_agente_perguntar_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {}
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Pergunta ao agente (SSE; simulado, nunca ativa nada)"
+      }
+    },
     "/audit": {
       "get": {
         "operationId": "audit_audit_get",
@@ -1139,6 +1367,74 @@
           }
         ],
         "summary": "Trilha de auditoria (somente auditor)"
+      }
+    },
+    "/auth/demo": {
+      "get": {
+        "operationId": "demo_status_auth_demo_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemoStatus"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Informa se o login de demonstracao esta habilitado",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/demo/{role}": {
+      "post": {
+        "operationId": "demo_token_auth_demo__role__post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role",
+            "required": true,
+            "schema": {
+              "enum": [
+                "analista",
+                "gestor",
+                "auditor"
+              ],
+              "title": "Role",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemoToken"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Token de demonstracao (1 h) para o perfil; 404 se DEMO_LOGIN!=1",
+        "tags": [
+          "auth"
+        ]
       }
     },
     "/clientes": {
@@ -1574,6 +1870,47 @@
         "summary": "Aprova ou rejeita uma acao NBA (somente gestor); grava em ops.audit_log"
       }
     },
+    "/nba/{customer_id}/proposta": {
+      "post": {
+        "operationId": "propose_nba__customer_id__proposta_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customer_id",
+            "required": true,
+            "schema": {
+              "pattern": "^C\\d{6}$",
+              "title": "Customer Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {}
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Gera e persiste uma proposta do agente para o cliente (SSE; pendente de aprovacao humana)"
+      }
+    },
     "/ops/drift": {
       "get": {
         "operationId": "drift_ops_drift_get",
@@ -1754,6 +2091,214 @@
           }
         ],
         "summary": "Execucoes do pipeline"
+      }
+    },
+    "/propostas": {
+      "get": {
+        "operationId": "proposals_propostas_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "pending",
+                    "approved",
+                    "rejected"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "customer_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "pattern": "^C\\d{6}$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Customer Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProposalOut"
+                  },
+                  "title": "Response Proposals Propostas Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Propostas do agente persistidas (simuladas; exigem aprovacao humana)"
+      }
+    },
+    "/propostas/fila/stream": {
+      "get": {
+        "operationId": "queue_stream_propostas_fila_stream_get",
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {}
+            },
+            "description": "Successful Response"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Fila de propostas pendentes em tempo real (SSE; reconecte ao receber 'end')"
+      }
+    },
+    "/propostas/{proposal_id}": {
+      "get": {
+        "operationId": "proposal_propostas__proposal_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "proposal_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Proposal Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposalOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Detalhe de uma proposta do agente"
+      }
+    },
+    "/propostas/{proposal_id}/decisao": {
+      "post": {
+        "operationId": "decide_propostas__proposal_id__decisao_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "proposal_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Proposal Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposalOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Aprova ou rejeita uma proposta do agente (somente gestor); grava before/after em ops.audit_log"
       }
     },
     "/rotas": {
