@@ -66,6 +66,7 @@ Edite o `.env`: troque as senhas. `POSTGRES_PORT` e as URLs (`DATABASE_URL`, `DA
 docker compose up -d
 docker ps                           # aguarde "Up (healthy)"
 ```
+> A imagem agora é `pgvector/pgvector:pg16` (necessária para a base de conhecimento do agente). Se você já tinha o container antigo (`postgres:16-alpine`), recrie-o: `docker compose down -v` e `docker compose up -d` (apaga só dados sintéticos locais).
 
 **4. Carregar o `.env` no terminal**
 ```powershell

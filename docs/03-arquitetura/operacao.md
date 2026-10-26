@@ -74,6 +74,15 @@ Versionadas em `db/migrations/`, aplicadas em ordem por `python -m src.db migrat
 | `006_grants.sql` | privilégios mínimos por papel |
 | `007_pipeline_run_instrumentation.sql` | colunas de instrumentação (versão de código, seed, linhas por entidade) |
 | `008_agent_proposals.sql` | `ops.agent_proposals` (propostas do agente; máquina de estados por trigger) |
+| `009_knowledge_base.sql` | extensão `vector` (pgvector), schema `knowledge`: `public_sources` (URL, data de consulta, versão) e `rule_chunks` (chunks + embedding `vector(256)`); versionado, sem UPDATE/DELETE |
+
+### 4.3 Base de conhecimento do RAG (`knowledge`)
+
+- Exige a imagem `pgvector/pgvector:pg16` (já no `docker-compose.yml`). Volume antigo criado com `postgres:16-alpine` deve ser recriado: `docker compose down -v` **no seu checkout**, depois `.\scripts\start.ps1`.
+- Fontes ficam em `knowledge/sources/*.md` (front-matter `url`, `title`, `publisher`, `consulted_at`, `license_note` + texto). Só `https` no domínio `voeazul.com.br`, sem PII; veja `_TEMPLATE.md`. O texto é transcrito/resumido por uma pessoa a partir da página pública: nada é raspado automaticamente (o site bloqueia acesso automatizado).
+- Ingestão: `python -m src.knowledge` (papel `etl`). Texto igual não muda nada; texto alterado cria nova versão e a anterior deixa de ser corrente (continua no banco para auditoria).
+- Embeddings: `hash-256-v1`, determinístico e local (sem credencial). O modelo é gravado por chunk e a busca só compara vetores do mesmo modelo.
+- As fontes semeadas são **resumos de pesquisa sem valores numéricos**; critérios e benefícios exatos precisam ser adicionados a partir das páginas oficiais antes de qualquer afirmação numérica pelo agente.
 
 ## 5. API
 
