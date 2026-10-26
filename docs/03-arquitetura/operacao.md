@@ -83,6 +83,14 @@ Versionadas em `db/migrations/`, aplicadas em ordem por `python -m src.db migrat
 - Ingestão: `python -m src.knowledge` (papel `etl`). Texto igual não muda nada; texto alterado cria nova versão e a anterior deixa de ser corrente (continua no banco para auditoria).
 - Embeddings: `hash-256-v1`, determinístico e local (sem credencial). O modelo é gravado por chunk e a busca só compara vetores do mesmo modelo.
 - As fontes semeadas são **resumos de pesquisa sem valores numéricos**; critérios e benefícios exatos precisam ser adicionados a partir das páginas oficiais antes de qualquer afirmação numérica pelo agente.
+
+### 4.4 Agente (`src/agent`)
+
+- Ferramentas tipadas e fechadas (`consultar_cliente`, `calcular_elegibilidade`, `buscar_regra`), sobre conexão somente leitura; sem SQL livre.
+- Plano fixo de ferramentas; a ação proposta vem sempre da elegibilidade determinística (`requires_approval`), o LLM só redige o texto.
+- Provider padrão: `rules` (sem credencial). `AGENT_LLM_PROVIDER=llm` exige `AGENT_LLM_API_KEY`, `AGENT_LLM_BASE_URL` (https) e `AGENT_LLM_MODEL` por ambiente; sem eles, ou em erro/saída inválida, cai em `rules` e registra `fallback_reason`.
+- Busca de regras: score mínimo + ao menos uma palavra de conteúdo em comum (embedding por hash é ruidoso). Sem fonte, o agente diz que não encontrou.
+- Logs só com metadados (ferramentas, provider, latência).
 
 ## 5. API
 
