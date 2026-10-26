@@ -122,6 +122,8 @@ Códigos: 401 sem token válido, 403 perfil insuficiente, 404 cliente inexistent
 
 **Streaming SSE (agente e fila):** eventos `meta`, `guardrails`, `sources`, `proposed_action`, `delta`, `proposal`, `done` (e `queue`, `end`, `error` na fila). A resposta só é transmitida depois de validada pelos guardrails; `perguntar` nunca grava, `proposta` grava `pending` + `proposal.create` no audit_log, e `decisao` grava `before`/`after` (só gestor). `EventSource` não envia `Authorization`: o cliente deve usar `fetch` com leitura do stream. A fila faz polling a cada 2 s, reabre a cada 60 s (`end {reconnect:true}`) e aceita no máximo 10 conexões simultâneas.
 
+**Frontend (aba "Agente (simulado)"):** `frontend/src/pages/AgentPage.tsx` usa `streamSse` (fetch + leitura de stream, JWT só no header) para exibir resposta incremental, fontes citadas (só links `https`), status dos guardrails e o selo "simulado"; a fila reconecta sozinha ao receber `end`/erro e só o gestor vê Aprovar/Rejeitar (justificativa de 5–500 caracteres). Texto do agente é renderizado como texto puro (sem HTML).
+
 **Proteções:** JWT com `iss`, `sub`, `role`, `iat`, `exp` obrigatórios e validade máxima de 24 h; rate limit por IP em memória (por processo; `X-Forwarded-For` não é confiado); logs JSON no logger `ancora.api` (`request_id`, rota, status, duração, `sub`, `role`; sem query string, corpo ou token); headers CSP, nosniff, X-Frame-Options, HSTS, no-store, Referrer-Policy.
 
 ## 6. Rotinas operacionais
